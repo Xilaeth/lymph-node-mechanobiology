@@ -35,8 +35,8 @@ int main(int argc, const char* argv[])
     // Integrate positions
     Vtk_output output{"relax"};  // Writes to output/relax_#.vtk
     for (auto time_step = 0; time_step <= n_time_steps; time_step++) {
-        bodies.copy_to_host();
-        bodies.take_step<morse>(dt);    // Ordered to write during calculation,
+        cells.copy_to_host();
+        cells.take_step<morse>(dt);    // Ordered to write during calculation,
         output.write_positions(cells);  // use thread for full concurrency.
     }
 
