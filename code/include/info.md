@@ -1,0 +1,1 @@
+- The inits.cuh file includes all the initial configurations
