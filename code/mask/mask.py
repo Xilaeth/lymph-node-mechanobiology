@@ -33,7 +33,7 @@ def densityInSquare(x, l):
 inp = 'lines'
 
 # reads an image file as input
-im = Image.open(inp + ".png", 'r')
+im = Image.open("pngs\\" + inp + ".png", 'r')
 width, height = im.size
 pixel_values = list(im.getdata())
 
