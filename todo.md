@@ -1,7 +1,7 @@
 # Todo
-[] Test it out for different values of a, r\_c, D, etc.
-[] Write a tool to compare masked tissue before and after relaxing again to figure out how stable it is 
-[] Write a script and run it through the parameter space of a, r\_c and D
+[] write script that runs simulations until the convergence is good
+[] write script that automatically determines the size and then applies a mask accordingly
+[] write script that compares two images and quantifies the difference
 
 # Done
 [x] Look at the file format of vtk that ya||a uses
