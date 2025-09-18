@@ -8,6 +8,7 @@
 #include <queue>
 #include <random>
 #include <iomanip>
+#include <sstream>
 
 using namespace std;
 
@@ -66,12 +67,12 @@ class Scene {
 
         // starts the scene with cells arranged in a rectangle with x length lx and a distance to the nearest cells of d
         void loadRectangle(double d, double lx) {
-            double x = 0;
-            double y = d;
+            double x = -lx/2 + d;
+            double y = -lx/2 + d;
             for (int i = 0; i < n_cells; i++) {
                 x += d;
-                if ((x + d) >= lx) {
-                    x = d;
+                if ((x + d) >= lx/2) {
+                    x = -lx/2 + d;
                     y += d;
                 }
                 cells.push_back(Float3(x, y, 0, i));
@@ -86,6 +87,21 @@ class Scene {
             vector<string> content;
             while(getline(inp, line)) {
                 content.push_back(line);
+            }
+            n_cells = content.size() - 6;
+            content.erase(content.begin(), content.begin() + 6);
+
+            unsigned int index = 0;
+
+            for (auto& l : content) {
+                vector<string> coords; 
+                stringstream ss(l);
+                string temp;
+                while(ss >> temp) {
+                    coords.push_back(temp);
+                }
+                cells.push_back(Float3(stod(coords[0]), stod(coords[1]), stod(coords[2]), index));
+                index++;
             }
         }
 
@@ -288,17 +304,20 @@ class K3Tree {
 
 void runSimulation(Scene& scene, double d, double lx, string prefix, Float3 (*force)(Float3, Float3), string folder = "") {
     scene.loadRectangle(d, lx);
+    //scene.loadVtk("hole_out.vtk");
     if (folder != "") folder.append("/");
 
+    unsigned int j = 0;
     for (unsigned int i = 0; i <= scene.steps; i++) {
         string save = "";
         save.append(prefix);
-        save.append(to_string(i));
-        if (i == 0) {scene.saveScene(save, folder); continue;}
+        save.append(to_string(j));
+        if (i == 0) {scene.saveScene(save, folder); j++; continue;}
         K3Tree tree = K3Tree(scene.cells);  
         tree.setNeighbors(scene);
         scene.updateGabriel();
         scene.takeStep(force);
-        scene.saveScene(save, folder);
+        if ((i % 10) == 0) {j++; scene.saveScene(save, folder);}
+        //if(i == scene.steps) scene.saveScene(save, folder);
     }
 }

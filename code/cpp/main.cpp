@@ -15,6 +15,6 @@ Float3 f(Float3 vi, Float3 vj) {
 }
 
 int main() {
-    Scene scene = Scene(100, 10000, 0.05);
-    runSimulation(scene, 0.1, 1.2, "test", f, "output");
+    Scene scene = Scene(10000, 1000, 0.1);
+    runSimulation(scene, 0.4, 40.8, "test", f, "output");
 }
