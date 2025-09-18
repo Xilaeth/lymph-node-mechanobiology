@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from math import floor
 
-file = open("n10000T2000dt1.vtk", "rt")
+file = open("vtks/n10000T2000dt1.vtk", "rt")
 content = file.read()
 lines = content.splitlines()
 lines = lines[6:]

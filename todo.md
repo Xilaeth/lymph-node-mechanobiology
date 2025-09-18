@@ -1,6 +1,6 @@
 # Todo
-[] Test out the masked tool to relax in cpp
 [] Test it out for different values of a, r\_c, D, etc.
+[] Rewrite the density generating code in cpp for performance
 [] Write a tool to compare masked tissue before and after relaxing again to figure out how stable it is 
 [] Write a script and run it through the parameter space of a, r\_c and D
 
@@ -12,3 +12,4 @@
 [x] Look at some examples of the vedo library and understand the general structure of it
 [x] Figuring out the mask from the vtk file
 [x] Find/ Make some bitmaps
+[x] Test out the masked tool to relax in cpp
