@@ -23,5 +23,5 @@ grid = np.full((ny, nx), np.nan)
 for x, y, v in zip(xs, ys, vals):
     grid[y, x] = v
 
-plt.imshow(grid, origin='lower', cmap='viridis', interpolation='none')
+plt.imshow(grid, origin='lower', cmap='Greens', interpolation='none')
 plt.show()
