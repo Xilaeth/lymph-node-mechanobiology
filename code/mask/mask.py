@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from math import floor
 
-file = open("vtks/n10000T2000dt1.vtk", "rt")
+file = open("vtks/inp.vtk", "rt")
 content = file.read()
 lines = content.splitlines()
 lines = lines[6:]
@@ -28,7 +28,7 @@ def densityInSquare(x, l):
 
 #print(densityInSquare([0, 0], 10))
 
-inp = 'hole'
+inp = 'lines'
 
 im = Image.open(inp + ".png", 'r')
 width, height = im.size
@@ -40,8 +40,8 @@ pixel_values = np.array(pixel_values).reshape((width, height, 4))
 
 coordsOut = []
 
-l = 36
-x = [0, 0]
+l = 15
+x = [10, 7]
 
 for v in coords:
     if (not(isInSquare(x, l, v))):
@@ -69,7 +69,15 @@ with open(out + ".vtk", "w", encoding="ascii") as f:
     for i in coordsOut:
         f.write(str(i[0]) + " " + str(i[1]) + " " + "0.0\n")
 
-plt.scatter(xs, ys, s=1.5, c='red')
-plt.axis('square')
-plt.show()
+fig, ax = plt.subplots()
 
+# Remove axes completely
+ax.set_axis_off()
+#ax.set_box_aspect(1)
+
+# Adjust figure so no padding remains
+plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
+#ax.scatter(xs, ys, s=1.5, c='red')
+
+
+#plt.show()

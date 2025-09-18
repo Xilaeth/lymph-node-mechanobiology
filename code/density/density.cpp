@@ -47,12 +47,14 @@ double densityInCirc(vector<double> x, double r, vector<vector<double>>& inp) {
 }
 
 int main() {
-    vector<vector<double>> inp = loadVtk("hole_out.vtk");
+    vector<vector<double>> inp = loadVtk("lines_out.vtk");
 
-    double l = 36; 
+    double l = 15; 
     unsigned int n = 100;
-    double r = 1;
-    string loc = "hole_data";
+    double r = 2;
+    double x = 10;
+    double y = 7;
+    string loc = "lines_out_data";
 
     string endup = "";
     endup.append(loc);
@@ -61,7 +63,7 @@ int main() {
 
     for (int i = 0; i <= n; i++) {
         for (int j = 0; j <= n; j++) {
-            temp_file << i << "," << j << "," << densityInCirc({-l/2 + i*(l/n), -l/2 + j*(l/n)}, r, inp) << endl;
+            temp_file << i << "," << j << "," << densityInCirc({-l/2 + x + i*(l/n), -l/2 + y + j*(l/n)}, r, inp) << endl;
         }
     }
 }

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+nvcc -std=c++11 relax.cu -o relax
+./relax
+python3 clean.py

@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from math import floor
 
-data = np.loadtxt("hole_data.csv", delimiter=",")
+data = np.loadtxt("lines_out_data.csv", delimiter=",")
 
 # Convert to array for easier manipulation
 arr = np.array(data)
