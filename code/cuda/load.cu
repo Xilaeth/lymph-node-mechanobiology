@@ -13,7 +13,7 @@
 const auto r_max = 1.f; // maximum interaction length
 const auto r_c = 0.5f; // equilibrium distance
 const auto a = 1.f; // repulsion strength of the morse potential
-const auto n_time_steps = 10000u; // no. of time steps
+const auto n_time_steps = 1000u; // no. of time steps
 const auto dt = 0.05f; // time step
 
 
@@ -34,7 +34,7 @@ int main(int argc, const char* argv[])
 {
     using namespace std;
 
-    string file = "lines_out.vtk";
+    string file = "inp.vtk";
     ifstream inp(file);
 
     string line;

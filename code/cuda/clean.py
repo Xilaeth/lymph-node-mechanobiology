@@ -23,6 +23,7 @@ def extract_content_up_to_line(input_file, output_file, target_content):
         output.writelines(extracted_lines)
 
 for i in range(n): 
+    print("file: ", i)
     input_file = f"output/relax_{i}.vtk"
     output_file = f"output/relax_{i}.vtk"
     target_content = 'VERTICES' 

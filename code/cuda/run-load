@@ -2,4 +2,4 @@
 
 nvcc -std=c++11 load.cu -o load
 ./load
-python3 clean.py
+python3 clean-load.py

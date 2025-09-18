@@ -8,9 +8,9 @@
 const auto r_max = 1.f; // maximum interaction length
 const auto r_c = 0.5f; // equilibrium distance
 const auto a = 1.f; // repulsion strength of the morse potential
-const auto n_cells = 100000u; // no. of bodies
-const auto n_time_steps = 500u; // no. of time steps
-const auto dt = 0.1f; // time step
+const auto n_cells = 90000u; // no. of bodies
+const auto n_time_steps = 1000u; // no. of time steps
+const auto dt = 0.05f; // time step
 
 
 __device__ float3 morse(float3 Xi, float3 r, float dist, int i, int j)
@@ -30,7 +30,7 @@ int main(int argc, const char* argv[])
 {
     // Prepare initial state
     Solution<float3, Gabriel_solver> cells{n_cells};
-    regular_rectangle(0.4f, 100, cells);
+    regular_rectangle(0.45f, 300, cells);
 
     // Integrate positions
     Vtk_output output{"relax"};  // Writes to output/relax_#.vtk

@@ -4,7 +4,7 @@ from PIL import Image
 from math import floor
 
 # read the file and split it by lines -> remove the first 6 lines
-file = open("vtks/inp.vtk", "rt")
+file = open("vtks/load_1000.vtk", "rt")
 content = file.read()
 lines = content.splitlines()
 lines = lines[6:]
@@ -30,7 +30,7 @@ def densityInSquare(x, l):
             counter += 1
     return (counter / (l*l))
 
-inp = 'hole'
+inp = 'lines'
 
 # reads an image file as input
 im = Image.open(inp + ".png", 'r')
@@ -43,9 +43,9 @@ pixel_values = np.array(pixel_values).reshape((width, height, 4))
 coordsOut = []
 
 # define side length of the square we overlay the image over
-l = 20
+l = 100
 # set the center of the square
-x = [10, 7]
+x = [70, 60]
 
 for v in coords:
     if (not(isInSquare(x, l, v))):
@@ -75,6 +75,8 @@ out = inp + "_out"
 #        f.write(str(i[0]) + " " + str(i[1]) + " " + "0.0\n")
 
 fig, ax = plt.subplots()
+#ax.set_xlim([0, 2*x[0]])
+#ax.set_ylim([0, 2*x[0]])
 
 # Remove axes completely
 #ax.set_axis_off()
@@ -82,7 +84,7 @@ fig, ax = plt.subplots()
 
 # Adjust figure so no padding remains
 #plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
-ax.scatter(xs, ys, s=1.5, c='red')
+ax.scatter(xs, ys, s=0.05, c='red')
 
 
 plt.show()

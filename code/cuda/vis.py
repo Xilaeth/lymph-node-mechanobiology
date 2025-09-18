@@ -1,9 +1,9 @@
 from vedo import *
 from vedo.applications import Browser
 
-path="output/relax_"
+path="output/load_"
 pdata=[]
-for i in range(0,501):
+for i in range(900,1001):
 	p=load(f"{path}{i}.vtk")
 	p.point_size(30)
 	pdata.append(p)
