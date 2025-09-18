@@ -63,5 +63,3 @@ yom += r
 
 print("x: [", xom, ", ", xop, "]")
 print("y: [", yom, ", ", yop, "]")
-
-
