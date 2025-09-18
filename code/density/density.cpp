@@ -7,6 +7,7 @@
 
 using namespace std;
 
+// load the vtk file into the cpp program
 vector<vector<double>> loadVtk(string file) {
     ifstream inp(file);
 
@@ -31,6 +32,7 @@ vector<vector<double>> loadVtk(string file) {
     return output;
 }
 
+// checks if v is in the circle of radius r at position x
 bool isInCirc(vector<double> v, vector<double> x, double r) {
     if ((pow(v[0] - x[0], 2) + pow(v[1] - x[1], 2)) < r*r) {
         return true;
@@ -38,6 +40,7 @@ bool isInCirc(vector<double> v, vector<double> x, double r) {
     return false;
 }
 
+// calculates the density of cells in the circle of radius r at position x
 double densityInCirc(vector<double> x, double r, vector<vector<double>>& inp) {
     unsigned int counter = 0;
     for (auto& v : inp) {
