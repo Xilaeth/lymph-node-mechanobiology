@@ -8,4 +8,4 @@ xc = 44.5
 yc = 38.5
 name = sys.argv[1]
 
-os.system(f"./density out_vtks/{name}.vtk {l} {n} {r} out_vtks/{name}.csv {xc} {yc}")
+os.system(f"./density {name}.vtk {l} {n} {r} {name}.csv {xc} {yc}")

@@ -8,7 +8,7 @@
 
 const auto r_c = 0.5f; // equilibrium distance
 __device__ auto n_time_steps = 100u; // no. of time steps
-const double dt = 0.05f; // time step
+__device__ double dt = 0.05f; // time step
 __device__ int n_cells = 1000;
 __device__ double a = 1.0f;
 __device__ double r_max = 1.0f;
@@ -37,18 +37,19 @@ int main(int argc, const char* argv[])
     r_max = r_c * stod(argv[3]); // maximum interaction length
     int rect = stoi(argv[4]);
     n_time_steps = stoi(argv[5]);
+    dt = stod(argv[6]);
+    int every_n = stoi(argv[7]);
 
     // Prepare initial state
     Solution<float3, Gabriel_solver> cells{n_cells};
-    regular_rectangle(0.45f, rect, cells);
+    regular_rectangle(0.5f, rect, cells);
 
     // Integrate positions
-    Vtk_output output{"relax"};  // Writes to output/relax_#.vtk
+    Vtk_output output{"load"};  // Writes to output/relax_#.vtk
     for (auto time_step = 0; time_step <= n_time_steps; time_step++) {
         cells.copy_to_host();
         cells.take_step<morse>(dt);    // Ordered to write during calculation,
-//        printf("\n");
-        if(time_step == n_time_steps) output.write_positions(cells);  // use thread for full concurrency.
+        if(time_step % every_n == 0) output.write_positions(cells);  // use thread for full concurrency.
     }
 
     return 0;

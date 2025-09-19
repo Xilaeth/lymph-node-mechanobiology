@@ -11,9 +11,9 @@
 #include <cmath>
 
 const auto r_c = 0.5f; // equilibrium distance
-const auto n_time_steps = 100u; // no. of time steps
 const auto dt = 0.05f; // time step
-__device__ int n_cells = 1000;
+__device__ int n_time_steps = 50u;
+//__device__ int n_cells = 1000;
 __device__ double a = 1.0f;
 __device__ double r_max = 1.0f;
     
@@ -38,6 +38,7 @@ int main(int argc, const char* argv[])
     a = stod(argv[1]); // repulsion strength of the morse potential
     r_max = r_c * stod(argv[2]); // maximum interaction length
     string file = argv[3]; // input file name
+    n_time_steps = stoi(argv[4]);
 
     ifstream inp(file);
 
