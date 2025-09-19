@@ -24,5 +24,11 @@ grid = np.full((ny, nx), np.nan)
 for x, y, v in zip(xs, ys, vals):
     grid[y, x] = v
 
-plt.imshow(grid, origin='lower', cmap='Greens', interpolation='none')
+fig, ax = plt.subplots()
+ax.imshow(grid, origin='lower', cmap='Greens', interpolation='none')
+
+ax.set_axis_off()
+
+plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
+
 plt.show()
