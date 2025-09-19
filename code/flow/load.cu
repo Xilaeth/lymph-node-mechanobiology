@@ -1,7 +1,7 @@
 // Integrate N-body problem with springs between all bodies
 #include "../include/dtypes.cuh"
 #include "../include/inits.cuh"
-#include "../include/solvers-force.cuh"
+#include "../include/solvers.cuh"
 #include "../include/vtk.cuh"
 #include <iostream>
 #include <string>
@@ -70,7 +70,7 @@ int main(int argc, const char* argv[])
     for (auto time_step = 0; time_step <= n_time_steps; time_step++) {
         cells.copy_to_host();
         cells.take_step<morse>(dt);    // Ordered to write during calculation,
-        printf("\n");
+//        printf("\n");
         if (time_step == n_time_steps) output.write_positions(cells);  // use thread for full concurrency.
     }
 

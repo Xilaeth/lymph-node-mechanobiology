@@ -506,6 +506,9 @@ using Grid_solver = Heun_solver<Pt, Grid_computer>;
 // plus further refinement of the cell neighbourhood using the Gabriel
 // method (Delile et al. 2017. Nature Communications,
 // Marin-Riera et al. 2016, Bioinformatics).
+
+__global__ double Ftot = 0;
+
 template<typename Pt, Pairwise_interaction<Pt> pw_int,
     Pairwise_friction<Pt> pw_friction>
 __global__ void compute_cube_gabriel(const int n, const Pt* __restrict__ d_X,

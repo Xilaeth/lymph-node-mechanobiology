@@ -1,14 +1,15 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import sys
 
 Fs = []
 FsVar = []
-n = 20
-T = 100
+n = int(sys.argv[2])
+path = sys.argv[1]
 
 for i in range(n + 1):
 
-    file = open(f"force{i}.csv", "rt")
+    file = open(f"{path}/force{i}.csv", "rt")
     content = file.read()
     lines = content.splitlines()[:-2]
 
@@ -31,13 +32,16 @@ for i in range(n + 1):
 
 FsVar = list(map(lambda x: x/max(FsVar), FsVar))
 
-with open("TotVar.csv", "w", encoding="ascii") as f:
+with open(f"{path}/TotVar.csv", "w", encoding="ascii") as f:
     for i in range(len(FsVar)):
         if (i == (len(FsVar) - 1)):
             f.write(str(FsVar[i]))
         else:
             f.write(str(FsVar[i]) + ",")
 
-#print(Fs)
-#plt.plot(range(len(FsVar)), FsVar)
-#plt.show()
+with open(f"{path}/Forces.csv", "w", encoding="ascii") as f:
+    for i in range(len(Fs)):
+        if (i == (len(FsVar) - 1)):
+            f.write(str(Fs[i]))
+        else:
+            f.write(str(Fs[i]) + ",")
