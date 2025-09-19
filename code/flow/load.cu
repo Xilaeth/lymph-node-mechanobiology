@@ -1,7 +1,7 @@
 // Integrate N-body problem with springs between all bodies
 #include "../include/dtypes.cuh"
 #include "../include/inits.cuh"
-#include "../include/solvers.cuh"
+#include "../include/solvers-force.cuh"
 #include "../include/vtk.cuh"
 #include <iostream>
 #include <string>
@@ -11,7 +11,7 @@
 #include <cmath>
 
 const auto r_c = 0.5f; // equilibrium distance
-const auto n_time_steps = 50u; // no. of time steps
+const auto n_time_steps = 100u; // no. of time steps
 const auto dt = 0.05f; // time step
 __device__ int n_cells = 1000;
 __device__ double a = 1.0f;
@@ -70,6 +70,7 @@ int main(int argc, const char* argv[])
     for (auto time_step = 0; time_step <= n_time_steps; time_step++) {
         cells.copy_to_host();
         cells.take_step<morse>(dt);    // Ordered to write during calculation,
+        printf("\n");
         if (time_step == n_time_steps) output.write_positions(cells);  // use thread for full concurrency.
     }
 
