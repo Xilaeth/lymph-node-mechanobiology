@@ -2,8 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 from math import floor
+import sys
 
-data = np.loadtxt("lines_out_data.csv", delimiter=",")
+data = np.loadtxt(sys.argv[1], delimiter=",")
 
 # Convert to array for easier manipulation
 arr = np.array(data)

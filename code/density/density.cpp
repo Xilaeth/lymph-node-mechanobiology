@@ -7,7 +7,6 @@
 
 using namespace std;
 
-// load the vtk file into the cpp program
 vector<vector<double>> loadVtk(string file) {
     ifstream inp(file);
 
@@ -32,7 +31,6 @@ vector<vector<double>> loadVtk(string file) {
     return output;
 }
 
-// checks if v is in the circle of radius r at position x
 bool isInCirc(vector<double> v, vector<double> x, double r) {
     if ((pow(v[0] - x[0], 2) + pow(v[1] - x[1], 2)) < r*r) {
         return true;
@@ -40,7 +38,6 @@ bool isInCirc(vector<double> v, vector<double> x, double r) {
     return false;
 }
 
-// calculates the density of cells in the circle of radius r at position x
 double densityInCirc(vector<double> x, double r, vector<vector<double>>& inp) {
     unsigned int counter = 0;
     for (auto& v : inp) {
@@ -49,24 +46,21 @@ double densityInCirc(vector<double> x, double r, vector<vector<double>>& inp) {
     return (double)(counter/(M_PI*r*r));
 }
 
-int main() {
-    vector<vector<double>> inp = loadVtk("lines_out.vtk");
+int main(const int argc, const char* argv[]) {
+    vector<vector<double>> inp = loadVtk(argv[1]);
 
-    double l = 15; 
-    unsigned int n = 100;
-    double r = 2;
-    double x = 10;
-    double y = 7;
-    string loc = "lines_out_data";
+    double l = stoi(argv[2]); 
+    unsigned int n = stoi(argv[3]);
+    double r = stod(argv[4]);
+    string endup = argv[5];
+    double xc = stod(argv[6]);
+    double yc = stod(argv[7]);
 
-    string endup = "";
-    endup.append(loc);
-    endup.append(".csv");
     ofstream temp_file (endup);
 
     for (int i = 0; i <= n; i++) {
         for (int j = 0; j <= n; j++) {
-            temp_file << i << "," << j << "," << densityInCirc({-l/2 + x + i*(l/n), -l/2 + y + j*(l/n)}, r, inp) << endl;
+            temp_file << i << "," << j << "," << densityInCirc({-l/2 + xc + i*(l/n), -l/2 + yc + j*(l/n)}, r, inp) << endl;
         }
     }
 }
