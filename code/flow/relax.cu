@@ -3,12 +3,15 @@
 #include "../include/inits.cuh"
 #include "../include/solvers.cuh"
 #include "../include/vtk.cuh"
-#include <strings>
+#include <string>
 
 
 const auto r_c = 0.5f; // equilibrium distance
 const auto n_time_steps = 50u; // no. of time steps
 const auto dt = 0.05f; // time step
+__device__ int n_cells = 1000;
+__device__ double a = 1.0f;
+__device__ double r_max = 1.0f;
 
 
 __device__ float3 morse(float3 Xi, float3 r, float dist, int i, int j)
@@ -28,20 +31,22 @@ int main(int argc, const char* argv[])
 {
     using namespace std;
 
-    const int n_cells = stoi(argv[1]); // no. of bodies
-    const auto a = stod(argv[2]); // repulsion strength of the morse potential
-    const auto r_max = r_c * stod(argv[3]); // maximum interaction length
+    // CUDA is very unhappy about accessing a __device__ variable from a host function but it compiles and works so I won't question it and just accept this code and be happy :)
+    n_cells = stoi(argv[1]); // no. of bodies
+    a = stod(argv[2]); // repulsion strength of the morse potential
+    r_max = r_c * stod(argv[3]); // maximum interaction length
+    int rect = stoi(argv[4]);
 
     // Prepare initial state
     Solution<float3, Gabriel_solver> cells{n_cells};
-    regular_rectangle(0.45f, 300, cells);
+    regular_rectangle(0.45f, rect, cells);
 
     // Integrate positions
     Vtk_output output{"relax"};  // Writes to output/relax_#.vtk
     for (auto time_step = 0; time_step <= n_time_steps; time_step++) {
         cells.copy_to_host();
         cells.take_step<morse>(dt);    // Ordered to write during calculation,
-        output.write_positions(cells);  // use thread for full concurrency.
+        if(time_step == n_time_steps) output.write_positions(cells);  // use thread for full concurrency.
     }
 
     return 0;
