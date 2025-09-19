@@ -1,6 +1,5 @@
 # Todo
 [] write script that runs simulations until the convergence is good
-[] write script that automatically determines the size and then applies a mask accordingly
 [] write script that compares two images and quantifies the difference
 
 # Done
@@ -13,3 +12,4 @@
 [x] Find/ Make some bitmaps
 [x] Test out the masked tool to relax in cpp
 [x] Rewrite the density generating code in cpp for performance
+[x] write script that automatically determines the size and then applies a mask accordingly

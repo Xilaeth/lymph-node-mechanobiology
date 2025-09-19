@@ -2,10 +2,9 @@ from vedo import *
 from vedo.applications import Browser
 import sys
 
-path="vtks/"
 pdata=[]
 for i in range(0,1):
-	p=load(f"{path}{sys.argv[1]}.vtk")
+	p=load(f"{sys.argv[1]}")
 	p.point_size(10)
 	pdata.append(p)
 	
