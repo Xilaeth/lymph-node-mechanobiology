@@ -45,11 +45,15 @@ int main(int argc, const char* argv[])
     regular_rectangle(0.5f, rect, cells);
 
     // Integrate positions
-    Vtk_output output{"load"};  // Writes to output/relax_#.vtk
+    Vtk_output output_pos{"pos"}; 
+    Vtk_output output_force{"force"};  
     for (auto time_step = 0; time_step <= n_time_steps; time_step++) {
         cells.copy_to_host();
-        cells.take_step<morse>(dt);    // Ordered to write during calculation,
-        if(time_step % every_n == 0) output.write_positions(cells);  // use thread for full concurrency.
+        cells.take_step<morse>(dt);    
+        if(time_step % every_n == 0) {
+            output_pos.write_positions(cells);
+            output_force.write_field(cells);
+        }
     }
 
     return 0;
