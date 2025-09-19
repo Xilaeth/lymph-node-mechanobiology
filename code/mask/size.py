@@ -4,7 +4,7 @@ from PIL import Image
 from math import floor
 
 # read the file and split it by lines -> remove the first 6 lines
-file = open("vtks/load_1000.vtk", "rt")
+file = open("vtks/load_0.vtk", "rt")
 content = file.read()
 lines = content.splitlines()
 lines = lines[6:]

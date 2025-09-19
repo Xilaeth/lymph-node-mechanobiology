@@ -4,7 +4,7 @@ from PIL import Image
 from math import floor
 
 # read the file and split it by lines -> remove the first 6 lines
-file = open("vtks/load_1000.vtk", "rt")
+file = open("vtks/load_0.vtk", "rt")
 content = file.read()
 lines = content.splitlines()
 lines = lines[6:]
@@ -43,9 +43,9 @@ pixel_values = np.array(pixel_values).reshape((width, height, 4))
 coordsOut = []
 
 # define side length of the square we overlay the image over
-l = 100
+l = 82 * 0.9
 # set the center of the square
-x = [70, 60]
+x = [44.5, 38.5]
 
 for v in coords:
     if (not(isInSquare(x, l, v))):
