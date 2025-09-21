@@ -2,9 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 from math import floor
+import sys
 
 # read the file and split it by lines -> remove the first 6 lines
-file = open("vtks/load_0.vtk", "rt")
+file = open(sys.argv[1], "rt")
 content = file.read()
 lines = content.splitlines()
 lines = lines[6:]
@@ -60,6 +61,12 @@ xop -= r
 yop -= r
 xom += r
 yom += r
+dx = xop - xom
+dy = yop - yom
+l = 0.9*min(dx, dy)
 
 print("x: [", xom, ", ", xop, "]")
 print("y: [", yom, ", ", yop, "]")
+print(f"xc: {xom + dx/2}")
+print(f"yc: {yom + dy/2}")
+print(f"l: {l}")

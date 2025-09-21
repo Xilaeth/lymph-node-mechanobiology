@@ -77,7 +77,7 @@ yc = yom + (dy/2)
 inp = sys.argv[2]
 
 # reads an image file as input
-im = Image.open("pngs\\" + inp + ".png", 'r')
+im = Image.open("./pngs/" + inp + ".png", 'r')
 width, height = im.size
 pixel_values = list(im.getdata())
 
@@ -101,21 +101,21 @@ for v in coords:
         coordsOut.append(v)
 
 
-xs = list(map(lambda x: x[0], coordsOut))
-ys = list(map(lambda x: x[1], coordsOut))
+#xs = list(map(lambda x: x[0], coordsOut))
+#ys = list(map(lambda x: x[1], coordsOut))
 
 leng = len(xs)
 
 out = inp + "_out"
 
-with open(out + ".vtk", "w", encoding="ascii") as f:
-    f.write("# vtk DataFile Version 3.0\n")
-    f.write(out + "\n")
-    f.write("ASCII\n")
-    f.write("DATASET POLYDATA\n\n")
-    f.write("POINTS " + str(leng) + " float\n")
-    for i in coordsOut:
-        f.write(str(i[0]) + " " + str(i[1]) + " " + "0.0\n")
+#with open(out + ".vtk", "w", encoding="ascii") as f:
+#    f.write("# vtk DataFile Version 3.0\n")
+#    f.write(out + "\n")
+#    f.write("ASCII\n")
+#    f.write("DATASET POLYDATA\n\n")
+#    f.write("POINTS " + str(leng) + " float\n")
+#    for i in coordsOut:
+#        f.write(str(i[0]) + " " + str(i[1]) + " " + "0.0\n")
 
 fig, ax = plt.subplots()
 #ax.set_xlim([0, 2*x[0]])
@@ -126,8 +126,8 @@ fig, ax = plt.subplots()
 #ax.set_box_aspect(1)
 
 # Adjust figure so no padding remains
-#plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
-#ax.scatter(xs, ys, s=0.05, c='red')
+plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
+ax.scatter(xs, ys, s=0.5, c='red')
 
 
-#plt.show()
+plt.show()

@@ -47,10 +47,11 @@ int main(int argc, const char* argv[])
     n_time_steps = stoi(argv[5]);
     dt = stod(argv[6]);
     int every_n = stoi(argv[7]);
+    double starting_dist = stod(argv[8]);
 
     // Prepare initial state
     Solution<Cell, Gabriel_solver> cells{n_cells};
-    regular_rectangle(0.4f, rect, cells);
+    regular_rectangle(starting_dist, rect, cells);
 
     // Integrate positions
     Vtk_output output{"out"}; 

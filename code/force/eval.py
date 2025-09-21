@@ -14,5 +14,7 @@ force_tot = np.array(force_tot)/max(force_tot)
 #varia = np.array(varia)/max(varia)
 
 plt.plot(range(len(force_tot)), force_tot, 'b')
+plt.xlabel("N")
+plt.ylabel(r'$F_{tot}(N) / F_{max}(N)$')
 #plt.plot(range(len(force_tot)), varia, 'r-')
 plt.show()
