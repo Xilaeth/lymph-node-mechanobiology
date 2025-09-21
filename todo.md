@@ -1,6 +1,7 @@
 # Todo
 [] write script that runs simulations until the convergence is good
-[] figure out force write in ya||a
+[] check how long it takes to equilibrate for different r_c
+[] check how long running 1000 time steps takes on my machine for different bead numbers
 [] write script that compares two images and quantifies the difference
 
 # Done

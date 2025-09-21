@@ -23,6 +23,9 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j)
     if (dist > r_max) return dF; // if the distance is greater than the maximum interaction length it's also the 0 vector
 
     double F = 2 * (exp(-2*a*(dist - r_c)) - exp(-a*(dist - r_c))); // strength of the Morse potential
+    if (F > 100) {
+        printf("%f - %f", F, dist);
+    }
 
     dF.x = F * r.x / dist;
     dF.y = F * r.y / dist;
@@ -47,7 +50,7 @@ int main(int argc, const char* argv[])
 
     // Prepare initial state
     Solution<Cell, Gabriel_solver> cells{n_cells};
-    regular_rectangle(0.45f, rect, cells);
+    regular_rectangle(0.4f, rect, cells);
 
     // Integrate positions
     Vtk_output output{"out"}; 
