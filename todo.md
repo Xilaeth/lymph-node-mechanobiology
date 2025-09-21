@@ -1,5 +1,6 @@
 # Todo
 [] write script that runs simulations until the convergence is good
+[] figure out force write in ya||a
 [] write script that compares two images and quantifies the difference
 
 # Done
