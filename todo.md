@@ -2,7 +2,6 @@
 [] write script that runs simulations until the convergence is good
 [] check how long it takes to equilibrate for different r_c
 [] check how good increasing dt works, as in comparing the results
-[] check how long running 1000 time steps takes on my machine for different bead numbers
 [] write script that compares two images and quantifies the difference
 
 # Done
@@ -16,3 +15,4 @@
 [x] Test out the masked tool to relax in cpp
 [x] Rewrite the density generating code in cpp for performance
 [x] write script that automatically determines the size and then applies a mask accordingly
+[x] check how long running 1000 time steps takes on my machine for different bead numbers
