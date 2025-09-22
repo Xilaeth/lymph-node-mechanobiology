@@ -1,0 +1,17 @@
+import numpy as np
+import sys
+import matplotlib.pyplot as plt
+
+force_tot = []
+varia = []
+
+data_temp = np.loadtxt(f"{sys.argv[1]}", delimiter=",")
+force_tot = np.array(list(map(float, data_temp)))
+
+avg = np.mean(force_tot)
+var = np.var(force_tot)
+
+if (var/avg < 0.5):
+    print(1)
+else:
+    print(0)
