@@ -93,6 +93,9 @@ for x, y, v in zip(xs, ys, vals):
     grid[y, x] = v
 
 fig, ax = plt.subplots()
+ax.set_axis_off()
+ax.set_box_aspect(1)
+plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
 ax.imshow(grid, origin='lower', cmap='Greens', interpolation='none')
 plt.savefig(f"output/out_original_density.png", bbox_inches='tight')
 
@@ -156,5 +159,8 @@ for inp in mask_list:
         grid[y, x] = v
 
     fig, ax = plt.subplots()
+    ax.set_axis_off()
+    ax.set_box_aspect(1)
+    plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
     ax.imshow(grid, origin='lower', cmap='Greens', interpolation='none')
     plt.savefig(f"output/{out}_density.png", bbox_inches='tight')
