@@ -1,7 +1,7 @@
 import os
 import sys
 
-dt_list = [0.1] #, 0.05, 0.1, 0.5, 1.0]
+dt_list = [0.05, 0.1, 0.2, 0.4] #, 0.05, 0.1, 0.5, 1.0]
 a_list = [1.0] #[0.2, 0.5, 1.0, 2.0, 5.0]
 rmax = 1.0
 T = 100
@@ -9,11 +9,13 @@ tot_saves = 50
 var = 0
 frac = 0.01
 load = sys.argv[1]
+n = 10
 
 for dt in dt_list:
     for a in a_list:
-        i = 0
-        while (True):
+        #i = 0
+        #while (True):
+        for i in range(n + 1):
             every_n = int(int(T/dt) / tot_saves)
             if (i == 0):
                 folder = f"0-{int(T/dt)}_dt-{dt}_a-{a}"
@@ -40,9 +42,8 @@ for dt in dt_list:
                 os.system(f"zip -r -qq {folder}.zip ./forces")
                 os.system(f"mv {folder}.zip ./out/{folder}")
                 os.system(f"rm ./forces/*")
-#                    conv = os.popen(f"python3 check_conv.py ./out/{folder}/forces.csv").read()
-                conv = float(os.popen(f"python3 eval2.py ./out/{folder}/forces.csv").read())
-                if (conv < frac*var):
-                    break
-            i += 1
+#                conv = float(os.popen(f"python3 eval2.py ./out/{folder}/forces.csv").read())
+#                if (conv < frac*var):
+#                    break
+            #i += 1
 os.system("rm load.vtk")
