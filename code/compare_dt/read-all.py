@@ -37,7 +37,7 @@ for l in range(n + 1):
 
     with open(f"{sys.argv[3]}/positions{l}.vtk", "w", encoding="ascii") as f:
         f.write("# vtk DataFile Version 3.0\n")
-        f.write("positions" + "\n")
+        f.write(f"positions{l}" + "\n")
         f.write("ASCII\n")
         f.write("DATASET POLYDATA\n\n")
         f.write("POINTS " + str(len(pos)) + " float\n")
