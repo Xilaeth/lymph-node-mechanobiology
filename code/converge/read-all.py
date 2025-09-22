@@ -29,7 +29,7 @@ for l in range(n + 1):
     pos = list(map(lambda x: list(map(lambda y: float(y), x.split(' ')))[:2], pos))
     force = list(map(lambda x: float(x), force))
     for i in range(len(force)):
-        if (np.abs(force[i]) > 1):
+        if (np.abs(force[i]) > 100):
             force[i] = 0
 
     xs = list(map(lambda x: x[0], pos))
