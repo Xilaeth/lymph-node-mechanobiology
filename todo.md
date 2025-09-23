@@ -5,6 +5,7 @@
 [] write script that compares two images and quantifies the difference
 [] add stochasticity
 [] flip the mask in python
+[] what happens when plotting the forces
 
 # Done
 [x] Look at the file format of vtk that ya||a uses
