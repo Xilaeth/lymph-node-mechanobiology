@@ -5,7 +5,6 @@ from math import sqrt
 n = 2500
 a = 1.0
 rmax = 1.0
-rect = sqrt(n)
 T = 1000
 dt = 0.01
 every_n = 1
@@ -40,5 +39,7 @@ for inp in sys.argv[1:]:
             case "rm=":
                 rmax = inp[4:]
                 continue
+
+rect = sqrt(n)
 
 os.system(f"./relax {n} {a} {rmax} {rect} {T} {dt} {every_n} {starting_dist} {D}")
