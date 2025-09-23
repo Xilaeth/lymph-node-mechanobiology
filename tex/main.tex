@@ -9,7 +9,7 @@
 
 % commands the the citations I am using
 \renewcommand{\cite}[1]{[\ref{#1}]} 
-\renewcommand{\labelenumi}{[\theenumi]}
+%\renewcommand{\labelenumi}{[\theenumi]}
 
 % commands for the page number
 \pagestyle{fancy}
@@ -42,9 +42,33 @@ Test
 
 Mathematical modelling is one of the most powerful tools accessible to scientists studying nature. Differently from experiments that yield empirical laws and discoveries, mathematical modelling gives us a chance to peak behind the curtains of nature and try to, on a more fundamental level, understand these empirical laws. \par
 
-\subsection{Mathematical Modelling in Science}
+\subsection{Agent Based Models}
+
+A very large class of systems in nature and society is constructed of many individual parts with a distinct behavior. These individual actors, called agents, might themselves follow very simple rules, the entire system might on the other hand exhibit vastly complex behaviors. Models that try to capture the complex dynamics of such agent-centered models are called Agent Based Models (ABMs).\par
+
+\vspace{4mm}
+
+A famous example of such an Agent Based Model is Conway's Game of Life. To construct it we consider a two-dimensional grid made of cells. Each cell can be in one of two states: alive or dead. The system's dynamics are given by discrete time steps during which each cell follows a set of simple rules to determine its future state: 
 
 
+\begin{enumerate}
+    \item Any living cell with less than two living neighbors dies
+    \item Any living cell with two or three neighbors continues to live
+    \item Any living cell with more than 3 neighbors dies
+    \item Any dead cell with exactly 3 living neighbors comes back to live
+\end{enumerate}
+
+These rules represent common dynamics in real world populations: underpopulation, overpopulation and reproduction. 
+
+Using these simple rules 
+
+\vspace{4mm}
+
+Another famous example is the Reynold's Model which describes flocking in a population of entities. 
+
+\vpsace{4mm}
+
+This concept of the whole being more than its parts has been a crutial part in the development of modern science. In his seminal work "More Is Different" Phillip W. Anderson explores this development in physics and science as a whole, writing "The behavior of large and complex aggregates of elementary particles, it turns out, is not to be understood in terms of a simple extrapolation of a few particles. Instead, at each level of complexity entirely new properties appear, and the understanding of these behaviors requires research which I think is as fundamental in its nature as any other" \cite{MoreIsDifferent}.
 
 \newpage
 
@@ -58,8 +82,11 @@ Mathematical modelling is one of the most powerful tools accessible to scientist
 
 \section{Outlook}
 
+\renewcommand{\labelenumi}{[\theenumi]}
+
 \section*{References}
 \begin{enumerate}
+    \item\label{MoreIsDifferent} P. W. Anderson: More Is Different: Broken Symmetry and the Nature of the Hierarchical Structure of Science, Science, vol. 177, no. 4047, Aug. 1972, pp. 393-96
     \item\label{Dieterich-Skript} Wolfgang Dieterich: Stochastische Prozesse in der Physik kondensierter Materie, Skript SoSe 2000, Universität Konstanz
 \end{enumerate}
 
