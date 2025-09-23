@@ -3,6 +3,8 @@
 [] check how long it takes to equilibrate for different r_c
 [] check how good increasing dt works, as in comparing the results
 [] write script that compares two images and quantifies the difference
+[] add stochasticity
+[] flip the mask in python
 
 # Done
 [x] Look at the file format of vtk that ya||a uses
