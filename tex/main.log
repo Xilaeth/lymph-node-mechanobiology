@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.9.14)  23 SEP 2025 21:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.9.14)  23 SEP 2025 22:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**C:/Users/gerfr/BA/tex/main.tex
-(C:/Users/gerfr/BA/tex/main.tex
+**./main.tex
+(main.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
 (D:\Software\MikTex\tex/latex/base\article.cls
@@ -190,23 +190,26 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \tf@toc=\write3
 \openout3 = `main.toc'.
 
-[1]
-! Undefined control sequence.
-l.67 \vpsace
-            {4mm}
-? 
-! Emergency stop.
-l.67 
-     
-End of file on the terminal!
-
- 
+[1] [2] [3] [4] [5] (main.aux)
+ ***********
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-04>
+ ***********
+ ) 
 Here is how much of TeX's memory you used:
- 2251 strings out of 474486
- 36385 string characters out of 5755949
- 1927542 words of memory out of 5000000
- 24552 multiletter control sequences out of 15000+600000
+ 2254 strings out of 474486
+ 36425 string characters out of 5755949
+ 1932542 words of memory out of 5000000
+ 24555 multiletter control sequences out of 15000+600000
  562326 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,11n,65p,448b,277s stack positions out of 10000i,1000n,20000p,200000b,200000s
-!  ==> Fatal error occurred, no output PDF file produced!
+ 57i,11n,65p,650b,277s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<D:/Software/MikTex/fonts/type1/public/amsfonts/cm/cmbx10.pfb><D:/Software/Mi
+kTex/fonts/type1/public/amsfonts/cm/cmbx12.pfb><D:/Software/MikTex/fonts/type1/
+public/amsfonts/cm/cmr10.pfb>
+Output written on main.pdf (6 pages, 59897 bytes).
+PDF statistics:
+ 36 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+
