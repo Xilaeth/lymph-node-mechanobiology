@@ -19,7 +19,7 @@ for dt in dt_list:
             if (i == 0):
                 folder = f"0-{int(T/dt)}_dt-{dt}_a-{a}"
                 os.system(f"mkdir ./out/{folder}")
-                os.system(f"python3 run_param_load.py {load} {a} {rmax} {int(T/dt)} {dt} {every_n} {D}")
+                os.system(f"python3 run_param_load.py {load} -a={a} -rm={rmax} -T={int(T/dt)} -dt={dt} -en={every_n} -D={D}")
                 os.system(f"python3 read-all.py ./output/out_ {tot_saves} ./forces")
                 os.system(f"rm ./output/*")
                 os.system(f"python3 eval.py ./forces/forces {tot_saves} ./out/{folder}/convergence_0-{int(T/dt)}_dt-{dt}.png ./out/{folder}")
@@ -32,7 +32,7 @@ for dt in dt_list:
             else:
                 folder = f"{i*int(T/dt)}-{(i+1)*int(T/dt)}_dt-{dt}_a-{a}"
                 os.system(f"mkdir ./out/{folder}")
-                os.system(f"python3 run_param_load.py load.vtk {a} {rmax} {int(T/dt)} {dt} {every_n} {D}")
+                os.system(f"python3 run_param_load.py load.vtk -a={a} -rm={rmax} -T={int(T/dt)} -dt={dt} -en={every_n} -D={D}")
                 os.system(f"python3 read-all.py ./output/out_ {tot_saves} ./forces")
                 os.system(f"rm ./output/*")
                 os.system(f"python3 eval.py ./forces/forces {tot_saves} ./out/{folder}/convergence_{i*int(T/dt)}-{(i+1)*int(T/dt)}_dt-{dt}.png ./out/{folder}")
