@@ -1,9 +1,6 @@
 # Todo
-[] write script that runs simulations until the convergence is good
-[] check how long it takes to equilibrate for different r_c
-[] check how good increasing dt works, as in comparing the results
-[] write script that compares two images and quantifies the difference
-[] what happens when plotting the forces
+[] hold the very edge states in place
+- [] Add another value to the data type that determines if they experience forces or not 
 
 # Done
 [x] Look at the file format of vtk that ya||a uses

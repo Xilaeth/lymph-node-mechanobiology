@@ -106,7 +106,7 @@ for inp in mask_list:
 
     x = [xc, yc]
 
-    im = Image.open("./pngs/" + inp + ".png", 'r') 
+    im = Image.open("../pngs/" + inp + ".png", 'r') 
     width, height = im.size
     pixel_values = list(im.getdata())
     pixel_values = np.array(pixel_values).reshape((width, height, 4))
