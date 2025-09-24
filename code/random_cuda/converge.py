@@ -10,12 +10,14 @@ r_start = 0.45
 var = 0
 frac = 0.1
 D = 0.01
+n = int(sys.argv[1])
 
 for dt in dt_list:
     for a in a_list:
         for n in n_list:
-            i = 0
-            while (True):
+            #i = 0
+            #while (True):
+            for i in range(n):
                 every_n = int(int(T/dt) / tot_saves)
                 if (i == 0):
                     folder = f"0-{int(T/dt)}_dt-{dt}_a-{a}_n-{n}"
@@ -42,9 +44,9 @@ for dt in dt_list:
                     os.system(f"zip -r -qq {folder}.zip ./forces")
                     os.system(f"mv {folder}.zip ./out/{folder}")
                     os.system(f"rm ./forces/*")
-#                    conv = os.popen(f"python3 check_conv.py ./out/{folder}/forces.csv").read()
-                    conv = float(os.popen(f"python3 eval2.py ./out/{folder}/forces.csv").read())
-                    if (conv <= frac*var):
-                        break
-                i += 1
+                    #conv = os.popen(f"python3 check_conv.py ./out/{folder}/forces.csv").read()
+                    #conv = float(os.popen(f"python3 eval2.py ./out/{folder}/forces.csv").read())
+                    #if (conv <= frac*var):
+                    #    break
+                #i += 1
 os.system("rm load.vtk")
