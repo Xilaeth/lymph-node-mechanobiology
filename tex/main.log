@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.9.14)  24 SEP 2025 15:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.9.14)  24 SEP 2025 15:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -336,7 +336,7 @@ been already used, duplicate ignored
                    \relax 
 l.40 \newpage
               [1] [2] [3] [4] [5]
-Overfull \hbox (43.15901pt too wide) in paragraph at lines 111--112
+Overfull \hbox (43.15901pt too wide) in paragraph at lines 114--115
 []\OT1/cmr/m/n/10.95 Bauerschmidt, Roland, et al. `In-tro-duc-tion to a Renor-m
 al-i-sa-tion Group Method'. arXiv:1907.05474,
  []
@@ -352,16 +352,16 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 Here is how much of TeX's memory you used:
  9255 strings out of 474486
  143327 string characters out of 5755949
- 1932542 words of memory out of 5000000
+ 1933542 words of memory out of 5000000
  31426 multiletter control sequences out of 15000+600000
  559628 words of font info for 41 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,11n,79p,616b,439s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,11n,79p,687b,439s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <D:/Software/MikTex/fonts/type1/public/amsfonts/cm/cmbx10.pfb><D:/Software/Mi
 kTex/fonts/type1/public/amsfonts/cm/cmbx12.pfb><D:/Software/MikTex/fonts/type1/
 public/amsfonts/cm/cmr10.pfb><D:/Software/MikTex/fonts/type1/public/amsfonts/cm
 /cmti10.pfb>
-Output written on main.pdf (7 pages, 83283 bytes).
+Output written on main.pdf (7 pages, 83801 bytes).
 PDF statistics:
  110 PDF objects out of 1000 (max. 8388607)
  33 named destinations out of 1000 (max. 500000)
