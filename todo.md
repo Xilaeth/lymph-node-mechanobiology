@@ -1,6 +1,6 @@
 # Todo
-[] hold the very edge states in place
-- [] Add another value to the data type that determines if they experience forces or not 
+[] Write code that adds forces in a given direction with a certain magnitude
+[] Write code that compares the states and computes a linear response
 
 # Done
 [x] Look at the file format of vtk that ya||a uses
@@ -16,3 +16,4 @@
 [x] check how long running 1000 time steps takes on my machine for different bead numbers
 [x] add stochasticity
 [x] flip the mask in python
+[x] hold the very edge states in place
