@@ -9,7 +9,7 @@ tot_saves = 50
 var = 0
 frac = 0.5
 load = sys.argv[1]
-D = 0.01
+D = 0.001
 n = int(sys.argv[2])
 
 for dt in dt_list:

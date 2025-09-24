@@ -72,7 +72,7 @@ dy = yop - yom
 xc = xom + dx/2
 yc = yom + dy/2
 x = [xc, yc]
-l = 0.95*min(dx, dy)
+l = 0.9*min(dx, dy)
 
 # generate the csv for the original file and the corrosponding density plot
 os.system(f"./density-stable {sys.argv[1]} {l} {sys.argv[2]} {sys.argv[3]} output/out_original.csv {xc} {yc}")
@@ -117,16 +117,17 @@ for inp in mask_list:
 
     for v in coords:
         if (not(isInSquare(x, l, v))):
-        #    coordsOut.append(v)
+            coordsOut.append(v)
+            typ.append(0)
             continue
         px = floor((v[0] + (l/2 - x[0]))*500/l)
         py = floor((v[1] + (l/2 - x[1]))*500/l)
         if (pixel_values[px][py][0] != 0):
             coordsOut.append(v)
-            if ((px >= per*500) or (px <= (1-per)*500) or (py >= per*500) or (py <= (1-per)*500)):
-                typ.append(1)
-            else:
-                typ.append(0)
+            #if ((px >= per*500) or (px <= (1-per)*500) or (py >= per*500) or (py <= (1-per)*500)):
+            #    typ.append(1)
+            #else:
+            typ.append(0)
 
     xs = list(map(lambda x: x[0], coordsOut))
     ys = list(map(lambda x: x[1], coordsOut))
