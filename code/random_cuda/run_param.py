@@ -40,6 +40,6 @@ for inp in sys.argv[1:]:
                 rmax = inp[4:]
                 continue
 
-rect = sqrt(n)
+rect = sqrt(int(n))
 
 os.system(f"./relax {n} {a} {rmax} {rect} {T} {dt} {every_n} {starting_dist} {D}")
