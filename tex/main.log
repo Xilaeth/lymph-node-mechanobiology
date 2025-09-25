@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.9.14)  24 SEP 2025 18:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.9.14)  25 SEP 2025 15:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -229,6 +229,14 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 (D:\Software\MikTex\tex/latex/setspace\setspace.sty
 Package: setspace 2022/12/04 v6.7b set line spacing
 )
+(D:\Software\MikTex\tex/latex/tools\bm.sty
+Package: bm 2023/07/08 v1.2f Bold Symbol Support (DPC/FMi)
+\symboldoperators=\mathgroup4
+\symboldletters=\mathgroup5
+\symboldsymbols=\mathgroup6
+Package bm Info: No bold for \OMX/cmex/m/n, using \pmb.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 149.
+)
 
 Package geometry Warning: Over-specification in `h'-direction.
     `width' (483.69684pt) is ignored.
@@ -244,25 +252,25 @@ File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
 ) (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-Package hyperref Info: Link coloring OFF on input line 27.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+Package hyperref Info: Link coloring OFF on input line 28.
 
 (main.out) (main.out)
 \@outlinefile=\write3
@@ -325,7 +333,14 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 
 [1
 
-{C:/Users/gerfr/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] (main.toc)
+{C:/Users/gerfr/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] (main.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 3.
+)
 \tf@toc=\write4
 \openout4 = `main.toc'.
 
@@ -334,33 +349,51 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.40 \newpage
-              [1] [2] [3] [4] [5]
+l.41 \newpage
+              [1] [2]
+Underfull \hbox (badness 10000) in paragraph at lines 49--51
 
-! LaTeX Error: Something's wrong--perhaps a missing \item.
+ []
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.89 \end{enumerate}
-                    
-? 
-! Emergency stop.
- ...                                              
-                                                  
-l.89 \end{enumerate}
-                    
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
 
- 
+Underfull \hbox (badness 10000) in paragraph at lines 52--53
+
+ []
+
+
+Overfull \hbox (74.61494pt too wide) in paragraph at lines 54--56
+[]\OT1/cmr/m/n/10.95 (https://pmc.ncbi.nlm.nih.gov/articles/PMC7063836/) (https
+://pmc.ncbi.nlm.nih.gov/articles/PMC6557636/) 
+ []
+
+[3] [4] [5] [6] [7] (main.aux)
+ ***********
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-04>
+ ***********
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: CFE64E97E161D819104FFC21318235D9;644.
+ ) 
 Here is how much of TeX's memory you used:
- 9241 strings out of 474486
- 143300 string characters out of 5755949
- 1928542 words of memory out of 5000000
- 31423 multiletter control sequences out of 15000+600000
- 559628 words of font info for 41 fonts, out of 8000000 for 9000
+ 9376 strings out of 474486
+ 144848 string characters out of 5755949
+ 1935542 words of memory out of 5000000
+ 31539 multiletter control sequences out of 15000+600000
+ 564788 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,11n,79p,721b,439s stack positions out of 10000i,1000n,20000p,200000b,200000s
-!  ==> Fatal error occurred, no output PDF file produced!
+ 75i,11n,79p,769b,440s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<D:/Software/MikTex/fonts/type1/public/amsfonts/cm/cmbx10.pfb><D:/Software/Mi
+kTex/fonts/type1/public/amsfonts/cm/cmbx12.pfb><D:/Software/MikTex/fonts/type1/
+public/amsfonts/cm/cmex10.pfb><D:/Software/MikTex/fonts/type1/public/amsfonts/c
+m/cmmi10.pfb><D:/Software/MikTex/fonts/type1/public/amsfonts/cm/cmmi6.pfb><D:/S
+oftware/MikTex/fonts/type1/public/amsfonts/cm/cmmi8.pfb><D:/Software/MikTex/fon
+ts/type1/public/amsfonts/cm/cmmib10.pfb><D:/Software/MikTex/fonts/type1/public/
+amsfonts/cm/cmr10.pfb><D:/Software/MikTex/fonts/type1/public/amsfonts/cm/cmr8.p
+fb><D:/Software/MikTex/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/Software/M
+ikTex/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on main.pdf (8 pages, 146282 bytes).
+PDF statistics:
+ 136 PDF objects out of 1000 (max. 8388607)
+ 24 named destinations out of 1000 (max. 500000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+

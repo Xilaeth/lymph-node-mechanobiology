@@ -2,6 +2,7 @@
 [] Write code that adds forces in a given direction with a certain magnitude
 [] Write code that compares the states and computes a linear response
 [] Figure out how friction forces work in ya||a
+[] Figure out how to turn off Gabriel Updater in ya||a
 
 # Done
 [x] Look at the file format of vtk that ya||a uses
