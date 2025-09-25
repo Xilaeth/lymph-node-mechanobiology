@@ -53,14 +53,6 @@ Test
 (https://pmc.ncbi.nlm.nih.gov/articles/PMC7063836/)
 (https://pmc.ncbi.nlm.nih.gov/articles/PMC6557636/)
 
-\vspace{4mm}
-
-\begin{enumerate}
-    \item Agent Based Models
-    \item Agent Based Models in Cell Biology
-    \item Lymph Nodes and Structure
-\end{enumerate}
-
 \newpage
 
 \section{Methods}
@@ -68,9 +60,6 @@ Test
 We now want to introduce the mathematical and physical methods required to dynamically model the structure of the fibroblastic reticular network in the lymph nodes. After having established these methods we will further introduce the \text{ya||a} (yet another parallel agent based model for morphogenesis) framework which will be the main simulation tool we will use. \par
 
 \subsection{Cells as Agents}
-
-Before we can start with modelling the reticular network we first have to decide on which kind of agent based model we want to use and how exactly we define the its agents and their behavior. The first main choice is between using an on-lattice and an off-lattice agent based model. As we are interested in modelling structure and the change in this structure due to mechanical forces being able to directly simulate forces would make our work substantially easier, rather than having to interpret discrete changes due to semi-physical or biological rules. Such a modelling approach is a lot easier when considering an off-lattice model in which, like a point particle in classical mechanics, the cells are allowed to move continously in space, rather than discreetly on the lattice. Another reason for going with an off-lattice model is that switching from 2 -to 3D is very easy, where for the on-lattice model such a change adds a lot more complexity. Considering these arguements for and against on-lattice and off-lattice models it is an easy decision for us to go with an off-lattice model. \par
-
 
 
 \begin{enumerate}
