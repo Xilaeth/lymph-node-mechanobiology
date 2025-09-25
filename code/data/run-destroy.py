@@ -60,28 +60,28 @@ ypend = False
 ymend = False
 r = 0.5
 
-while (not(xpend) or not(ypend) or not(xmend) or not(ymend)):
-    if (densityInCirc([xop, 0], r) < 1e-5):
-        xpend = True
-    if (densityInCirc([0, yop], r) < 1e-5):
-        ypend = True
-    if (densityInCirc([xom, 0], r) < 1e-5):
-        xmend = True
-    if (densityInCirc([0, yom], r) < 1e-5):
-        ymend = True
-    if (not(xpend)):
-        xop += 1
-    if (not(ypend)):
-        yop += 1
-    if (not(xmend)):
-        xom -= 1
-    if (not(ymend)):
-        yom -= 1
+#while (not(xpend) or not(ypend) or not(xmend) or not(ymend)):
+#    if (densityInCirc([xop, 0], r) < 1e-5):
+#        xpend = True
+#    if (densityInCirc([0, yop], r) < 1e-5):
+#        ypend = True
+#    if (densityInCirc([xom, 0], r) < 1e-5):
+#        xmend = True
+#    if (densityInCirc([0, yom], r) < 1e-5):
+#        ymend = True
+#    if (not(xpend)):
+#        xop += 1
+#    if (not(ypend)):
+#        yop += 1
+#    if (not(xmend)):
+#        xom -= 1
+#    if (not(ymend)):
+#        yom -= 1
 
-xop -= r
-yop -= r
-xom += r
-yom += r
+xop = 0.98 * max(xs)
+yop = 0.98 * max(ys)
+xom = 0.98 * min(xs)
+yom = 0.98 * min(ys)
 dx = xop - xom
 dy = yop - yom
 xc = xom + dx/2
@@ -93,6 +93,8 @@ ly = 0.95 * dy
 
 # generate the masked vtks for the masks and generate the corrosponding csv files
 for inp in mask_list:
+
+    print(inp)
 
     x = [xc, yc]
 
@@ -112,8 +114,8 @@ for inp in mask_list:
     for v in coords:
         if (not(isInRect(x, lx, ly, v))):
             continue
-        px = floor((v[0] + (l/2 - x[0]))*w/l)
-        py = floor((v[1] + (l/2 - x[1]))*h/l)
+        px = floor((v[0] + (lx/2 - x[0]))*w/lx)
+        py = floor((v[1] + (ly/2 - x[1]))*h/ly)
         if (im_data[py][px] != 0):
             coordsOut.append(v)
 

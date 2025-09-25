@@ -94,7 +94,7 @@ int main(int argc, const char* argv[])
     for (auto time_step = 0; time_step <= n_time_steps; time_step++) {
         cells.copy_to_host();
         generate_noise<<<(n_cells + 32 - 1)/32, 32>>>(n_cells, d_state);
-        cells.take_step<morse, friction_w_neighbour>(dt_temp);    
+        cells.take_step<morse>(dt_temp);    
         if(time_step % every_n == 0) {
             output.write_positions(cells);
             output.write_field(cells, "f", &Cell::f);
