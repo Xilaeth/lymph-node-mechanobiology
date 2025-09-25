@@ -116,7 +116,7 @@ for inp in mask_list:
             continue
         px = floor((v[0] + (lx/2 - x[0]))*w/lx)
         py = floor((v[1] + (ly/2 - x[1]))*h/ly)
-        if (im_data[py][px] != 0):
+        if (im_data[h - py][px] != 0):
             coordsOut.append(v)
 
     xs = list(map(lambda x: x[0], coordsOut))

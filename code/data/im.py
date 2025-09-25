@@ -1,7 +1,8 @@
 from PIL import Image
+import sys
 import numpy as np
 
-im = Image.open("../../../Data-2D/P6059_FRC_One_Timepoint_thresholded_maxproj.ome.tif")
+im = Image.open(sys.argv[1])
 im_data = np.array(im)
 print(im_data.shape)
 print(im_data.size)
