@@ -6,7 +6,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 from math import floor
-import sys
 
 # first we determine the approximate size of the tissue sample
 
@@ -37,36 +36,46 @@ def densityInCirc(x, r):
             counter += 1
     return (counter / (np.pi*r*r))
 
-xop, xom = 0, 0
-xpend = False
-xmend = False
-yop, yom = 0, 0
-ypend = False
-ymend = False
-r = 0.5
+#xop, xom = 0, 0
+#xpend = False
+#xmend = False
+#yop, yom = 0, 0
+#ypend = False
+#ymend = False
+#r = 0.5
 
-while (not(xpend) or not(ypend) or not(xmend) or not(ymend)):
-    if (densityInCirc([xop, 0], r) < 1e-5):
-        xpend = True
-    if (densityInCirc([0, yop], r) < 1e-5):
-        ypend = True
-    if (densityInCirc([xom, 0], r) < 1e-5):
-        xmend = True
-    if (densityInCirc([0, yom], r) < 1e-5):
-        ymend = True
-    if (not(xpend)):
-        xop += 1
-    if (not(ypend)):
-        yop += 1
-    if (not(xmend)):
-        xom -= 1
-    if (not(ymend)):
-        yom -= 1
+#while (not(xpend) or not(ypend) or not(xmend) or not(ymend)):
+#    if (densityInCirc([xop, 0], r) < 1e-5):
+#        xpend = True
+#    if (densityInCirc([0, yop], r) < 1e-5):
+#        ypend = True
+#    if (densityInCirc([xom, 0], r) < 1e-5):
+#        xmend = True
+#    if (densityInCirc([0, yom], r) < 1e-5):
+#        ymend = True
+#    if (not(xpend)):
+#        xop += 1
+#    if (not(ypend)):
+#        yop += 1
+#    if (not(xmend)):
+#        xom -= 1
+#    if (not(ymend)):
+#        yom -= 1
 
-xop -= r
-yop -= r
-xom += r
-yom += r
+#xop -= r
+#yop -= r
+#xom += r
+#yom += r
+#dx = xop - xom
+#dy = yop - yom
+#xc = xom + dx/2
+#yc = yom + dy/2
+#x = [xc, yc]
+#l = 0.95*min(dx, dy)
+xop = 0.98 * max(xs)
+yop = 0.98 * max(ys)
+xom = 0.98 * min(xs)
+yom = 0.98 * min(ys)
 dx = xop - xom
 dy = yop - yom
 xc = xom + dx/2
