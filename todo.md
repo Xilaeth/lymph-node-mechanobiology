@@ -5,6 +5,7 @@
 [] Figure out how to turn off Gabriel Updater in ya||a
 [] Write vedo visualizer that takes one before and n after vtks and creates a plot that shows the average change with vectors
 [] Write auto_mask script for the 3d tif files
+[] Write code that takes in positions and gives out positions plus cell types
 
 # Done
 [x] Look at the file format of vtk that ya||a uses
