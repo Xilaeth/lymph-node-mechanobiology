@@ -3,7 +3,6 @@
 [] Write script that checks a lot of different parameters for the input to see what is stable and what isn't
 [] Write code that compares the states and computes a linear response
 [] Figure out how to turn off Gabriel Updater in ya||a
-[] Write code that takes the average of multiple simulations
 [] Write vedo visualizer that takes one before and n after vtks and creates a plot that shows the average change with vectors
 [] Write auto_mask script for the 3d tif files
 
@@ -25,3 +24,4 @@
 [x] Figure out tif files in 3d
 [x] Figure out how friction forces work in ya||a
 [x] Write script that creates 3d and 2d relaxed vtk files with a certain number of points 
+[x] Write code that takes the average of multiple simulations
