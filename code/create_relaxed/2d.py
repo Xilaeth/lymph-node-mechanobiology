@@ -7,7 +7,7 @@ z0 = 0
 nx = 100
 ny = 100
 l = 0.5
-out = "out.vtk"
+out = "out"
 
 for inp in sys.argv[1:]:
     if (inp[0] == "-"):
@@ -52,7 +52,7 @@ def createSheet(x, l, nx, ny):
 data = createSheet([x0, y0, z0], l, nx, ny)
 leng = len(data)
 
-with open(out, "w", encoding="ascii") as f:
+with open(out + ".vtk", "w", encoding="ascii") as f:
     f.write("# vtk DataFile Version 3.0\n")
     f.write(out + "\n")
     f.write("ASCII\n")

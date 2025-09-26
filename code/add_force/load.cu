@@ -1,4 +1,3 @@
-// Integrate N-body problem with springs between all bodies
 #include "../include/dtypes.cuh"
 #include "../include/inits.cuh"
 #include "../include/solvers.cuh"
@@ -17,9 +16,10 @@ __device__ double dt = 0.05f; // time step
 __device__ double a = 1.0f;
 __device__ double r_max = 1.0f;
 __device__ double D = 0.0;
+__device__ float f = 0.0;
 
 // new data type that stores force as well
-MAKE_PT(Cell, f);
+MAKE_PT(Cell, v);
 
 // random forces
 __device__ Cell *dW;
@@ -30,8 +30,18 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
     // if i == j add random noise and external force
     if (i == j) {
         dF += dW[i];
+        if (Xi.v == 1) {
+            Cell c = Xi;
+            c.x = 25 - c.x;
+            c.y = 21.6589 - c.x;
+            c.v = 0;
+            float mag = norm3d(c.x, c.y, c.z);
+            dF -= f*c/mag;
+        }
         return dF;
     }
+
+    if (Xi.v == 1) return dF;
 
     if (dist > r_max) return dF; // if the distance is greater than the maximum interaction length it's also the 0 vector
 
@@ -40,7 +50,6 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
     dF.x = F * r.x / dist;
     dF.y = F * r.y / dist;
     dF.z = F * r.z / dist;
-    dF.f = F/dt;
     return dF; // return force that's to be applied
 }
 
@@ -53,7 +62,7 @@ __global__ void generate_noise(int n, curandState* d_state) {
     dW[i].x = curand_normal(&d_state[i]) * powf(dt, 0.5) * D / dt;
     dW[i].y = curand_normal(&d_state[i]) * powf(dt, 0.5) * D / dt;
     dW[i].z = 0.0; //1*curand_normal(&d_state[i]) * powf(dt, 0.5) * D / dt;
-    dW[i].f = 0.0;
+    dW[i].v = 0.0;
 }
 
 // order of parameters is: n_cells, 
@@ -72,6 +81,8 @@ int main(int argc, const char* argv[])
     int every_n = stoi(argv[6]);
     double D_temp = stod(argv[7]);
     cudaMemcpyToSymbol(D, &D_temp, sizeof(double));
+    double f_temp = stod(argv[8]);
+    cudaMemcpyToSymbol(f, &f_temp, sizeof(double));
 
     ifstream inp(file);
 
@@ -97,6 +108,7 @@ int main(int argc, const char* argv[])
     Solution<Cell, Gabriel_solver> cells{n_cells};
 
     input.read_positions(cells);
+    input.read_field(cells, "v", &Cell::v);
     cells.copy_to_device();
 
     // Prepare random state
@@ -116,7 +128,7 @@ int main(int argc, const char* argv[])
         cells.take_step<morse>(dt_temp);    // Ordered to write during calculation,
         if ((time_step % every_n) == 0) {
             output.write_positions(cells);  // use thread for full concurrency.
-            output.write_field(cells, "f", &Cell::f);
+            output.write_field(cells, "v", &Cell::v);
         }
     }
 
