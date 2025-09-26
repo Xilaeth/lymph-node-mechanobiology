@@ -1,5 +1,6 @@
 # Todo
 [] Write code that adds forces in a given direction with a certain magnitude
+[] Write script that checks a lot of different parameters for the input to see what is stable and what isn't
 [] Write code that compares the states and computes a linear response
 [] Figure out how to turn off Gabriel Updater in ya||a
 [] Write code that takes the average of multiple simulations
