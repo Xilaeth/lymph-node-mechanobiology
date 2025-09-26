@@ -1,10 +1,8 @@
 # Todo
 [] Write code that adds forces in a given direction with a certain magnitude
 [] Write code that compares the states and computes a linear response
-[] Figure out how friction forces work in ya||a
 [] Figure out how to turn off Gabriel Updater in ya||a
 [] Write script that creates 3d and 2d relaxed vtk files with a certain number of points 
-[] Figure out tif files in 3d
 
 # Done
 [x] Look at the file format of vtk that ya||a uses
@@ -21,3 +19,5 @@
 [x] add stochasticity
 [x] flip the mask in python
 [x] hold the very edge states in place
+[x] Figure out tif files in 3d
+[x] Figure out how friction forces work in ya||a

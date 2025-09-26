@@ -51,3 +51,9 @@
 - We define the inital condition initialcondition(..., Solution);
 - We define the vtk output namescheme: `Vtk_output output{"name"};`
 - We loop over the time steps and do the following in the loop: we copy the cell to the host (`cells.copy_to_host();`); we take a step with our force function (`cells.take_step<force>(time step);`; we write the state to the output (`output.write_positions(cells);`)
+
+## Things I learned over time
+- generally in CUDA variables are split into device and host variables
+- to load a device variable to the host or the other way around we use cudaMemcpyToSymbol
+- The noise isn't automatically added in in ya||a, we therefore have to add it ourselves using curand (cuda random) variables that are created in parallel on the GPU
+- We can create new POINT classes that have more parameters that we can write and read from files using the write/read_field function
