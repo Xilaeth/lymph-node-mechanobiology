@@ -16,7 +16,7 @@ __device__ double dt = 0.05f; // time step
 __device__ double a = 1.0f;
 __device__ double r_max = 1.0f;
 __device__ double D = 0.0;
-__device__ float f = 0.0;
+__device__ double f = 0.0;
 
 // new data type that stores force as well
 MAKE_PT(Cell, v);
@@ -29,19 +29,13 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
 
     // if i == j add random noise and external force
     if (i == j) {
-        dF += dW[i];
         if (Xi.v == 1) {
-            Cell c = Xi;
-            c.x = 25 - c.x;
-            c.y = 21.6589 - c.x;
-            c.v = 0;
-            float mag = norm3d(c.x, c.y, c.z);
-            dF -= f*c/mag;
+            dF.x -= f;
         }
+        dF += dW[i];
         return dF;
     }
 
-    if (Xi.v == 1) return dF;
 
     if (dist > r_max) return dF; // if the distance is greater than the maximum interaction length it's also the 0 vector
 

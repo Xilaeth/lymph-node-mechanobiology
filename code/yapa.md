@@ -57,3 +57,4 @@
 - to load a device variable to the host or the other way around we use cudaMemcpyToSymbol
 - The noise isn't automatically added in in ya||a, we therefore have to add it ourselves using curand (cuda random) variables that are created in parallel on the GPU
 - We can create new POINT classes that have more parameters that we can write and read from files using the write/read_field function
+- To apply forces to specific points is easiest by giving them a type and then applying the force to that type of cell
