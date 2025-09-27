@@ -8,6 +8,8 @@
 #include <thrust/sort.h>
 #include <functional>
 
+#include <vector>
+
 #include "cudebug.cuh"
 #include "dtypes.cuh"
 
@@ -208,7 +210,9 @@ public:
     }
 
 protected:
+    // point that is the change
     Pt *d_X, *d_dX, *d_X1, *d_dX1;
+    // velocities
     float3 *d_old_v, *d_sum_v;
     float* d_sum_friction;
     int* d_n;
@@ -223,6 +227,7 @@ protected:
         assert(n <= n_max);
         return n;
     }
+    // this function takes the time step and the interaction forces
     template<Pairwise_interaction<Pt> pw_int, Pairwise_friction<Pt> pw_friction>
     void take_step(float dt, Generic_forces<Pt> gen_forces)
     {
@@ -233,6 +238,7 @@ protected:
         thrust::fill(thrust::device, d_sum_friction, d_sum_friction + n, 0);
         thrust::fill(thrust::device, d_sum_v, d_sum_v + n, float3{0});
         gen_forces(n, d_X, d_dX);
+        // computes the new neighbors
         Computer<Pt>::template pwints<pw_int, pw_friction>(
             n, d_X, d_old_v, d_dX, d_sum_v, d_sum_friction);
         add_rhs<<<(n + 32 - 1) / 32, 32>>>(
@@ -501,14 +507,16 @@ protected:
 template<typename Pt>
 using Grid_solver = Heun_solver<Pt, Grid_computer>;
 
+// saves the one time neighbour calculations
+__device__ int neighbour_ids[100000][100];
+__device__ bool updateNeigh[100000];
+
+// DOESN'T WORK YET AS I HAVEN'T FIGURED OUT HOW TO EXACTLY SAVE THE GRID AND THE CELL IDS EXTERNALLY YET
 
 // Compute pairwise interactions and frictions based on the grid solver,
 // plus further refinement of the cell neighbourhood using the Gabriel
 // method (Delile et al. 2017. Nature Communications,
 // Marin-Riera et al. 2016, Bioinformatics).
-
-__global__ double Ftot = 0;
-
 template<typename Pt, Pairwise_interaction<Pt> pw_int,
     Pairwise_friction<Pt> pw_friction>
 __global__ void compute_cube_gabriel(const int n, const Pt* __restrict__ d_X,
@@ -519,79 +527,100 @@ __global__ void compute_cube_gabriel(const int n, const Pt* __restrict__ d_X,
     auto i = blockIdx.x * blockDim.x + threadIdx.x;
     if (i >= n) return;
 
+    // id of the cell
     auto id_i = d_grid->d_point_id[i];
     auto Xi = d_X[id_i];
     Pt F{0};
     float3 sum_v{0};
     float sum_friction = 0;
 
+    // the neighbors of a given id of cell
     int neighbour_id[100];
     float neighbour_dist[100];
     int n_neighs = 0;
 
-    // First loop. Register all possible pairwise interactions based on
-    // extensive sweep of the nearby cubes.
-    for (auto j = 0; j < 27; j++) {
-        auto cube = d_grid->d_cube_id[i] + d_nhood[j];
-        for (auto k = d_grid->d_cube_start[cube]; k <= d_grid->d_cube_end[cube];
-             k++) {
-            auto j = d_grid->d_point_id[k];
+    if (not(updateNeigh[id_i])) {
+        // First loop. Register all possible pairwise interactions based on
+        // extensive sweep of the nearby cubes.
+        for (auto j = 0; j < 27; j++) {
+            auto cube = d_grid->d_cube_id[i] + d_nhood[j];
+            for (auto k = d_grid->d_cube_start[cube]; k <= d_grid->d_cube_end[cube];
+                 k++) {
+                auto j = d_grid->d_point_id[k];
+                auto Xj = d_X[j];
+                auto r = Xi - Xj;
+                auto dist = norm3df(r.x, r.y, r.z);
+                if (dist >= cube_size) continue;
+
+                neighbour_id[n_neighs] = j;
+                neighbour_dist[n_neighs] = dist;
+                n_neighs++;
+            }
+        }
+
+        // For an efficient implementation of the Gabriel method we sort the list
+        // of possible interactions by distance
+        for (auto m = 0; m < n_neighs - 1; m++) {
+            auto min_val = neighbour_dist[m];
+            auto min_index = m;
+            for (auto n = m + 1; n < n_neighs; n++) {
+                auto compare_val = neighbour_dist[n];
+                if (compare_val < min_val) {
+                    min_index = n;
+                    min_val = compare_val;
+                }
+            }
+            if (min_index != m) {
+                auto id_temp = neighbour_id[min_index];
+                neighbour_id[min_index] = neighbour_id[m];
+                neighbour_id[m] = id_temp;
+                neighbour_dist[min_index] = neighbour_dist[m];
+                neighbour_dist[m] = min_val;
+            }
+        }
+
+        // Second loop. We apply the Gabriel method by checking, for each pairwise
+        // interaction if any other close cell falls inside the sphere
+        // circumscribed by cells i and j. If that is the case, then pairwise
+        // intereaction i-j is not considered for force calculations.
+        for (auto m = n_neighs -1 ; m >= 0; m--) {
+            auto gabriel_condition = true;
+            auto j = neighbour_id[m];
+            auto Xj = d_X[j];
+            auto dist = neighbour_dist[m];
+            if (j != id_i) {
+                auto gabriel_radius = 0.5f * neighbour_dist[m] * gabriel_coefficient;
+                auto mid_point = 0.5f * (Xi + Xj);
+                for (auto n = m - 1 ; n >= 0; n--) {
+                    auto k = neighbour_id[n];
+                    auto r_mk = mid_point - d_X[k];
+                    auto dist_mk = norm3df(r_mk.x, r_mk.y, r_mk.z);
+                    if (dist_mk < gabriel_radius) {
+                        gabriel_condition = false;
+                        break;
+                    }
+                }
+            }
+            if (gabriel_condition) {
+                auto r = Xi - Xj;
+                F += pw_int(Xi, r, dist, id_i, j);
+                auto friction = pw_friction(Xi, r, dist, id_i, j);
+                sum_friction += friction;
+                sum_v += friction * d_old_v[j];
+            }
+        }
+
+        for (int k = 0; k < 100; k++) {
+            neighbour_ids[id_i][k] = neighbour_id[k];
+        }
+
+        updateNeigh[id_i] = true;
+
+    } else {
+        for (auto j : neighbour_ids[id_i]) {
             auto Xj = d_X[j];
             auto r = Xi - Xj;
             auto dist = norm3df(r.x, r.y, r.z);
-            if (dist >= cube_size) continue;
-
-            neighbour_id[n_neighs] = j;
-            neighbour_dist[n_neighs] = dist;
-            n_neighs++;
-        }
-    }
-
-    // For an efficient implementation of the Gabriel method we sort the list
-    // of possible interactions by distance
-    for (auto m = 0; m < n_neighs - 1; m++) {
-        auto min_val = neighbour_dist[m];
-        auto min_index = m;
-        for (auto n = m + 1; n < n_neighs; n++) {
-            auto compare_val = neighbour_dist[n];
-            if (compare_val < min_val) {
-                min_index = n;
-                min_val = compare_val;
-            }
-        }
-        if (min_index != m) {
-            auto id_temp = neighbour_id[min_index];
-            neighbour_id[min_index] = neighbour_id[m];
-            neighbour_id[m] = id_temp;
-            neighbour_dist[min_index] = neighbour_dist[m];
-            neighbour_dist[m] = min_val;
-        }
-    }
-
-    // Second loop. We apply the Gabriel method by checking, for each pairwise
-    // interaction if any other close cell falls inside the sphere
-    // circumscribed by cells i and j. If that is the case, then pairwise
-    // intereaction i-j is not considered for force calculations.
-    for (auto m = n_neighs -1 ; m >= 0; m--) {
-        auto gabriel_condition = true;
-        auto j = neighbour_id[m];
-        auto Xj = d_X[j];
-        auto dist = neighbour_dist[m];
-        if (j != id_i) {
-            auto gabriel_radius = 0.5f * neighbour_dist[m] * gabriel_coefficient;
-            auto mid_point = 0.5f * (Xi + Xj);
-            for (auto n = m - 1 ; n >= 0; n--) {
-                auto k = neighbour_id[n];
-                auto r_mk = mid_point - d_X[k];
-                auto dist_mk = norm3df(r_mk.x, r_mk.y, r_mk.z);
-                if (dist_mk < gabriel_radius) {
-                    gabriel_condition = false;
-                    break;
-                }
-            }
-        }
-        if (gabriel_condition) {
-            auto r = Xi - Xj;
             F += pw_int(Xi, r, dist, id_i, j);
             auto friction = pw_friction(Xi, r, dist, id_i, j);
             sum_friction += friction;
@@ -599,13 +628,9 @@ __global__ void compute_cube_gabriel(const int n, const Pt* __restrict__ d_X,
         }
     }
 
-    printf("%f,", F.x);
-    printf("%f,", F.y);
-    printf("%f,", F.z);
-
-    d_dX[d_grid->d_point_id[i]] += F;
-    d_sum_v[d_grid->d_point_id[i]] = sum_v;
-    d_sum_friction[d_grid->d_point_id[i]] = sum_friction;
+    d_dX[id_i] += F;
+    d_sum_v[id_i] = sum_v;
+    d_sum_friction[id_i] = sum_friction;
 }
 
 template<typename Pt>
@@ -634,18 +659,33 @@ public:
     }
 
 protected:
+    // this is the function that ends up computing the neighbors
     Grid grid;
+    bool updateGrid = true;
     template<Pairwise_interaction<Pt> pw_int, Pairwise_friction<Pt> pw_friction>
     void pwints(int n, const Pt* __restrict__ d_X,
         const float3* __restrict__ d_old_v, Pt* d_dX, float3* d_sum_v,
         float* d_sum_friction)
     {
+        // builds the first grid
+        /*
+        if (updateGrid) {
+            bool updateNeigh_t;
+            cudaMemcpyFromSymbol(&updateNeigh_t, updateNeigh, sizeof(bool));
+            if (not(updateNeigh_t)) updateGrid = false;
+        }
+        */
+        
+        //if (updateGrid) {
         grid.build(n, d_X, cube_size);
+        //}
+        // computes the gabriel neighborshods 
         compute_cube_gabriel<Pt, pw_int, pw_friction>
             <<<(n + TILE_SIZE - 1) / TILE_SIZE, TILE_SIZE>>>(n, d_X, d_old_v,
                 grid.d_grid, cube_size, d_dX, d_sum_v, d_sum_friction, gabriel_coefficient);
     }
 };
 
+// the Gabriel_solver is made of the Heun_solver with the Pt type and the Gabriel computer
 template<typename Pt>
 using Gabriel_solver = Heun_solver<Pt, Gabriel_computer>;

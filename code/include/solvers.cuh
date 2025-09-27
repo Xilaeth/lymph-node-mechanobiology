@@ -627,6 +627,7 @@ public:
     }
 
 protected:
+    // this is the function that ends up computing the neighbors
     Grid grid;
     template<Pairwise_interaction<Pt> pw_int, Pairwise_friction<Pt> pw_friction>
     void pwints(int n, const Pt* __restrict__ d_X,
@@ -640,5 +641,6 @@ protected:
     }
 };
 
+// the Gabriel_solver is made of the Heun_solver with the Pt type and the Gabriel computer
 template<typename Pt>
 using Gabriel_solver = Heun_solver<Pt, Gabriel_computer>;

@@ -1,6 +1,7 @@
 # Todo
 [] Write script that checks a lot of different parameters for the input to see what is stable and what isn't
 [] Write code that compares the states and computes a linear response
+[] Figure out how exactly the Grid class works so I can save it outside to stop the Gabriel solver from engaging
 [] Figure out how to turn off Gabriel Updater in ya||a
 [] Write vedo visualizer that takes one before and n after vtks and creates a plot that shows the average change with vectors
 [] Write auto_mask script for the 3d tif files

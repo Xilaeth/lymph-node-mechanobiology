@@ -1,5 +1,6 @@
 #include "../include/dtypes.cuh"
 #include "../include/inits.cuh"
+//#include "../include/solvers-modified.cuh"
 #include "../include/solvers.cuh"
 #include "../include/vtk.cuh"
 #include "../include/utils.cuh"
@@ -165,6 +166,7 @@ int main(int argc, const char* argv[])
     // Integrate positions
     Vtk_output output{"out"};  // Writes to output/relax_#.vtk
     for (auto time_step = 0; time_step <= n_time_steps; time_step++) {
+        cudaDeviceSynchronize();
         cells.copy_to_host();
         generate_noise<<<(n_cells + 32 - 1)/32, 32>>>(n_cells, d_state);
         cells.take_step<morse>(dt_temp);    // Ordered to write during calculation,
