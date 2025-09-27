@@ -10,12 +10,12 @@ var = 0
 load = sys.argv[1]
 D = 0.01
 tot_num = int(sys.argv[3])
-F = [1.0, 0, 0]
+f = 0.01
 
 for n in range(tot_num):
     every_n = int(int(T/dt) / tot_saves)
     file = f"0-{T}_a-{a}_rmax-{rmax}_D-{D}"
-    os.system(f"python3 run_param_load.py {load} -a={a} -rm={rmax} -T={int(T/dt)} -dt={dt} -en={every_n} -D={D} -Fx={F[0]} -Fy{F[1]} -Fz{F[2]}")
+    os.system(f"python3 run_param_load.py {load} -a={a} -rm={rmax} -T={int(T/dt)} -dt={dt} -en={every_n} -D={D} -f={f}")
     os.system(f"python3 read-all.py ./output/out_ {tot_saves} ./forces")
     os.system(f"rm ./output/*")
     os.system(f"cp ./forces/positions{tot_saves}.vtk ./")
