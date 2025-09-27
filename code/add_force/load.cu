@@ -16,7 +16,14 @@ __device__ double dt = 0.05f; // time step
 __device__ double a = 1.0f;
 __device__ double r_max = 1.0f;
 __device__ double D = 0.0;
-__device__ double f = 0.0;
+__device__ double fxl = 0.0;
+__device__ double fxr = 0.0;
+__device__ double fyu = 0.0;
+__device__ double fyd = 0.0;
+__device__ double fxyur = 0.0;
+__device__ double fxyul = 0.0;
+__device__ double fxydr = 0.0;
+__device__ double fxydl = 0.0;
 
 // new data type that stores force as well
 MAKE_PT(Cell, v);
@@ -29,8 +36,35 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
 
     // if i == j add random noise and external force
     if (i == j) {
-        if (Xi.v == 1) {
-            dF.x -= f;
+        switch (int(Xi.v)) {
+            case 1:
+                dF.x -= fxl;
+                break;
+            case 2:
+                dF.y += fyu;
+                break;
+            case 3:
+                dF.x += fxr;
+                break;
+            case 4:
+                dF.y -= fyd;
+                break;
+            case 5:
+                dF.x -= 0.7071*fxydl;
+                dF.y -= 0.7071*fxydl;
+                break;
+            case 6:
+                dF.x -= 0.7071*fxyul;
+                dF.y += 0.7071*fxyul;
+                break;
+            case 7:
+                dF.x += 0.7071*fxyur;
+                dF.y += 0.7071*fxyur;
+                break;
+            case 8:
+                dF.x += 0.7071*fxydr;
+                dF.y -= 0.7071*fxydr;
+                break;
         }
         dF += dW[i];
         return dF;
@@ -75,8 +109,22 @@ int main(int argc, const char* argv[])
     int every_n = stoi(argv[6]);
     double D_temp = stod(argv[7]);
     cudaMemcpyToSymbol(D, &D_temp, sizeof(double));
-    double f_temp = stod(argv[8]);
-    cudaMemcpyToSymbol(f, &f_temp, sizeof(double));
+    double fxr_temp = stod(argv[8]);
+    cudaMemcpyToSymbol(fxr, &fxr_temp, sizeof(double));
+    double fxl_temp = stod(argv[9]);
+    cudaMemcpyToSymbol(fxl, &fxl_temp, sizeof(double));
+    double fyu_temp = stod(argv[10]);
+    cudaMemcpyToSymbol(fyu, &fyu_temp, sizeof(double));
+    double fyd_temp = stod(argv[11]);
+    cudaMemcpyToSymbol(fyd, &fyd_temp, sizeof(double));
+    double fxyur_temp = stod(argv[12]);
+    cudaMemcpyToSymbol(fxyur, &fxyur_temp, sizeof(double));
+    double fxyul_temp = stod(argv[13]);
+    cudaMemcpyToSymbol(fxyul, &fxyul_temp, sizeof(double));
+    double fxydr_temp = stod(argv[14]);
+    cudaMemcpyToSymbol(fxydr, &fxydr_temp, sizeof(double));
+    double fxydl_temp = stod(argv[15]);
+    cudaMemcpyToSymbol(fxydl, &fxydl_temp, sizeof(double));
 
     ifstream inp(file);
 

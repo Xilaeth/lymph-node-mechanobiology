@@ -6,7 +6,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 from math import floor
-import sys
 
 # first we determine the approximate size of the tissue sample
 
