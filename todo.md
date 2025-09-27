@@ -3,9 +3,12 @@
 - [ ] Write code that compares the states and computes a linear response
 - [ ] Figure out how exactly the Grid class works so I can save it outside to stop the Gabriel solver from engaging
 - [ ] Figure out how to turn off Gabriel Updater in ya||a
-- [ ] Write vedo visualizer that takes one before and n after vtks and creates a plot that shows the average change with vectors
 - [ ] Write auto_mask script for the 3d tif files
 - [ ] Write script to subsample from the tif images and stacks
+- [ ] Implement a way to plot a scalar maximum stress plot using vedo
+- [ ] Implement a way to plot a stress trajectory plot using vedo
+- [ ] Implement a way to plot a deformed shape overlay using vedo
+- [ ] Implement a way to plot a vector/ tensor glyph plot using vedo
 
 # Done
 - [x] Look at the file format of vtk that ya||a uses
