@@ -1,8 +1,6 @@
 # Todo
 - [ ] Write script that checks a lot of different parameters for the input to see what is stable and what isn't using averages and stochasticity
 - [ ] Write code that compares the states and computes a linear response
-- [ ] Figure out how exactly the Grid class works so I can save it outside to stop the Gabriel solver from engaging
-- [ ] Figure out how to turn off Gabriel Updater in ya||a
 - [ ] Write a version of the solver with a second kind of repulsive bead
 - [ ] Write auto_mask script for the 3d tif files
 - [ ] Write script to subsample from the tif images and stacks
@@ -12,6 +10,7 @@
 - [ ] Implement a way to plot a vector/ tensor glyph plot using vedo
 
 # Done
+- [x] Figure out how to turn off Gabriel Updater in ya||a
 - [x] Look at the file format of vtk that ya||a uses
 - [x] Map out the structure of the ya||a library a bit
 - [x] Uniform relaxed tissue using ya||a

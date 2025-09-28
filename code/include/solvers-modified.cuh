@@ -540,6 +540,11 @@ __global__ void compute_cube_gabriel(const int n, const Pt* __restrict__ d_X,
     int n_neighs = 0;
 
     if (not(updateNeigh[id_i])) {
+
+        for (int k = 0; k < 100; k++) {
+            neighbour_ids[id_i][k] = -1;
+        }
+
         // First loop. Register all possible pairwise interactions based on
         // extensive sweep of the nearby cubes.
         for (auto j = 0; j < 27; j++) {
@@ -607,17 +612,15 @@ __global__ void compute_cube_gabriel(const int n, const Pt* __restrict__ d_X,
                 auto friction = pw_friction(Xi, r, dist, id_i, j);
                 sum_friction += friction;
                 sum_v += friction * d_old_v[j];
+                neighbour_ids[id_i][m] = neighbour_id[m];
             }
-        }
-
-        for (int k = 0; k < 100; k++) {
-            neighbour_ids[id_i][k] = neighbour_id[k];
         }
 
         updateNeigh[id_i] = true;
 
     } else {
         for (auto j : neighbour_ids[id_i]) {
+            if (j == -1) continue;
             auto Xj = d_X[j];
             auto r = Xi - Xj;
             auto dist = norm3df(r.x, r.y, r.z);
@@ -632,6 +635,8 @@ __global__ void compute_cube_gabriel(const int n, const Pt* __restrict__ d_X,
     d_sum_v[id_i] = sum_v;
     d_sum_friction[id_i] = sum_friction;
 }
+
+
 
 template<typename Pt>
 class Gabriel_computer {
@@ -661,24 +666,13 @@ public:
 protected:
     // this is the function that ends up computing the neighbors
     Grid grid;
-    bool updateGrid = true;
     template<Pairwise_interaction<Pt> pw_int, Pairwise_friction<Pt> pw_friction>
     void pwints(int n, const Pt* __restrict__ d_X,
         const float3* __restrict__ d_old_v, Pt* d_dX, float3* d_sum_v,
         float* d_sum_friction)
     {
-        // builds the first grid
-        /*
-        if (updateGrid) {
-            bool updateNeigh_t;
-            cudaMemcpyFromSymbol(&updateNeigh_t, updateNeigh, sizeof(bool));
-            if (not(updateNeigh_t)) updateGrid = false;
-        }
-        */
         
-        //if (updateGrid) {
         grid.build(n, d_X, cube_size);
-        //}
         // computes the gabriel neighborshods 
         compute_cube_gabriel<Pt, pw_int, pw_friction>
             <<<(n + TILE_SIZE - 1) / TILE_SIZE, TILE_SIZE>>>(n, d_X, d_old_v,
