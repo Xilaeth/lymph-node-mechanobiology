@@ -1,8 +1,9 @@
 # Todo
-- [ ] Write script that checks a lot of different parameters for the input to see what is stable and what isn't
+- [ ] Write script that checks a lot of different parameters for the input to see what is stable and what isn't using averages and stochasticity
 - [ ] Write code that compares the states and computes a linear response
 - [ ] Figure out how exactly the Grid class works so I can save it outside to stop the Gabriel solver from engaging
 - [ ] Figure out how to turn off Gabriel Updater in ya||a
+- [ ] Write a version of the solver with a second kind of repulsive bead
 - [ ] Write auto_mask script for the 3d tif files
 - [ ] Write script to subsample from the tif images and stacks
 - [ ] Implement a way to plot a scalar maximum stress plot using vedo

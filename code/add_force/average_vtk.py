@@ -10,13 +10,15 @@ n = len(lines_t)
 
 out = np.zeros((n, 3))
 
-for l in range(0, int(sys.argv[2])):
+for l in range(int(sys.argv[2])):
     file = open(f"./out/{sys.argv[1]}-{l}.vtk", "rt")
     content = file.read()
     lines = content.splitlines()
     lines = lines[6:]
     coords = np.array(list(map(lambda x: list(map(lambda y: float(y), x.split(' '))), lines)))
     out += coords 
+
+out /= int(sys.argv[2])
 
 with open(f"./out/{sys.argv[3]}.vtk", "w", encoding="ascii") as f:
     f.write("# vtk DataFile Version 3.0\n")
