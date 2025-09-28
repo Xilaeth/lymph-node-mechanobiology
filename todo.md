@@ -1,7 +1,6 @@
 # Todo
 - [ ] Write script that checks a lot of different parameters for the input to see what is stable and what isn't using averages and stochasticity
 - [ ] Write code that compares the states and computes a linear response
-- [ ] Write a version of the solver with a second kind of repulsive bead
 - [ ] Write auto_mask script for the 3d tif files
 - [ ] Write script to subsample from the tif images and stacks
 - [ ] Implement a way to plot a scalar maximum stress plot using vedo
@@ -10,6 +9,7 @@
 - [ ] Implement a way to plot a vector/ tensor glyph plot using vedo
 
 # Done
+- [x] Write a version of the solver with a second kind of repulsive bead
 - [x] Figure out how to turn off Gabriel Updater in ya||a
 - [x] Look at the file format of vtk that ya||a uses
 - [x] Map out the structure of the ya||a library a bit

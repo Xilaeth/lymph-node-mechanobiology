@@ -30,27 +30,10 @@ coords = list(map(lambda x: list(map(lambda y: float(y), x.split(' ')))[:2], lin
 xs = list(map(lambda x: x[0], coords))
 ys = list(map(lambda x: x[1], coords))
 
-def isInSquare(x, l, v):
-    if ((abs(v[0] - x[0]) < l/2) and (abs(v[1] - x[1]) < l/2)):
-        return True
-    return False
-
 def isInRect(x, lx, ly, v):
     if ((abs(v[0] - x[0]) < lx/2) and (abs(v[1] - x[1]) < ly/2)):
         return True
     return False
-
-def isInCirc(x, r, v):
-    if ((v[0] - x[0])**2 + (v[1] - x[1])**2 < r**2):
-        return True
-    return False
-
-def densityInCirc(x, r):
-    counter = 0
-    for i in range(len(xs)):
-        if (isInCirc(x, r, coords[i])):
-            counter += 1
-    return (counter / (np.pi*r*r))
 
 xop = 0.98 * max(xs)
 yop = 0.98 * max(ys)
