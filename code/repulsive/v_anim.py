@@ -18,14 +18,21 @@ for i in range(n):
     typ = []
 
     sc = 0
+    sc2 = 0
     for i in lines:
         if (not(i) or ((sc < 6 + len(coords)) and (sc > 0))):
             sc += 1
             continue
         if (sc == 0):
             coords.append(i)
-        if (sc > 0):
+        if ((i[0] == "S") or ((sc2 < 2) and (sc2>0))):
+            sc2 += 1
+            continue
+        if (sc2 > 0):
             typ.append(i)
+        if (sc > 0):
+            continue
+
 
     coords = list(map(lambda x: list(map(lambda y: float(y), x.split(' '))), coords))
     typ = list(map(lambda x: int(x), typ))
@@ -47,6 +54,8 @@ for f in range(len(coords_tot)):
 
     pts1_tot.append(pts_tis)
     pts2_tot.append(pts_inb)
+
+#print(pts1_tot)
 
 pts1 = Points(pts1_tot[0], r=4, c="green", alpha=1.0)
 pts2 = Points(pts2_tot[0], r=4, c=get_color(rgb=(190, 250, 215)), alpha=0.7)

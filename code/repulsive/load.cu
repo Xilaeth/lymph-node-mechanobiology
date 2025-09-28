@@ -34,7 +34,7 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j)
            dF += dW[i];
            return dF;
         }
-        if (r.v != 0) return dF;
+        if ((r.v != 0) && (dist > r_c)) return dF;
 
         if (dist > r_max) return dF; // if the distance is greater than the maximum interaction length it's also the 0 vector
 
