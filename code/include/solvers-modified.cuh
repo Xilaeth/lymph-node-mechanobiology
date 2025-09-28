@@ -8,8 +8,6 @@
 #include <thrust/sort.h>
 #include <functional>
 
-#include <vector>
-
 #include "cudebug.cuh"
 #include "dtypes.cuh"
 
