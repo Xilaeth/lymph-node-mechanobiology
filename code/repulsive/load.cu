@@ -26,22 +26,39 @@ __device__ Cell *dW;
 
 __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j)
 {
-    Cell dF{0}; // 0 vector
+    Cell dF{0}; 
 
-    // if i == j add random noise
-    if (i == j) {
-       dF += dW[i];
-       return dF;
+    // tissue cell
+    if (Xi.v == 1) {
+        if (i == j) {
+           dF += dW[i];
+           return dF;
+        }
+        if (r.v != 0) return dF;
+
+        if (dist > r_max) return dF; // if the distance is greater than the maximum interaction length it's also the 0 vector
+
+        double F = 2 * (exp(-2*a*(dist - r_c)) - exp(-a*(dist - r_c))); // strength of the Morse potential
+
+        dF.x = F * r.x / dist;
+        dF.y = F * r.y / dist;
+        dF.z = F * r.z / dist;
+        return dF; // return force that's to be applied
+    }
+    // in-between cell
+    if (Xi.v == 2) {
+        if (i == j) return dF;
+        if (dist > r_c) return dF; // only repulsive forces
+
+        double F = 2 * (exp(-2*a*(dist - r_c)) - exp(-a*(dist - r_c))); // strength of the Morse potential
+
+        dF.x = F * r.x / dist;
+        dF.y = F * r.y / dist;
+        dF.z = F * r.z / dist;
+        return dF; // return force that's to be applied
     }
 
-    if (dist > r_max) return dF; // if the distance is greater than the maximum interaction length it's also the 0 vector
-
-    double F = 2 * (exp(-2*a*(dist - r_c)) - exp(-a*(dist - r_c))); // strength of the Morse potential
-
-    dF.x = F * r.x / dist;
-    dF.y = F * r.y / dist;
-    dF.z = F * r.z / dist;
-    return dF; // return force that's to be applied
+    return dF;
 }
 
 // generate random forces
