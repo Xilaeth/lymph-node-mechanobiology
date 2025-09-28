@@ -15,6 +15,7 @@
 const auto r_c = 0.5f; // equilibrium distance
 __device__ double dt = 0.05f; // time step
 __device__ double a = 1.0f;
+__device__ double a2 = 1.0f;
 __device__ double r_max = 1.0f;
 __device__ double D = 0.0;
 
@@ -50,7 +51,7 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j)
         if (i == j) return dF;
         if (dist > r_c) return dF; // only repulsive forces
 
-        double F = 2 * (exp(-2*a*(dist - r_c)) - exp(-a*(dist - r_c))); // strength of the Morse potential
+        double F = 2 * (exp(-2*a2*(dist - r_c)) - exp(-a2*(dist - r_c))); // strength of the Morse potential
 
         dF.x = F * r.x / dist;
         dF.y = F * r.y / dist;
@@ -80,14 +81,16 @@ int main(int argc, const char* argv[])
 
     double a_temp = stod(argv[2]); // repulsion strength of the morse potential
     cudaMemcpyToSymbol(a, &a_temp, sizeof(double));
-    double r_max_temp = stod(argv[3]); // repulsion strength of the morse potential
+    double a2_temp = stod(argv[3]); // repulsion strength of the morse potential
+    cudaMemcpyToSymbol(a2, &a2_temp, sizeof(double));
+    double r_max_temp = stod(argv[4]); // repulsion strength of the morse potential
     cudaMemcpyToSymbol(r_max, &r_max_temp, sizeof(double));
-    double dt_temp = stod(argv[5]);
+    double dt_temp = stod(argv[6]);
     cudaMemcpyToSymbol(dt, &dt_temp, sizeof(double));
     string file = argv[1]; // input file name
-    int n_time_steps = stoi(argv[4]);
-    int every_n = stoi(argv[6]);
-    double D_temp = stod(argv[7]);
+    int n_time_steps = stoi(argv[5]);
+    int every_n = stoi(argv[7]);
+    double D_temp = stod(argv[8]);
     cudaMemcpyToSymbol(D, &D_temp, sizeof(double));
 
     ifstream inp(file);

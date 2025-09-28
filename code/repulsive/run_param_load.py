@@ -4,6 +4,7 @@ from math import sqrt
 
 load = "load.vtk"
 a = 1.0
+a2 = 1.0
 rmax = 1.0
 T = 1000
 dt = 0.01
@@ -32,7 +33,10 @@ for inp in sys.argv[1:]:
             case "en=":
                 every_n = inp[4:]
                 continue
+            case "a2=":
+                dt = inp[4:]
+                continue
     else:
         load = inp
 
-os.system(f"./load {load} {a} {rmax} {T} {dt} {every_n} {D}")
+os.system(f"./load {load} {a} {a2} {rmax} {T} {dt} {every_n} {D}")

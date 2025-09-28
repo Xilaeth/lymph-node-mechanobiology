@@ -28,6 +28,8 @@ for i in lines:
     if (sc > 0):
         typ.append(i)
 
+print(typ)
+
 coords = list(map(lambda x: list(map(lambda y: float(y), x.split(' '))), coords))
 typ = list(map(lambda x: int(x), typ))
 
