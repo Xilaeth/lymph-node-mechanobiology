@@ -55,10 +55,8 @@ for f in range(len(coords_tot)):
     pts1_tot.append(pts_tis)
     pts2_tot.append(pts_inb)
 
-#print(pts1_tot)
-
-pts1 = Points(pts1_tot[0], r=4, c="green", alpha=1.0)
-pts2 = Points(pts2_tot[0], r=4, c=get_color(rgb=(190, 250, 215)), alpha=0.7)
+pts1 = Points(pts1_tot[0], r=6, c="green", alpha=1.0)
+pts2 = Points(pts2_tot[0], r=4, c=get_color(rgb=(190, 250, 215)), alpha=0.6)
 
 def slider(widget, event):
     pts1.points = pts1_tot[int(widget.value)]
