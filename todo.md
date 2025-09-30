@@ -1,12 +1,10 @@
 # Todo
 - [ ] Write script that checks a lot of different parameters for the input to see what is stable and what isn't using averages and stochasticity
+- [ ] Write script that quantifies change (perhaps through using the average displacement and variance from the average displacement - perhaps also a density based subtraction)
+- [ ] Update the slide to include all the structured stuff
 - [ ] Write code that compares the states and computes a linear response
 - [ ] Write auto_mask script for the 3d tif files
 - [ ] Write script to subsample from the tif images and stacks
-- [ ] Implement a way to plot a scalar maximum stress plot using vedo
-- [ ] Implement a way to plot a stress trajectory plot using vedo
-- [ ] Implement a way to plot a deformed shape overlay using vedo
-- [ ] Implement a way to plot a vector/ tensor glyph plot using vedo
 
 # Done
 - [x] Write a version of the solver with a second kind of repulsive bead
