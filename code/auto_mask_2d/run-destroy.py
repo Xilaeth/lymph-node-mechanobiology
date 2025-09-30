@@ -36,42 +36,6 @@ def densityInCirc(x, r):
             counter += 1
     return (counter / (np.pi*r*r))
 
-#xop, xom = 0, 0
-#xpend = False
-#xmend = False
-#yop, yom = 0, 0
-#ypend = False
-#ymend = False
-#r = 0.5
-
-#while (not(xpend) or not(ypend) or not(xmend) or not(ymend)):
-#    if (densityInCirc([xop, 0], r) < 1e-5):
-#        xpend = True
-#    if (densityInCirc([0, yop], r) < 1e-5):
-#        ypend = True
-#    if (densityInCirc([xom, 0], r) < 1e-5):
-#        xmend = True
-#    if (densityInCirc([0, yom], r) < 1e-5):
-#        ymend = True
-#    if (not(xpend)):
-#        xop += 1
-#    if (not(ypend)):
-#        yop += 1
-#    if (not(xmend)):
-#        xom -= 1
-#    if (not(ymend)):
-#        yom -= 1
-
-#xop -= r
-#yop -= r
-#xom += r
-#yom += r
-#dx = xop - xom
-#dy = yop - yom
-#xc = xom + dx/2
-#yc = yom + dy/2
-#x = [xc, yc]
-#l = 0.95*min(dx, dy)
 xop = 0.98 * max(xs)
 yop = 0.98 * max(ys)
 xom = 0.98 * min(xs)
@@ -84,29 +48,29 @@ x = [xc, yc]
 l = 0.95*min(dx, dy)
 
 # generate the csv for the original file and the corrosponding density plot
-os.system(f"./density {sys.argv[1]} {l} {sys.argv[2]} {sys.argv[3]} output/out_original.csv {xc} {yc}")
+#os.system(f"./density {sys.argv[1]} {l} {sys.argv[2]} {sys.argv[3]} output/out_original.csv {xc} {yc}")
 
-data = np.loadtxt("output/out_original.csv", delimiter=",")
+#data = np.loadtxt("output/out_original.csv", delimiter=",")
 
-arr = np.array(data)
-xs = arr[:,0].astype(int)
-ys = arr[:,1].astype(int)
-vals = arr[:,2]
+#arr = np.array(data)
+#xs = arr[:,0].astype(int)
+#ys = arr[:,1].astype(int)
+#vals = arr[:,2]
 
-nx = xs.max() + 1
-ny = ys.max() + 1
+#nx = xs.max() + 1
+#ny = ys.max() + 1
 
-grid = np.full((ny, nx), np.nan)
-
-for x, y, v in zip(xs, ys, vals):
-    grid[y, x] = v
-
-fig, ax = plt.subplots()
-ax.set_axis_off()
-ax.set_box_aspect(1)
-plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
-ax.imshow(grid, origin='lower', cmap='Greens', interpolation='none')
-plt.savefig(f"output/out_original_density.png", bbox_inches='tight')
+#grid = np.full((ny, nx), np.nan)
+#
+#for x, y, v in zip(xs, ys, vals):
+#    grid[y, x] = v
+#
+#fig, ax = plt.subplots()
+#ax.set_axis_off()
+#ax.set_box_aspect(1)
+#plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
+#ax.imshow(grid, origin='lower', cmap='Greens', interpolation='none')
+#plt.savefig(f"output/out_original_density.png", bbox_inches='tight')
 
 mask_list = ["hole", "lines", "small_lines", "small_holes", "medium_holes"] #["lines_random_create", "lines_vertical_create"]
 
@@ -145,31 +109,31 @@ for inp in mask_list:
         for i in coordsOut:
             f.write(str(i[0]) + " " + str(i[1]) + " " + "0.0\n")
     
-    os.system(f"./density output/{out + '.vtk'} {l} {sys.argv[2]} {sys.argv[3]} output/{out + '.csv'} {xc} {yc}")
-
-    data = np.loadtxt("output/" + out + '.csv', delimiter=",")
-
-    # Convert to array for easier manipulation
-    arr = np.array(data)
-    xs = arr[:,0].astype(int)
-    ys = arr[:,1].astype(int)
-    vals = arr[:,2]
-
-    # Determine grid size
-    # (max index +1 to include zero-based)
-    nx = xs.max() + 1
-    ny = ys.max() + 1
-
-    # Create an empty grid, fill with e.g. nan for missing data
-    grid = np.full((ny, nx), np.nan)
+#    os.system(f"./density output/{out + '.vtk'} {l} {sys.argv[2]} {sys.argv[3]} output/{out + '.csv'} {xc} {yc}")
+#
+#    data = np.loadtxt("output/" + out + '.csv', delimiter=",")
+#
+#    # Convert to array for easier manipulation
+#    arr = np.array(data)
+#    xs = arr[:,0].astype(int)
+#    ys = arr[:,1].astype(int)
+#    vals = arr[:,2]
+#
+#    # Determine grid size
+#    # (max index +1 to include zero-based)
+#    nx = xs.max() + 1
+#    ny = ys.max() + 1
+#
+#    # Create an empty grid, fill with e.g. nan for missing data
+#    grid = np.full((ny, nx), np.nan)
 
     # Fill in values
-    for x, y, v in zip(xs, ys, vals):
-        grid[y, x] = v
-
-    fig, ax = plt.subplots()
-    ax.set_axis_off()
-    ax.set_box_aspect(1)
-    plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
-    ax.imshow(grid, origin='lower', cmap='Greens', interpolation='none')
-    plt.savefig(f"output/{out}_density.png", bbox_inches='tight')
+    #for x, y, v in zip(xs, ys, vals):
+    #    grid[y, x] = v
+#
+#    fig, ax = plt.subplots()
+#    ax.set_axis_off()
+#    ax.set_box_aspect(1)
+#    plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
+#    ax.imshow(grid, origin='lower', cmap='Greens', interpolation='none')
+#    plt.savefig(f"output/{out}_density.png", bbox_inches='tight')

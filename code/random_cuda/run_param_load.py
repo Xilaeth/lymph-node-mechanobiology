@@ -6,7 +6,7 @@ load = "load.vtk"
 a = 1.0
 rmax = 1.0
 T = 1000
-dt = 0.01
+dt = 0.05
 every_n = 1
 D = 0.01
 
