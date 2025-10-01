@@ -4,6 +4,7 @@
 - [ ] Write code that compares the states and computes a linear response
 - [ ] Write auto_mask script for the 3d tif files
 - [ ] Write script to subsample from the tif images and stacks
+- [ ] Compare the elasticity of no change, no gabriel updater and inbetween
 
 # Done
 - [x] Write a version of the solver with a second kind of repulsive bead
