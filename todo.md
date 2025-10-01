@@ -1,6 +1,5 @@
 # Todo
 - [ ] Write script that checks a lot of different parameters for the input to see what is stable and what isn't using averages and stochasticity
-- [ ] Write script that quantifies change (perhaps through using the average displacement and variance from the average displacement - perhaps also a density based subtraction)
 - [ ] Update the slide to include all the structured stuff
 - [ ] Write code that compares the states and computes a linear response
 - [ ] Write auto_mask script for the 3d tif files
