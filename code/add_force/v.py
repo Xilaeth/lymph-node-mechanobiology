@@ -2,48 +2,47 @@ import sys
 import numpy as np
 from vedo import *
 
-file_name = "load.vtk"
+coords_tot = []
+typ_tot = []
 
-for inp in sys.argv:
-    if (inp[0] == "-"):
-        print(":)")
-    else:
-        file_name = inp
-
-file = open(file_name)
+file = open(f"{sys.argv[1]}.vtk")
 content = file.read()
 lines = content.splitlines()
 lines = lines[6:]
 
 coords = []
-typ = []
 
 sc = 0
+sc2 = 0
 for i in lines:
-    if (not(i) or ((sc < 4) and (sc > 0))):
+    if (not(i) or ((sc < 6 + len(coords)) and (sc > 0))):
         sc += 1
         continue
     if (sc == 0):
         coords.append(i)
+    if ((i[0] == "S") or ((sc2 < 2) and (sc2>0))):
+        sc2 += 1
+        continue
+    if (sc2 > 0):
+        continue
     if (sc > 0):
-        typ.append(i)
+        continue
+
 
 coords = list(map(lambda x: list(map(lambda y: float(y), x.split(' '))), coords))
-typ = list(map(lambda x: int(x), typ))
 
-coords_n = []
-coords_f = []
+xs = list(map(lambda x: x[0], coords))
+ys = list(map(lambda x: x[1], coords))
 
-for i in range(len(coords)):
-    if (typ[i] == 0):
-        coords_n.append(coords[i])
-    else:
-        coords_f.append(coords[i])
+pts1 = Points(coords, r=6, c="green", alpha=1.0)
 
-pts_n = Points(coords_n).ps(10).c("green")
-pts_f = Points(coords_f).ps(10).c("red")
+px = max(xs)*1.1
+py = max(ys)*1.1
+mx = min(xs)*1.1
+my = min(ys)*1.1
 
 plt = Plotter()
-plt.at(0).show(__doc__, pts_t_n, pts_t_f)
-plt.interactive()
+ax = Axes(xrange=(mx, px), yrange=(my, py), xygrid_transparent=True, title_font="Calibri", label_font="Calibri")
+plt.show(pts1, ax, interactive=False)
+plt.screenshot(filename="0.png")
 plt.close()

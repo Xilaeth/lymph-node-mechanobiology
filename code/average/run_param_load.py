@@ -16,9 +16,6 @@ for inp in sys.argv[1:]:
             case "a=":
                 a = inp[3:]
                 continue
-            case "rmax=":
-                rmax = inp[3:]
-                continue
             case "T=":
                 T = inp[3:]
                 continue
@@ -31,6 +28,9 @@ for inp in sys.argv[1:]:
                 continue
             case "en=":
                 every_n = inp[4:]
+                continue
+            case "rm=":
+                rmax = inp[4:]
                 continue
     else:
         load = inp
