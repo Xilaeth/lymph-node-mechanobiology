@@ -41,8 +41,8 @@ for i in range(len(typ)):
         pts_inb.append(coords[i])
 
 pts1 = Points(pts_tis, r=4, c="green", alpha=1.0)
-pts2 = Points(pts_inb, r=4, c=get_color(rgb=(190, 250, 215)), alpha=0.7)
+#pts2 = Points(pts_inb, r=4, c=get_color(rgb=(190, 250, 215)), alpha=0.7)
 
 plt = Plotter()
-plt.at(0).show(__doc__, pts1, pts2)
+plt.at(0).show(__doc__, pts1) #, pts2)
 plt.interactive().close()

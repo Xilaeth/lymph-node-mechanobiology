@@ -6,7 +6,7 @@ y0 = 0
 z0 = 0
 nx = 100
 ny = 100
-nz = 100
+nz = 30
 l = 0.5
 out = "out.vtk"
 
