@@ -5,6 +5,9 @@
 - [ ] Run a first 3d simulation to have an example of what it could look like
 - [ ] Compare the elasticity of no change, no gabriel updater and inbetween
 - [ ] Do some research on Dissipative Particle Dynamics
+- [ ] Do a parameter scan with adjusted forces
+- [ ] Write a program that automatically quantifies the parameter scan (stretching parameter as the distance between the two most left/ right points over the initial size of the tissue)
+- [ ] Calculate Stress-Strain curves for different parameters
 
 # Done
 - [x] Write code that compares the states and computes a linear response
