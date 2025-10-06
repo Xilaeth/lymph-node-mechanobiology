@@ -31,11 +31,11 @@ for inp in sys.argv[1:]:
 im_data = imread(name)
 print(im_data)
 h, w = im_data.shape
-coordsOut = np.zeros((x2-x1+1, y2-y1+1), dtype=np.uint8)
+coordsOut = np.zeros((y2-y1+1, x2-x1+1), dtype=np.uint8)
 
 for x in range(0, x2-x1):
     for y in range(0, y2-y1):
-        coordsOut[y2-y1-y][x] = im_data[h - (y1 + y)][x1 + x]
+        coordsOut[y2-y1-y][x] = im_data[h - (y1 + y)][x1 + x]*255
 
 print(coordsOut)
 

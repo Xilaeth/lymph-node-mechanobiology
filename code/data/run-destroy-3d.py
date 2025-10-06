@@ -23,7 +23,7 @@ ys = list(map(lambda x: x[1], coords))
 zs = list(map(lambda x: x[2], coords))
 
 f1 = 1.0
-f = 0.95
+f = 1.0
 
 xop = f1 * max(xs)
 yop = f1 * max(ys)
@@ -62,12 +62,6 @@ elif ((ly < lx) and (ly*(w/h) <= lx)):
     lx = ly * (w/h)
     lz = ly * (d/h)
 
-print(lx)
-print(ly)
-print(lz)
-print(zop)
-print(im_data.shape)
-
 def isInRect(x, lx, ly, lz, v):
     if ((abs(v[0] - x[0]) < lx/2) and (abs(v[1] - x[1]) < ly/2) and (abs(v[2] - x[2]) < lz/2)):
         return True
@@ -76,10 +70,9 @@ def isInRect(x, lx, ly, lz, v):
 for v in coords:
     if (not(isInRect(x, lx, ly, lz, v))):
         continue
-    print("here")
-    px = floor((v[0] - x[0] + lx/2)*w/lx)
-    py = floor((v[1] - x[1] + ly/2)*h/ly)
-    pz = floor((v[2] - x[2] + lz/2)*d/lz)
+    px = floor((v[0] - x[0] + lx/2)*w/lx) - 1
+    py = floor((v[1] - x[1] + ly/2)*h/ly) + 1
+    pz = floor((v[2] - x[2] + lz/2)*d/lz) - 1
     if (im_data[pz, h - py, px] != 0):
         coordsOut.append(v)
 
