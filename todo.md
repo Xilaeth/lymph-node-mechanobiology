@@ -1,15 +1,15 @@
 # Todo
-- [ ] Update the slide to include all the structured stuff
-- [ ] Write auto_mask script for the 3d tif files
-- [ ] Write script to subsample from the tif images and stacks
-- [ ] Run a first 3d simulation to have an example of what it could look like
 - [ ] Compare the elasticity of no change, no gabriel updater and inbetween
+- [ ] Update the slide to include all the structured stuff
 - [ ] Do some research on Dissipative Particle Dynamics
 - [ ] Do a parameter scan with adjusted forces
 - [ ] Write a program that automatically quantifies the parameter scan (stretching parameter as the distance between the two most left/ right points over the initial size of the tissue)
 - [ ] Calculate Stress-Strain curves for different parameters
 
 # Done
+- [x] Run a first 3d simulation to have an example of what it could look like
+- [x] Write script to subsample from the tif images and stacks
+- [x] Write auto_mask script for the 3d tif files
 - [x] Write code that compares the states and computes a linear response
 - [x] Write script that checks a lot of different parameters for the input to see what is stable and what isn't using averages and stochasticity
 - [x] Write a version of the solver with a second kind of repulsive bead
