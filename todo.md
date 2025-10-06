@@ -1,12 +1,14 @@
 # Todo
-- [ ] Write script that checks a lot of different parameters for the input to see what is stable and what isn't using averages and stochasticity
 - [ ] Update the slide to include all the structured stuff
-- [ ] Write code that compares the states and computes a linear response
 - [ ] Write auto_mask script for the 3d tif files
 - [ ] Write script to subsample from the tif images and stacks
+- [ ] Run a first 3d simulation to have an example of what it could look like
 - [ ] Compare the elasticity of no change, no gabriel updater and inbetween
+- [ ] Do some research on Dissipative Particle Dynamics
 
 # Done
+- [x] Write code that compares the states and computes a linear response
+- [x] Write script that checks a lot of different parameters for the input to see what is stable and what isn't using averages and stochasticity
 - [x] Write a version of the solver with a second kind of repulsive bead
 - [x] Figure out how to turn off Gabriel Updater in ya||a
 - [x] Look at the file format of vtk that ya||a uses
