@@ -2,6 +2,8 @@
 - [ ] Compare the elasticity of no change, no gabriel updater and inbetween
 - [ ] Update the slide to include all the structured stuff
 - [ ] Do some research on Dissipative Particle Dynamics
+- [ ] Figure out how to model a Coarse Grained Model of water using the Morse-Potential and checking parameters like "Diffusion", "Thermal Conductivity" and so on
+- [ ] Maybe try to look up general elasticities for reticular networks that are similar
 - [ ] Do a parameter scan with adjusted forces
 - [ ] Write a program that automatically quantifies the parameter scan (stretching parameter as the distance between the two most left/ right points over the initial size of the tissue)
 - [ ] Calculate Stress-Strain curves for different parameters
