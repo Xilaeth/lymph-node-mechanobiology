@@ -1,7 +1,5 @@
-import os
 import sys
 import numpy as np
-import matplotlib.pyplot as plt
 from PIL import Image
 from math import floor
 
@@ -29,7 +27,7 @@ coords = list(map(lambda x: list(map(lambda y: float(y), x.split(' '))), coords)
 xs = list(map(lambda x: x[0], coords))
 ys = list(map(lambda x: x[1], coords))
 
-f1 = 0.98 # float(sys.argv[3])
+f1 = 1.00 # float(sys.argv[3])
 f = 0.95 #float(sys.argv[4])
 fm = 1 - f
 

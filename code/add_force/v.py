@@ -11,6 +11,7 @@ lines = content.splitlines()
 lines = lines[6:]
 
 coords = []
+typ = []
 
 sc = 0
 sc2 = 0

@@ -33,6 +33,9 @@ print(typ)
 coords = list(map(lambda x: list(map(lambda y: float(y), x.split(' '))), coords))
 typ = list(map(lambda x: int(x), typ))
 
+xs = list(map(lambda x: x[0], coords))
+ys = list(map(lambda x: x[1], coords))
+
 pts_tis = []
 pts_inb = []
 

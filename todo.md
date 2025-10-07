@@ -1,16 +1,19 @@
 # Todo
-- [ ] Compare the elasticity of no change, no gabriel updater and inbetween
 - [ ] Update the slide to include all the structured stuff
-- [ ] Do some research on Dissipative Particle Dynamics
 - [ ] Figure out how to model a Coarse Grained Model of water using the Morse-Potential and checking parameters like "Diffusion", "Thermal Conductivity" and so on
 - [ ] Maybe try to look up general elasticities for reticular networks that are similar
 - [ ] Research Elastic Properties of Collagen Fibers
 - [ ] Test models for the fibers on the computer and find parameters that fit best
-- [ ] Do a parameter scan with adjusted forces
-- [ ] Write a program that automatically quantifies the parameter scan (stretching parameter as the distance between the two most left/ right points over the initial size of the tissue)
 - [ ] Calculate Stress-Strain curves for different parameters
 
+# Doing
+- [ ] Write resolution adjuster for tiff stacks
+- [ ] Write a program that automatically quantifies the parameter scan (stretching parameter as the distance between the two most left/ right points over the initial size of the tissue)
+- [ ] Do a parameter scan with adjusted forces
+
 # Done
+- [x] Do some research on Dissipative Particle Dynamics
+- [x] Compare the elasticity of no change, no gabriel updater and inbetween
 - [x] Run a first 3d simulation to have an example of what it could look like
 - [x] Write script to subsample from the tif images and stacks
 - [x] Write auto_mask script for the 3d tif files
