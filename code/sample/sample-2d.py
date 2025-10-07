@@ -29,7 +29,6 @@ for inp in sys.argv[1:]:
         name = inp
 
 im_data = imread(name)
-print(im_data)
 h, w = im_data.shape
 coordsOut = np.zeros((y2-y1+1, x2-x1+1), dtype=np.uint8)
 
