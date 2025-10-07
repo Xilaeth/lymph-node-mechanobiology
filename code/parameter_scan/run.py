@@ -26,7 +26,7 @@ for name in name_list:
                     os.system(f"mkdir ./out/{file}")
                     os.system(f"mkdir ./out/{file}/saves")
                     os.system(f"cp out_{name}_n{n}.vtk ./out/{file}/saves/init.vtk")
-                    tn = os.popen(f"python3 get_num.py out_{name}_n{n}.vtk")
+                    tn = int(os.popen(f"python3 get_num.py out_{name}_n{n}").read())
                     for N in range(tot_num):
                         fx = f/tn
                         cur = f"{name}_n-{n}_T-{T}_dt-{dt}_en-{en}_a-{a}_rm-{rm}_D-{D}_f-{f}-{N}"

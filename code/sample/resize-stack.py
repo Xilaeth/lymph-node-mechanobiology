@@ -22,7 +22,7 @@ new = []
 for z in range(d):
     temp = im_data[z, :, :]
     imwrite(f"out.tif", temp, photometric='minisblack', dtype='uint8')
-    os.system(f"ffmpeg -i out.tif -vf scale={x}:-1 out2.tif")
+    os.system(f"ffmpeg -loglevel error -hide_banner -i out.tif -vf scale={x}:-1 out2.tif")
     temp2 = imread(f"out2.tif")
     new.append(temp2)
     os.system("rm out*.tif")

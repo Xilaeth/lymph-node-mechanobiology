@@ -13,24 +13,34 @@ coords = []
 typ = []
 f = []
 
+
 sc = 0
 sc2 = 0
+
+# to correct change the if statements
+
 for i in lines:
-    if ((i[0] == "S") or ((sc < 2) and (sc>0))):
+    if (not(i)):
+        continue
+    if ((i[0] == "P") or ((sc < 2) and (sc>0))):
         sc += 1
         continue
-    if ((i[0] == "S") or ((sc2 < 2) and (sc2>0))):
+    if ((i[0] == "P") or ((sc2 < 2) and (sc2>0))):
         sc2 += 1
         continue
-    if (sc == 0):
-        coords.append(i)
-    if (sc > 0):
-        f.append(i) 
     if (sc2 > 0):
+        print(sc2)
         typ.append(i)
+        continue
+    elif (sc > 0):
+        f.append(i) 
+        continue
+    elif (sc == 0):
+        coords.append(i)
+        continue
 
 f = list(map(lambda x: int(x), f))
 f = list(map(lambda x: 1 if (x == 3) else 0, f))
 n = sum(f)
 
-print(f)
+print(n)

@@ -7,11 +7,11 @@
 - [ ] Calculate Stress-Strain curves for different parameters
 
 # Doing
-- [ ] Write resolution adjuster for tiff stacks
 - [ ] Write a program that automatically quantifies the parameter scan (stretching parameter as the distance between the two most left/ right points over the initial size of the tissue)
 - [ ] Do a parameter scan with adjusted forces
 
 # Done
+- [x] Write resolution adjuster for tiff stacks
 - [x] Do some research on Dissipative Particle Dynamics
 - [x] Compare the elasticity of no change, no gabriel updater and inbetween
 - [x] Run a first 3d simulation to have an example of what it could look like
