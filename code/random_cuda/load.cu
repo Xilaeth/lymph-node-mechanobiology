@@ -1,4 +1,3 @@
-// Integrate N-body problem with springs between all bodies
 #include "../include/dtypes.cuh"
 #include "../include/inits.cuh"
 #include "../include/solvers.cuh"

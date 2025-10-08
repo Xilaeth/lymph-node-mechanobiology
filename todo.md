@@ -1,5 +1,8 @@
 # Todo
 - [ ] Update the slide to include all the structured stuff
+- [ ] Run a 3D simulation with a rescaled 3d file
+- [ ] Check the stability of the 3d file
+- [ ] Apply forces to the 3d file
 - [ ] Write a script that checks the elasticity in the way that Franzi wanted it to be checked
 - [ ] Figure out how to model a Coarse Grained Model of water using the Morse-Potential and checking parameters like "Diffusion", "Thermal Conductivity" and so on
 - [ ] Maybe try to look up general elasticities for reticular networks that are similar
