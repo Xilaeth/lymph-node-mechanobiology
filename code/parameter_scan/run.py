@@ -25,7 +25,7 @@ for name in name_list:
                     file = f"{name}_n-{n}_a-{a}_rm-{rm}_f-{f}"
                     os.system(f"mkdir ./out/{file}")
                     os.system(f"mkdir ./out/{file}/saves")
-                    os.system(f"cp out_{name}_n{n}.vtk ./out/{file}/saves/init.vtk")
+#                    os.system(f"cp out_{name}_n{n}.vtk ./out/{file}/saves/init.vtk")
                     tn = int(os.popen(f"python3 get_num.py out_{name}_n{n}").read())
                     for N in range(tot_num):
                         fx = f/tn
@@ -36,6 +36,10 @@ for name in name_list:
 #                        os.system(f"mv 0.png ./out/{file}/init.png")
                         os.system(f"mv ./output/out_100.vtk ./out/{file}/saves/save_end-{N}.vtk")
                         os.system(f"mv ./output/out_0.vtk ./out/{file}/saves/save_start-{N}.vtk")
+                        e1 = float(os.popen(f"python3 quant-stretch.py ./out/{file}/saves/save_start-{N}.vtk")).read()
+                        e2 = float(os.popen(f"python3 quant-stretch.py ./out/{file}/saves/save_end-{N}.vtk")).read()
+                        os.system(f"echo {e1} >> ./out/{file}/saves/ecc-{N}.txt")
+                        os.system(f"echo {e2} >> ./out/{file}/saves/ecc-{N}.txt")
                         os.system(f"mv ./{cur}.zip ./out/{file}/")
                         os.system(f"rm ./output/*")
 #                    os.system(f"python3 average_vtk.py ./out/{file}/saves/save {tot_num} ./out/{file}/average")

@@ -8,9 +8,10 @@
 - [ ] Calculate Stress-Strain curves for different parameters
 
 # Doing
-- [ ] Write a script that automatically does a parameter scan and quantizes the effect of the forces
+- [ ] Write a legend for the scripts and their usage
 
 # Done
+- [x] Write a script that automatically does a parameter scan and quantizes the effect of the forces
 - [x] Write a program that automatically quantifies the parameter scan (stretching parameter as the distance between the two most left/ right points over the initial size of the tissue)
 - [x] Do a parameter scan with adjusted forces
 - [x] Write resolution adjuster for tiff stacks
