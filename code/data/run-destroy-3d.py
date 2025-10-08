@@ -78,8 +78,6 @@ for v in coords:
 
 leng = len(coordsOut)
 
-print(coordsOut)
-
 with open(out + ".vtk", "w", encoding="ascii") as f:
     f.write("# vtk DataFile Version 3.0\n")
     f.write(out + "\n")

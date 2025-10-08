@@ -25,8 +25,13 @@ for i in lines:
 coords = list(map(lambda x: list(map(lambda y: float(y), x.split(' '))), coords))
 
 
-pts = Points(coords, r=4, c="green", alpha=1.0)
+#pts.smooth_mls_2d(f=0.8)
+#pts.subsample(0.005)
+#reco = pts.reconstruct_surface(radius=0.5).c("green")
+#m = Mesh(file_name, c='green')
+pts = Points(coords, r=6, c="green", alpha=1).density(radius=1, dims=100).smooth_gaussian(sigma=2)
+pts.cmap('Greens').alpha([0, 1])
 
-plt = Plotter()
+plt = Plotter().background(c1="black")
 plt.at(0).show(__doc__, pts)
 plt.interactive().close()

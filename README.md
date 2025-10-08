@@ -38,9 +38,22 @@ This folder includes the include files from ya||a
 #### examples
 This folder includes the examples from the ya||a library
 
+#### data
+This folder includes some files that work with the tif files, i.e. create vtk files from them and so on
+
+#### cuda
+This folder includes the first files that I wrote when I started using ya||a. 
+
+#### create-relaxed
+This folder includes scripts that creates relaxed vtk files.
+
+#### average
 UNFINISHED
 
 ### Deprecated Folders
+
+#### density
+This folder includes files to calculate a density map of the cells
 
 UNFINISHED
 

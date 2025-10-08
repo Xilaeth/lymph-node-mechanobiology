@@ -52,7 +52,7 @@ __global__ void generate_noise(int n, curandState* d_state) {
 
     dW[i].x = curand_normal(&d_state[i]) * powf(dt, 0.5) * D / dt;
     dW[i].y = curand_normal(&d_state[i]) * powf(dt, 0.5) * D / dt;
-    dW[i].z = 0.0; //powf(dt, 0.5) * D / dt;
+    dW[i].z = curand_normal(&d_state[i]) * powf(dt, 0.5) * D / dt;
     dW[i].f = 0.0;
 }
 
@@ -111,6 +111,7 @@ int main(int argc, const char* argv[])
     // Integrate positions
     Vtk_output output{"out"};  // Writes to output/relax_#.vtk
     for (auto time_step = 0; time_step <= n_time_steps; time_step++) {
+        cudaDeviceSynchronize();
         cells.copy_to_host();
         generate_noise<<<(n_cells + 32 - 1)/32, 32>>>(n_cells, d_state);
         cells.take_step<morse>(dt_temp);    // Ordered to write during calculation,

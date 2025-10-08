@@ -8,7 +8,7 @@ rmax = 1.0
 T = 1000
 dt = 0.05
 every_n = 1
-D = 0.01
+D = 0.001
 
 for inp in sys.argv[1:]:
     if (inp[0] == '-'):
