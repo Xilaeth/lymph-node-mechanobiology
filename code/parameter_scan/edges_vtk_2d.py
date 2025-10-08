@@ -27,7 +27,7 @@ xs = list(map(lambda x: x[0], coords))
 ys = list(map(lambda x: x[1], coords))
 
 f1 = 1.0
-f = 0.98
+f = 0.95
 fm = 1 - f
 
 xop = f1*max(xs)

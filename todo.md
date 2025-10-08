@@ -1,5 +1,6 @@
 # Todo
 - [ ] Update the slide to include all the structured stuff
+- [ ] Write a script that checks the elasticity in the way that Franzi wanted it to be checked
 - [ ] Figure out how to model a Coarse Grained Model of water using the Morse-Potential and checking parameters like "Diffusion", "Thermal Conductivity" and so on
 - [ ] Maybe try to look up general elasticities for reticular networks that are similar
 - [ ] Research Elastic Properties of Collagen Fibers
@@ -7,16 +8,17 @@
 - [ ] Calculate Stress-Strain curves for different parameters
 
 # Doing
-- [ ] Write a program that automatically quantifies the parameter scan (stretching parameter as the distance between the two most left/ right points over the initial size of the tissue)
-- [ ] Do a parameter scan with adjusted forces
+- [ ] Write a script that automatically does a parameter scan and quantizes the effect of the forces
 
 # Done
+- [x] Write a program that automatically quantifies the parameter scan (stretching parameter as the distance between the two most left/ right points over the initial size of the tissue)
+- [x] Do a parameter scan with adjusted forces
 - [x] Write resolution adjuster for tiff stacks
 - [x] Do some research on Dissipative Particle Dynamics
 - [x] Compare the elasticity of no change, no gabriel updater and inbetween
 - [x] Run a first 3d simulation to have an example of what it could look like
 - [x] Write script to subsample from the tif images and stacks
-- [x] Write auto_mask script for the 3d tif files
+- [x] Write auto-mask script for the 3d tif files
 - [x] Write code that compares the states and computes a linear response
 - [x] Write script that checks a lot of different parameters for the input to see what is stable and what isn't using averages and stochasticity
 - [x] Write a version of the solver with a second kind of repulsive bead
