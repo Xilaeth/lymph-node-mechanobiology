@@ -10,10 +10,10 @@
 
 # Doing
 - [ ] Write a legend for the scripts and their usage
-- [ ] Run a 3D simulation with a rescaled 3d file
-- [ ] Check the stability of the 3d file
+- [ ] Check the stability of the 3d file (3/54)
 
 # Done
+- [x] Run a 3D simulation with a rescaled 3d file
 - [x] Write a better visualization of 3d files
 - [x] Write a script that automatically does a parameter scan and quantizes the effect of the forces
 - [x] Write a program that automatically quantifies the parameter scan (stretching parameter as the distance between the two most left/ right points over the initial size of the tissue)
