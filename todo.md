@@ -1,7 +1,6 @@
 # Todo
 - [ ] Update the slide to include all the structured stuff
 - [ ] Apply forces to the 3d file
-- [ ] Write a script that checks the elasticity in the way that Franzi wanted it to be checked
 - [ ] Figure out how to model a Coarse Grained Model of water using the Morse-Potential and checking parameters like "Diffusion", "Thermal Conductivity" and so on
 - [ ] Maybe try to look up general elasticities for reticular networks that are similar
 - [ ] Research Elastic Properties of Collagen Fibers
@@ -11,6 +10,7 @@
 # Doing
 - [ ] Write a legend for the scripts and their usage
 - [ ] Check the stability of the 3d file (3/54)
+- [ ] Write a script that checks the elasticity in the way that Franzi wanted it to be checked
 
 # Done
 - [x] Run a 3D simulation with a rescaled 3d file
