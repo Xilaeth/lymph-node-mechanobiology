@@ -9,7 +9,7 @@
 
 # Doing
 - [ ] Write a legend for the scripts and their usage
-- [ ] Check the stability of the 3d file (3/54)
+- [ ] Check the stability of the 3d file (7/54)
 - [ ] Write a script that checks the elasticity in the way that Franzi wanted it to be checked
 
 # Done
