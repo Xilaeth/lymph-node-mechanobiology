@@ -22,17 +22,17 @@ __device__ int id = 0;
 __device__ int f_dir = 0; // direction of the force
 
 // new data type that stores force as well
-//MAKE_PT(Cell, v);
+MAKE_PT(Cell, v);
 
 // random forces
-__device__ float3 *dW;
+__device__ Cell *dW;
 
-__device__ float3 morse(float3 Xi, float3 r, float dist, int i, int j) {
-    float3 dF{0}; // 0 vector
+__device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
+    Cell dF{0}; // 0 vector
 
     // if i == j add random noise and external force
     if (i == j) {
-        if (i == id) {
+        if (int(Xi.v) == id) {
             switch (f_dir) {
                 case 1:
                     dF.x += f;
@@ -81,6 +81,7 @@ __global__ void generate_noise(int n, curandState* d_state) {
     dW[i].x = curand_normal(&d_state[i]) * powf(dt, 0.5) * D / dt;
     dW[i].y = curand_normal(&d_state[i]) * powf(dt, 0.5) * D / dt;
     dW[i].z = 0.0; //1*curand_normal(&d_state[i]) * powf(dt, 0.5) * D / dt;
+    dW[i].v = 0.0;
 }
 
 // order of parameters is: n_cells, 
@@ -127,9 +128,10 @@ int main(int argc, const char* argv[])
         
     // Prepare initial state
     Vtk_input input{file};
-    Solution<float3, Gabriel_solver> cells{n_cells};
+    Solution<Cell, Gabriel_solver> cells{n_cells};
 
     input.read_positions(cells);
+    input.read_field(cells, "v", &Cell::v);
     cells.copy_to_device();
 
     // Prepare random state
@@ -138,7 +140,7 @@ int main(int argc, const char* argv[])
     auto seed = time(NULL);
     setup_rand_states<<<(n_cells + 32 - 1)/32, 32>>>(n_cells, seed, d_state);
 
-    Property<float3> W{n_cells, "wiener_process"};
+    Property<Cell> W{n_cells, "wiener_process"};
     cudaMemcpyToSymbol(dW, &W.d_prop, sizeof(dW));
 
     // Integrate positions
@@ -150,6 +152,7 @@ int main(int argc, const char* argv[])
         cells.take_step<morse>(dt_temp);    // Ordered to write during calculation,
         if ((time_step % every_n) == 0) {
             output.write_positions(cells);  // use thread for full concurrency.
+            output.write_field(cells, "v", &Cell::v);
         }
     }
 
