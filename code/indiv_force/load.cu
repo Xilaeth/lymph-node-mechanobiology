@@ -103,9 +103,9 @@ int main(int argc, const char* argv[])
     double f_temp = stod(argv[8]);
     cudaMemcpyToSymbol(f, &f_temp, sizeof(double));
     int id_temp = stoi(argv[9]);
-    cudaMemcpyToSymbol(id, &id_temp, sizeof(double));
+    cudaMemcpyToSymbol(id, &id_temp, sizeof(int));
     int f_dir_temp = stoi(argv[10]);
-    cudaMemcpyToSymbol(f_dir, &f_dir_temp, sizeof(double));
+    cudaMemcpyToSymbol(f_dir, &f_dir_temp, sizeof(int));
 
     ifstream inp(file);
 
