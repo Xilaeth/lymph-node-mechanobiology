@@ -10,9 +10,9 @@
 # Doing
 - [ ] Write a legend for the scripts and their usage
 - [ ] Check the stability of the 3d file (7/54)
-- [ ] Write a script that checks the elasticity in the way that Franzi wanted it to be checked
 
 # Done
+- [x] Write a script that checks the elasticity in the way that Franzi wanted it to be checked
 - [x] Run a 3D simulation with a rescaled 3d file
 - [x] Write a better visualization of 3d files
 - [x] Write a script that automatically does a parameter scan and quantizes the effect of the forces
