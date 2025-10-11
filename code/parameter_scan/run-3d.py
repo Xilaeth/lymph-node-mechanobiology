@@ -1,9 +1,9 @@
 import os 
 import sys
 
-n_list = [[120, 120, 15]]#, [190, 190, 24], [250, 250, 31]]
-a_list = [0.5]#, 1.0, 2.5]
-rm_list = [0.6, 0.7]
+n_list = [[190, 190, 24]]#, [190, 190, 24], [250, 250, 31]]
+a_list = [0.5, 1.0, 2.5]
+rm_list = [0.5, 0.6, 0.7]
 name_list = ["P6059"]
 #f_list = [0.2, 0.4, 0.8]
 T = 2000
@@ -19,6 +19,8 @@ for name in name_list:
     for n in n_list:
         for a in a_list:
             for rm in rm_list:
+                if ((a == 0.5) and (rm == 0.5)):
+                    continue
                 i += 1
                 print(f"{i}/{tot}")
                 file = f"{name}_nx-{n[0]}_ny-{n[1]}_nz-{n[2]}_a-{a}_rm-{rm}_T-{T}_dt-{dt}_en-{en}_D-{D}"
