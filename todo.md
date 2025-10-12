@@ -1,4 +1,5 @@
 # Todo
+- [ ] Implement using a different metric for the different x, y and z axes
 - [ ] Update the slide to include all the structured stuff
 - [ ] Apply forces to the 3d file
 - [ ] Figure out how to model a Coarse Grained Model of water using the Morse-Potential and checking parameters like "Diffusion", "Thermal Conductivity" and so on
