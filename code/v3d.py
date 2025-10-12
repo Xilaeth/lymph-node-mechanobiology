@@ -32,8 +32,9 @@ coords = list(map(lambda x: list(map(lambda y: float(y), x.split(' '))), coords)
 #pts = Points(coords, r=6, c="green", alpha=1).density(radius=2, dims=(100, 100, 29)).smooth_gaussian(sigma=2)
 #pts.cmap('coolwarm').alpha([0, 1])
 
-pts = Points(coords, r=6, c="green", alpha=0.02)
+#pts = Points(coords, r=6, c="green", alpha=0.02)
+pts = Points(coords, r=6, c="green", alpha=1)
 
-plt = Plotter().background(c1="black")
+plt = Plotter().background(c1="white")
 plt.at(0).show(__doc__, pts)
 plt.interactive().close()

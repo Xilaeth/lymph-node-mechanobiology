@@ -2,7 +2,7 @@ import os
 import sys
 
 a = 1.0
-rm = 1.0
+rm = 0.6
 D = 0.0
 dt = 0.05
 T = 100

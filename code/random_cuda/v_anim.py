@@ -51,14 +51,22 @@ def slider(widget, event):
     pts1.points = coords_tot[int(widget.value)]
     txt.text(f"T={int(widget.value)}")
 
-p = max(max(xs), max(ys))*1.1
-m = min(min(xs), min(ys))*1.1
+px = max(xs) 
+mx = min(xs)
+py = max(ys)
+my = min(ys)
+dx = px - mx
+dy = py - my
+px += 0.05*dx
+mx -= 0.05*dx
+py += 0.05*dy
+my -= 0.05*dy
 
 plt = Plotter()
-ax = Axes(xrange=(m, p), yrange=(m, p), xygrid_transparent=True, title_font="Calibri", label_font="Calibri")
-#plt.add_slider(slider, xmin=0, xmax=(len(coords_tot) - 1), value=0)
-plt.show(pts1, ax, txt, interactive=False)
-plt.screenshot(filename="0.png")
-pts1.points = coords_tot[99]
-txt.text("T=99")
-plt.screenshot(filename="1.png")
+ax = Axes(xrange=(mx, px), yrange=(my, py), xygrid_transparent=True, title_font="Calibri", label_font="Calibri")
+plt.add_slider(slider, xmin=0, xmax=(len(coords_tot) - 1), value=0)
+plt.show(pts1, ax, txt, interactive=True).close()
+#plt.screenshot(filename="0.png")
+#pts1.points = coords_tot[99]
+#txt.text("T=99")
+#plt.screenshot(filename="1.png")

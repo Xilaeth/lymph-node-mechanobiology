@@ -35,17 +35,20 @@ def isInRect(x, lx, ly, v):
         return True
     return False
 
-xop = 0.98 * max(xs)
-yop = 0.98 * max(ys)
-xom = 0.98 * min(xs)
-yom = 0.98 * min(ys)
+f1 = 1.0
+f = 1.0
+
+xop = f1 * max(xs)
+yop = f1 * max(ys)
+xom = f1 * min(xs)
+yom = f1 * min(ys)
 dx = xop - xom
 dy = yop - yom
 xc = xom + dx/2
 yc = yom + dy/2
 x = [xc, yc]
-lx = 0.95 * dx
-ly = 0.95 * dy
+lx = f * dx
+ly = f * dy
 
 
 # generate the masked vtks for the masks and generate the corrosponding csv files
@@ -69,8 +72,8 @@ for inp in mask_list:
     for v in coords:
         if (not(isInRect(x, lx, ly, v))):
             continue
-        px = floor((v[0] + (lx/2 - x[0]))*w/lx)
-        py = floor((v[1] + (ly/2 - x[1]))*h/ly)
+        px = floor((v[0] + (lx/2 - x[0]))*w/lx) - 1
+        py = floor((v[1] + (ly/2 - x[1]))*h/ly) + 1
         if (im_data[h - py][px] != 0):
             coordsOut.append(v)
 

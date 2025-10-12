@@ -52,7 +52,7 @@ __global__ void generate_noise(int n, curandState* d_state) {
 
     dW[i].x = curand_normal(&d_state[i]) * powf(dt, 0.5) * D / dt;
     dW[i].y = curand_normal(&d_state[i]) * powf(dt, 0.5) * D / dt;
-    dW[i].z = curand_normal(&d_state[i]) * powf(dt, 0.5) * D / dt;
+    dW[i].z = 0.0; //curand_normal(&d_state[i]) * powf(dt, 0.5) * D / dt;
     dW[i].f = 0.0;
 }
 
