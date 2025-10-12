@@ -1,5 +1,6 @@
 # Todo
 - [ ] Implement using a different metric for the different x, y and z axes
+- [ ] Check if the individual force code is correct with the (-) prefix for the forces, the results look very similar
 - [ ] Update the slide to include all the structured stuff
 - [ ] Apply forces to the 3d file
 - [ ] Figure out how to model a Coarse Grained Model of water using the Morse-Potential and checking parameters like "Diffusion", "Thermal Conductivity" and so on
