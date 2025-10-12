@@ -2,10 +2,10 @@ import os
 import sys
 
 a = 1.0
-rm = 1.0
+rm = 0.5
 D = 0.0
 dt = 0.05
-T = 100
+T = 25
 en = T
 file = sys.argv[1]
 N = int(sys.argv[2])
