@@ -1,6 +1,6 @@
 # Todo
-- [ ] Implement using a different metric for the different x, y and z axes
-- [ ] Check if the individual force code is correct with the (-) prefix for the forces, the results look very similar
+- [ ] Check stability of 3D files the correct way
+- [ ] Write visualization for the change due to the indiv forces
 - [ ] Update the slide to include all the structured stuff
 - [ ] Apply forces to the 3d file
 - [ ] Figure out how to model a Coarse Grained Model of water using the Morse-Potential and checking parameters like "Diffusion", "Thermal Conductivity" and so on
@@ -11,9 +11,11 @@
 
 # Doing
 - [ ] Write a legend for the scripts and their usage
-- [ ] Check the stability of the 3d file (13/54)
 
 # Done
+- [x] Check if the individual force code is correct with the (-) prefix for the forces, the results look very similar
+- [x] Check the stability of the 3d file (0/54) - DID IT INCORRECTLY
+- [x] Implement using a different metric for the different x, y and z axes
 - [x] Write a script that checks the elasticity in the way that Franzi wanted it to be checked
 - [x] Run a 3D simulation with a rescaled 3d file
 - [x] Write a better visualization of 3d files

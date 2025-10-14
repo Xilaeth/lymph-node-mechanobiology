@@ -44,4 +44,6 @@ for inp in sys.argv[1:]:
     else:
         load = inp
 
+print(fdir)
+
 os.system(f"./load-cont {load} {a} {rmax} {T} {dt} {every_n} {D} {f} {fdir}")
