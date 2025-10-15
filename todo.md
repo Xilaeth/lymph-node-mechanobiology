@@ -1,4 +1,5 @@
 # Todo
+- [ ] Write the simulation using sampling
 - [ ] Check stability of 3D files the correct way
 - [ ] Write visualization for the change due to the indiv forces
 - [ ] Update the slide to include all the structured stuff
@@ -10,9 +11,12 @@
 - [ ] Calculate Stress-Strain curves for different parameters
 
 # Doing
+- [ ] Figure out why the simulation is behaving weirdly
 - [ ] Write a legend for the scripts and their usage
+- [ ] Update the docs files for recent work
 
 # Done
+- [x] How much of a difference does using \_\_expf() make?
 - [x] Check if the individual force code is correct with the (-) prefix for the forces, the results look very similar
 - [x] Check the stability of the 3d file (0/54) - DID IT INCORRECTLY
 - [x] Implement using a different metric for the different x, y and z axes

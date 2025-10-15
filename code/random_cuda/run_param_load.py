@@ -4,11 +4,11 @@ from math import sqrt
 
 load = "load.vtk"
 a = 1.0
-rmax = 1.0
+rmax = 0.5
 T = 1000
 dt = 0.05
-every_n = 1
-D = 0.001
+every_n = T
+D = 0.0
 
 for inp in sys.argv[1:]:
     if (inp[0] == '-'):
