@@ -33,6 +33,7 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
     // if i == j add random noise and external force
     if (i == j) {
         if (int(Xi.v) == id) {
+            /*
             if (f_dir == 1) {
                 dF.x += f;
             } else if (f_dir == 2) {
@@ -42,8 +43,8 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
             } else if (f_dir == -2) {
                 dF.y -= f;
             }
+            */
 
-            /*
             switch (f_dir) {
                 case 1:
                     dF.x += f;
@@ -64,7 +65,6 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
                     dF.z -= f;
                     break;
             }
-            */
         }
         dF += dW[i];
         return dF;
@@ -72,7 +72,7 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
 
     if (dist > r_max) return dF; // if the distance is greater than the maximum interaction length it's also the 0 vector
 
-    double F = 2 * (expf(-2*a*(dist - r_c)) - expf(-a*(dist - r_c))); // strength of the Morse potential
+    double F = 2 * (exp(-2*a*(dist - r_c)) - exp(-a*(dist - r_c))); // strength of the Morse potential
 
     dF.x = F * r.x / dist;
     dF.y = F * r.y / dist;
@@ -159,7 +159,7 @@ int main(int argc, const char* argv[])
 
 
     for (int i = 0; i < n_cells; i++) {
-//        if (not(i % 100 == 0)) continue;
+//        if (not(i % 800 == 0)) continue;
         cudaMemcpyToSymbol(id, &i, sizeof(int));
 
         for (int j = 0; j < n_cells; j++) {
