@@ -11,7 +11,7 @@ file = sys.argv[1]
 N = int(sys.argv[2])
 f = float(sys.argv[3])
 #dirs = [1, -2, -1, 2] # x, -y, -x, y
-dirs = [1]
+dirs = [-1, 2, -2]
 
 for d in dirs:
     os.system(f"mkdir ./out/dir-{d}")
