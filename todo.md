@@ -11,11 +11,11 @@
 - [ ] Calculate Stress-Strain curves for different parameters
 
 # Doing
-- [ ] Figure out why the simulation is behaving weirdly
 - [ ] Write a legend for the scripts and their usage
 - [ ] Update the docs files for recent work
 
 # Done
+- [x] Figure out why the simulation is behaving weirdly
 - [x] How much of a difference does using \_\_expf() make?
 - [x] Check if the individual force code is correct with the (-) prefix for the forces, the results look very similar
 - [x] Check the stability of the 3d file (0/54) - DID IT INCORRECTLY

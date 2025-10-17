@@ -33,18 +33,6 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
     // if i == j add random noise and external force
     if (i == j) {
         if (int(Xi.v) == id) {
-            /*
-            if (f_dir == 1) {
-                dF.x += f;
-            } else if (f_dir == 2) {
-                dF.y += f;
-            } else if (f_dir == -1) {
-                dF.x -= f;
-            } else if (f_dir == -2) {
-                dF.y -= f;
-            }
-            */
-
             switch (f_dir) {
                 case 1:
                     dF.x += f;
@@ -187,6 +175,7 @@ int main(int argc, const char* argv[])
             }
         }
     }
+
 
     return 0;
 }

@@ -149,6 +149,7 @@ int main(int argc, const char* argv[])
         cells_init[i][3] = cells.h_X[i].v;
     }
 
+    printf("%d\n", n_cells);
 
     for (int i = 0; i < n_cells; i++) {
         cudaMemcpyToSymbol(id, &i, sizeof(int));
