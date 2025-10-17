@@ -28,7 +28,7 @@ content = content[0::2]
 content = list(map(lambda x: list(map(lambda y: y, x.split(' '))), content))
 content = list(map(lambda x: [float(x[1]), float(x[4]), float(x[7])], content))
 #content = list(map(lambda x: LA.norm(np.array(x)), content))
-content = list(map(lambda x: np.abs(x[0]), content))
+content = list(map(lambda x: x[0], content))
 
 pts = Points(coords, r=6, c='green', alpha=1.0)
 pts.pointdata["deformation"] = content

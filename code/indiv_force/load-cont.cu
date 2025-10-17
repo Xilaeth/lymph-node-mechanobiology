@@ -1,7 +1,7 @@
 #include "../include/dtypes.cuh"
 #include "../include/inits.cuh"
-//#include "../include/solvers-modified.cuh"
-#include "../include/solvers.cuh"
+#include "../include/solvers-modified.cuh"
+//#include "../include/solvers.cuh"
 #include "../include/vtk.cuh"
 #include "../include/utils.cuh"
 #include "../include/property.cuh"
@@ -147,7 +147,7 @@ int main(int argc, const char* argv[])
 
 
     for (int i = 0; i < n_cells; i++) {
-//        if (not(i % 800 == 0)) continue;
+//        if (not(i == 0)) continue;
         cudaMemcpyToSymbol(id, &i, sizeof(int));
 
         for (int j = 0; j < n_cells; j++) {

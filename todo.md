@@ -1,4 +1,5 @@
 # Todo
+- [ ] Write per bead simulation using in between beads
 - [ ] Write the simulation using sampling
 - [ ] Check stability of 3D files the correct way
 - [ ] Write visualization for the change due to the indiv forces
