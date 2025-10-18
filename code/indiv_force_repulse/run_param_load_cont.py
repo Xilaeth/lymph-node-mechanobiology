@@ -11,6 +11,7 @@ every_n = 1
 D = 0.01
 f = 0.0
 fdir = 0
+nr = 0
 
 for inp in sys.argv[1:]:
     if (inp[0] == '-'):
@@ -37,6 +38,9 @@ for inp in sys.argv[1:]:
             case "en=":
                 every_n = int(inp[4:])
                 continue
+            case "nr=":
+                nr = int(inp[4:])
+                continue
         match inp[1:6]:
             case "fdir=":
                 fdir = int(inp[6:])
@@ -44,4 +48,4 @@ for inp in sys.argv[1:]:
     else:
         load = inp
 
-os.system(f"./load-cont {load} {a} {rmax} {T} {dt} {every_n} {D} {f} {fdir}")
+os.system(f"./load-cont {load} {a} {rmax} {T} {dt} {every_n} {D} {f} {fdir} {nr}")

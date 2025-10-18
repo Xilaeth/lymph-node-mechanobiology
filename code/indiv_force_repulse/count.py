@@ -12,6 +12,8 @@ fo = []
 sc = 0
 for i in lines:
     if (not(i) or (sc>0 and sc<4)):
+        if (sc == 4):
+            break
         sc += 1
     elif (sc == 0):
         continue
@@ -20,5 +22,5 @@ for i in lines:
 
 fo = list(map(lambda x: int(x), fo))
 
-n = list(map(lambda x: 1 if x == 1 else 0, fo))
+n = sum(list(map(lambda x: 1 if x == 1 else 0, fo)))
 print(n)

@@ -118,6 +118,7 @@ int main(int argc, const char* argv[])
     cudaMemcpyToSymbol(fo, &fo_temp, sizeof(double));
     int f_dir_temp = stoi(argv[9]);
     cudaMemcpyToSymbol(f_dir, &f_dir_temp, sizeof(int));
+    int n_real = stoi(argv[10]);
 
     ifstream inp(file);
 
@@ -166,8 +167,8 @@ int main(int argc, const char* argv[])
     }
 
 
-    for (int i = 0; i < n_cells; i++) {
-        if (not(i == 500)) continue;
+    for (int i = 0; i < n_real; i++) {
+//        if (not(i == 500)) continue;
         cudaMemcpyToSymbol(id, &i, sizeof(int));
 
         for (int j = 0; j < n_cells; j++) {
