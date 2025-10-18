@@ -1,5 +1,4 @@
 # Todo
-- [ ] Write per bead simulation using in between beads
 - [ ] Write the simulation using sampling
 - [ ] Check stability of 3D files the correct way
 - [ ] Write visualization for the change due to the indiv forces
@@ -12,6 +11,7 @@
 - [ ] Calculate Stress-Strain curves for different parameters
 
 # Doing
+- [ ] Write per bead simulation using in between beads
 - [ ] Write a legend for the scripts and their usage
 - [ ] Update the docs files for recent work
 
