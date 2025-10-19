@@ -1,4 +1,5 @@
 # Todo
+- [ ] compare the different version of the indiv force thing to put it on the slides
 - [ ] Write the simulation using sampling
 - [ ] Check stability of 3D files the correct way
 - [ ] Write visualization for the change due to the indiv forces
@@ -11,11 +12,13 @@
 - [ ] Calculate Stress-Strain curves for different parameters
 
 # Doing
-- [ ] Write per bead simulation using in between beads
+- [ ] Write a script that takes the big tiff file and makes a lot of smaller tiff files out of it that can be worked with (hopefully using ffmpeg)
 - [ ] Write a legend for the scripts and their usage
+- [ ] Update the slides for Tuesday
 - [ ] Update the docs files for recent work
 
 # Done
+- [x] Write per bead simulation using in between beads
 - [x] Figure out why the simulation is behaving weirdly
 - [x] How much of a difference does using \_\_expf() make?
 - [x] Check if the individual force code is correct with the (-) prefix for the forces, the results look very similar
