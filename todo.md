@@ -1,4 +1,5 @@
 # Todo
+- [ ] write a yalla program that takes individual strands of a certain thickness and pulls on them to get a certain quantification for the parameters and their effect on elasticity
 - [ ] compare the different version of the indiv force thing to put it on the slides
 - [ ] Write the simulation using sampling
 - [ ] Check stability of 3D files the correct way
