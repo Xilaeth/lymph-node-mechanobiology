@@ -1,16 +1,16 @@
 import os 
 import sys
 
-nxs = [2, 20]
-nys = [10, 100]
-ass = [0.5, 1.0]
-rms = [1.0]
-Fs = [1.0]
-fs = [0.04, 0.4]
+nxs = [1, 2, 10, 20]
+nys = [10, 50, 100, 200]
+ass = [0.5, 1.0, 2.0]
+rms = [0.7, 1.0, 2.0]
+Fs = [0.5, 1.0, 2.0]
+fs = [0.04, 0.08, 0.4, 0.8, 4.0]
 modes = [1]
-T = 10000
+T = 1000
 dt = 0.05
-en = 1000
+en = 200
 
 i = 0
 tot = len(nxs)*len(nys)*len(ass)*len(rms)*len(Fs)*len(fs)*len(modes)

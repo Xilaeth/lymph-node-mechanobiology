@@ -1,5 +1,5 @@
 # Todo
-- [ ] compare the different version of the indiv force thing to put it on the slides
+- [ ] Run a yalla program that does a sweeping scan on the 2d file and see how that works out 
 - [ ] Write the simulation using sampling
 - [ ] Check stability of 3D files the correct way
 - [ ] Write visualization for the change due to the indiv forces
@@ -12,11 +12,12 @@
 - [ ] Calculate Stress-Strain curves for different parameters
 
 # Doing
-- [ ] write a yalla program that takes individual strands of a certain thickness and pulls on them to get a certain quantification for the parameters and their effect on elasticity
 - [ ] Write a legend for the scripts and their usage
 - [ ] Update the docs files for recent work
 
 # Done
+- [x] compare the different version of the indiv force thing to put it on the slides
+- [x] write a yalla program that takes individual strands of a certain thickness and pulls on them to get a certain quantification for the parameters and their effect on elasticity
 - [x] Write a script that takes the big tiff file and makes a lot of smaller tiff files out of it that can be worked with (hopefully using ffmpeg)
 - [x] Write per bead simulation using in between beads
 - [x] Figure out why the simulation is behaving weirdly
