@@ -11,6 +11,7 @@
 - [ ] Calculate Stress-Strain curves for different parameters
 
 # Doing
+- [ ] Write a quantification program for 3d tubes
 - [ ] Write visualization for the change due to the indiv forces
 - [ ] Write a legend for the scripts and their usage
 - [ ] Update the docs files for recent work
