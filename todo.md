@@ -2,7 +2,6 @@
 - [ ] Run a yalla program that does a sweeping scan on the 2d file and see how that works out 
 - [ ] Write the simulation using sampling
 - [ ] Check stability of 3D files the correct way
-- [ ] Write visualization for the change due to the indiv forces
 - [ ] Update the slide to include all the structured stuff
 - [ ] Apply forces to the 3d file
 - [ ] Figure out how to model a Coarse Grained Model of water using the Morse-Potential and checking parameters like "Diffusion", "Thermal Conductivity" and so on
@@ -12,6 +11,7 @@
 - [ ] Calculate Stress-Strain curves for different parameters
 
 # Doing
+- [ ] Write visualization for the change due to the indiv forces
 - [ ] Write a legend for the scripts and their usage
 - [ ] Update the docs files for recent work
 
