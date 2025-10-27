@@ -17,6 +17,7 @@ __device__ double dt = 0.05f; // time step
 __device__ double a = 1.0f;
 __device__ double r_max = 1.0f;
 __device__ double D = 0.0;
+__device__ double F_0 = 0.0;
 __device__ double f = 0.0;
 __device__ int id = 0;
 __device__ int f_dir = 0; // direction of the force
@@ -60,7 +61,7 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
 
     if (dist > r_max) return dF; // if the distance is greater than the maximum interaction length it's also the 0 vector
 
-    double F = 2 * (exp(-2*a*(dist - r_c)) - exp(-a*(dist - r_c))); // strength of the Morse potential
+    double F = 2 * F_0 * a * (exp(-2*a*(dist - r_c)) - exp(-a*(dist - r_c))); // strength of the Morse potential
 
     dF.x = F * r.x / dist;
     dF.y = F * r.y / dist;
@@ -96,9 +97,11 @@ int main(int argc, const char* argv[])
     int every_n = stoi(argv[6]);
     double D_temp = stod(argv[7]);
     cudaMemcpyToSymbol(D, &D_temp, sizeof(double));
-    double f_temp = stod(argv[8]);
+    double F_temp = stod(argv[8]);
+    cudaMemcpyToSymbol(F_0, &F_temp, sizeof(double));
+    double f_temp = stod(argv[9]);
     cudaMemcpyToSymbol(f, &f_temp, sizeof(double));
-    int f_dir_temp = stoi(argv[9]);
+    int f_dir_temp = stoi(argv[10]);
     cudaMemcpyToSymbol(f_dir, &f_dir_temp, sizeof(int));
 
     ifstream inp(file);

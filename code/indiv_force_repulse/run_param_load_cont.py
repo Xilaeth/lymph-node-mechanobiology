@@ -10,6 +10,7 @@ dt = 0.01
 every_n = 1
 D = 0.01
 f = 0.0
+F = 1.0
 fdir = 0
 nr = 0
 
@@ -27,6 +28,9 @@ for inp in sys.argv[1:]:
                 continue
             case "f=":
                 f = inp[3:]
+                continue
+            case "F=":
+                F = inp[3:]
                 continue
         match inp[1:4]:
             case "rm=":
@@ -48,4 +52,4 @@ for inp in sys.argv[1:]:
     else:
         load = inp
 
-os.system(f"./load-cont {load} {a} {rmax} {T} {dt} {every_n} {D} {f} {fdir} {nr}")
+os.system(f"./load-cont {load} {a} {rmax} {T} {dt} {every_n} {D} {F} {f} {fdir} {nr}")

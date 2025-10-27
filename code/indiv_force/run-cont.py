@@ -10,13 +10,14 @@ en = T
 file = sys.argv[1]
 N = int(sys.argv[2])
 f = float(sys.argv[3])
+F = 1.0
 #dirs = [1, -2, -1, 2] # x, -y, -x, y
 dirs = [1]
 
 for d in dirs:
     os.system(f"mkdir ./out/dir-{d}")
     os.system(f"touch ./out/dir-{d}/difs.txt")
-    os.system(f"python3 run_param_load_cont.py {file}.vtk -a={a} -rm={rm} -T={T} -D={D} -f={f} -dt={dt} -en={en} -fdir={d}")
+    os.system(f"python3 run_param_load_cont.py {file}.vtk -a={a} -rm={rm} -T={T} -D={D} -F={F} -f={f} -dt={dt} -en={en} -fdir={d}")
     for i in range(N):
 #        if (not(i % 800 == 0)):
 #            continue
