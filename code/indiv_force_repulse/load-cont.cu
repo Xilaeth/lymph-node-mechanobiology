@@ -171,7 +171,7 @@ int main(int argc, const char* argv[])
 
 
     for (int i = 0; i < n_real; i++) {
-//        if (not(i == 500)) continue;
+//        if (not(i == 0)) continue;
         cudaMemcpyToSymbol(id, &i, sizeof(int));
 
         for (int j = 0; j < n_cells; j++) {

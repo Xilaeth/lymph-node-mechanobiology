@@ -85,7 +85,7 @@ for inp in mask_list:
         for i in coordsOut:
             f.write(str(i[0]) + " " + str(i[1]) + " " + "0.0\n")
         f.write("\nPOINT_DATA " + str(leng) + "\n")
-        f.write("SCALARS v float\n")
+        f.write("SCALARS f float\n")
         f.write("LOOKUP_TABLE default\n")
         for i in typ:
             f.write(str(i) + "\n")
