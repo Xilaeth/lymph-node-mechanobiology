@@ -2,14 +2,15 @@ import os
 import sys
 
 a = 1.0
-rm = 1.0
+rm = 2.0
 D = 0.0
 dt = 0.05
-T = 10
+T = 20
+#en = int(T/100)
 en = T
 file = sys.argv[1]
 f = float(sys.argv[2])
-F = 1.0
+F = 2.0
 #dirs = [1, -2, -1, 2] # x, -y, -x, y
 dirs = [1]
 
@@ -21,10 +22,8 @@ for d in dirs:
     os.system(f"touch ./out/dir-{d}/difs.txt")
     os.system(f"python3 run_param_load_cont.py {file}.vtk -a={a} -rm={rm} -T={T} -D={D} -f={f} -dt={dt} -en={en} -fdir={d} -nr={N} -F={F}")
     for i in range(N):
-#        if (not(i % 800 == 0)):
+#        if (not(i == 0)):
 #            continue
-#        if (not(i == 500)):
-#           continue
         print(f"{i}/{N}")
         name = f"inp-{file}_T-{T}_dt-{dt}_a-{a}_rm-{rm}_D-{D}_N-{N}_f-{f}_id-{i}"
         os.system(f"mkdir ./out/dir-{d}/{name}")

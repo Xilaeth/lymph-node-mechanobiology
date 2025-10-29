@@ -1,4 +1,5 @@
 # Todo
+- [ ] Write a quantification program for 3d tubes
 - [ ] Run a yalla program that does a sweeping scan on the 2d file and see how that works out 
 - [ ] Write the simulation using sampling
 - [ ] Check stability of 3D files the correct way
@@ -11,12 +12,14 @@
 - [ ] Calculate Stress-Strain curves for different parameters
 
 # Doing
-- [ ] Write a quantification program for 3d tubes
-- [ ] Write visualization for the change due to the indiv forces
+- [ ] Write a modified simulation cuda program that only outputs differences instead of everything
+- [ ] Write updated difs.txt computer that uses the previously implemented new way of storing data
+- [ ] Find samples from the original data and write down their coordinates
 - [ ] Write a legend for the scripts and their usage
 - [ ] Update the docs files for recent work
 
 # Done
+- [x] Write visualization for the change due to the indiv forces
 - [x] compare the different version of the indiv force thing to put it on the slides
 - [x] write a yalla program that takes individual strands of a certain thickness and pulls on them to get a certain quantification for the parameters and their effect on elasticity
 - [x] Write a script that takes the big tiff file and makes a lot of smaller tiff files out of it that can be worked with (hopefully using ffmpeg)

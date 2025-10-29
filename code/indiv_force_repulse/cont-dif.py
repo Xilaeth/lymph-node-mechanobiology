@@ -2,13 +2,14 @@ import os
 import sys
 
 a = 1.0
-rm = 1.0
+rm = 2.0
 D = 0.0
 dt = 0.05
-T = 10
-en = 10
+T = 20
+en = T
 file = sys.argv[1]
 f = float(sys.argv[2])
+F = 2.0
 #dirs = [1, -2, -1, 2] # x, -y, -x, y
 dirs = [1]
 count = 0
