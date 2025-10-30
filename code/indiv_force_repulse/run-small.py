@@ -5,7 +5,7 @@ a = 1.0
 rm = 2.0
 D = 0.0
 dt = 0.05
-T = 20
+T = 1
 #en = int(T/100)
 en = T
 file = sys.argv[1]
@@ -22,3 +22,5 @@ for d in dirs:
     os.system(f"mkdir ./out/{name}")
     os.system(f"python3 run_param_small.py {file}.vtk -a={a} -rm={rm} -T={T} -D={D} -f={f} -dt={dt} -en={en} -fdir={d} -nr={N} -F={F}")
     os.system(f"mv ./output/out_0.vtk ./out/{name}")
+    os.system(f"python3 small-dif.py ./out/{name}/out_0.vtk")
+    os.system(f"mv ./data.csv ./out/{name}")

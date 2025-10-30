@@ -1,24 +1,20 @@
 # Todo
-- [ ] Write a quantification program for 3d tubes
 - [ ] Run a yalla program that does a sweeping scan on the 2d file and see how that works out 
 - [ ] Write the simulation using sampling
-- [ ] Check stability of 3D files the correct way
-- [ ] Update the slide to include all the structured stuff
-- [ ] Apply forces to the 3d file
-- [ ] Figure out how to model a Coarse Grained Model of water using the Morse-Potential and checking parameters like "Diffusion", "Thermal Conductivity" and so on
-- [ ] Maybe try to look up general elasticities for reticular networks that are similar
-- [ ] Research Elastic Properties of Collagen Fibers
-- [ ] Test models for the fibers on the computer and find parameters that fit best
 - [ ] Calculate Stress-Strain curves for different parameters
 
 # Doing
-- [ ] Write a modified simulation cuda program that only outputs differences instead of everything
-- [ ] Write updated difs.txt computer that uses the previously implemented new way of storing data
-- [ ] Find samples from the original data and write down their coordinates
+- [ ] Research Elastic Properties of Collagen Fibers
+- [ ] Research 2D water properties
+- [ ] Figure out how to model a Coarse Grained Model of water using the Morse-Potential and checking parameters like "Diffusion", "Thermal Conductivity" and so on
 - [ ] Write a legend for the scripts and their usage
 - [ ] Update the docs files for recent work
 
 # Done
+- [x] Find samples from the original data and write down their coordinates
+- [x] Check stability of 3D files the correct way
+- [x] Write a modified simulation cuda program that only outputs differences instead of everything
+- [x] Write updated difs.txt computer that uses the previously implemented new way of storing data
 - [x] Write visualization for the change due to the indiv forces
 - [x] compare the different version of the indiv force thing to put it on the slides
 - [x] write a yalla program that takes individual strands of a certain thickness and pulls on them to get a certain quantification for the parameters and their effect on elasticity
