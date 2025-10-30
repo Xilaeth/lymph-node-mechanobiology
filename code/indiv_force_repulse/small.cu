@@ -221,8 +221,8 @@ int main(int argc, const char* argv[])
             continue;
         }
         cells.h_X[i].ox = 1000;
-        cells.h_X[i].ox = 1000;
-        cells.h_X[i].ox = 1000;
+        cells.h_X[i].oy = 1000;
+        cells.h_X[i].oz = 1000;
     }
 
     Vtk_output output{"out"};  // Writes to output/relax_#.vtk
