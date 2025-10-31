@@ -4,10 +4,10 @@ import sys
 a = 1.0
 rm = 2.0
 D = 0.0
-dt = 0.05
-T = 20
+dt = 0.01
+T = 5000
 #en = int(T/100)
-en = T
+en = int(T/100)
 file = sys.argv[1]
 f = float(sys.argv[2])
 F = 2.0
@@ -18,8 +18,8 @@ N = int(os.popen(f"python3 count.py {file}.vtk").read())
 print(N)
 
 for d in dirs:
-    os.system(f"mkdir ./out/dir-{d}")
-    os.system(f"touch ./out/dir-{d}/difs.txt")
+#    os.system(f"mkdir ./out/dir-{d}")
+#    os.system(f"touch ./out/dir-{d}/difs.txt")
     os.system(f"python3 run_param_load_cont.py {file}.vtk -a={a} -rm={rm} -T={T} -D={D} -f={f} -dt={dt} -en={en} -fdir={d} -nr={N} -F={F}")
     for i in range(N):
 #        if (not(i == 0)):

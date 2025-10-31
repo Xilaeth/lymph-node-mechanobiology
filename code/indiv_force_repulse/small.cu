@@ -18,6 +18,8 @@ __device__ double a = 1.0f;
 __device__ double r_max = 1.0f;
 __device__ double D = 0.0;
 __device__ double F_0 = 1.0;
+__device__ double F_1 = 0.5;
+__device__ double a_1 = 1.0;
 __device__ double fo = 0.0;
 __device__ int id = 0;
 __device__ int f_dir = 0; // direction of the force
@@ -60,7 +62,16 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
             return dF;
         }
 
-        if (not(Xi.f == r.f)) return dF;
+        if (not(0 == r.f)) {
+            if (dist > r_c) return dF;
+
+            double F = 2 * F_1 * a_1 * (exp(-2*a_1*(dist - r_c)) - exp(-a_1*(dist - r_c))); // strength of the Morse potential
+
+            dF.x = F * r.x / dist;
+            dF.y = F * r.y / dist;
+            dF.z = F * r.z / dist;
+            return dF; // return force that's to be applied
+        }
 
         if (dist > r_max) return dF; // if the distance is greater than the maximum interaction length it's also the 0 vector
 
@@ -75,7 +86,17 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
     if (Xi.f == 2) {
         if (i == j) return dF;
         if (dist > r_c) return dF;
-        double F = 2 * F_0 * a * (exp(-2*a*(dist - r_c)) - exp(-a*(dist - r_c))); // strength of the Morse potential
+
+        if (not(0 == r.f)) {
+            double F = 2 * F_0 * a * (exp(-2*a*(dist - r_c)) - exp(-a*(dist - r_c))); // strength of the Morse potential
+
+            dF.x = F * r.x / dist;
+            dF.y = F * r.y / dist;
+            dF.z = F * r.z / dist;
+            return dF; // return force that's to be applied
+        }
+
+        double F = 2 * F_1 * a_1 * (exp(-2*a_1*(dist - r_c)) - exp(-a_1*(dist - r_c))); // strength of the Morse potential
 
         dF.x = F * r.x / dist;
         dF.y = F * r.y / dist;
@@ -122,6 +143,10 @@ int main(int argc, const char* argv[])
     int f_dir_temp = stoi(argv[10]);
     cudaMemcpyToSymbol(f_dir, &f_dir_temp, sizeof(int));
     int n_real = stoi(argv[11]);
+    double F_1_temp = stod(argv[12]);
+    cudaMemcpyToSymbol(F_1, &F_1_temp, sizeof(double));
+    double a_1_temp = stod(argv[13]);
+    cudaMemcpyToSymbol(a_1, &a_1_temp, sizeof(double));
 
     ifstream inp(file);
 
@@ -177,12 +202,6 @@ int main(int argc, const char* argv[])
     }
 
     for (int i = 0; i < n_real; i++) {
-        /*
-        cells_out[i][0] = 0;
-        cells_out[i][1] = 0;
-        cells_out[i][2] = 0;
-        if (not(i == 0)) continue;
-        */
         printf("%d / %d\n", i+1, n_real);
         cudaMemcpyToSymbol(id, &i, sizeof(int));
 

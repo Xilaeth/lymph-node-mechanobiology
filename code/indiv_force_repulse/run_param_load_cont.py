@@ -13,6 +13,7 @@ f = 0.0
 F = 1.0
 fdir = 0
 nr = 0
+fid = 0
 
 for inp in sys.argv[1:]:
     if (inp[0] == '-'):
@@ -45,6 +46,9 @@ for inp in sys.argv[1:]:
             case "nr=":
                 nr = int(inp[4:])
                 continue
+            case "fi=":
+                fid = int(inp[4:])
+                continue
         match inp[1:6]:
             case "fdir=":
                 fdir = int(inp[6:])
@@ -52,4 +56,4 @@ for inp in sys.argv[1:]:
     else:
         load = inp
 
-os.system(f"./load-cont {load} {a} {rmax} {T} {dt} {every_n} {D} {F} {f} {fdir} {nr}")
+os.system(f"./load-cont {load} {a} {rmax} {T} {dt} {every_n} {D} {F} {f} {fdir} {nr} {fid}")

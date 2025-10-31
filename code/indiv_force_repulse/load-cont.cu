@@ -60,7 +60,7 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
             return dF;
         }
 
-        if (not(Xi.f == r.f)) return dF;
+        if (not(Xi.f == r.f) && (dist > r_c)) return dF;
 
         if (dist > r_max) return dF; // if the distance is greater than the maximum interaction length it's also the 0 vector
 
@@ -171,7 +171,6 @@ int main(int argc, const char* argv[])
 
 
     for (int i = 0; i < n_real; i++) {
-//        if (not(i == 0)) continue;
         cudaMemcpyToSymbol(id, &i, sizeof(int));
 
         for (int j = 0; j < n_cells; j++) {
