@@ -1,17 +1,17 @@
 import os
 import sys
 
-a = 1.0
+a = 1.5
 rm = 2.0
 D = 0.0
 dt = 0.05
-T = 5
+T = 100
 #en = int(T/100)
 en = 1
 file = sys.argv[1]
 f = float(sys.argv[2])
 fid = int(sys.argv[3])
-F = 2.0
+F = 1.0
 F1 = 0.1
 a1 = 1.0
 #dirs = [1, -2, -1, 2] # x, -y, -x, y

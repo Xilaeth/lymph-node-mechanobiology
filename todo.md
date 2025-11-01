@@ -1,4 +1,5 @@
 # Todo
+- [ ] Test with "inbetween" around the entire thing
 - [ ] Run a yalla program that does a sweeping scan on the 2d file and see how that works out 
 - [ ] Write the simulation using sampling
 - [ ] Calculate Stress-Strain curves for different parameters
@@ -7,6 +8,7 @@
 - [ ] Figure out how to model a Coarse Grained Model of water using the Morse-Potential and checking parameters like "Diffusion", "Thermal Conductivity" and so on
 
 # Doing
+- [ ] Prepare Presentation for Monday (New Test Images, T tests, maybe a scan test)
 - [ ] Run more test cases for the simulation (F values, f values, T values, F\_2 values)
 - [ ] Write a legend for the scripts and their usage
 - [ ] Update the docs files for recent work
