@@ -219,7 +219,7 @@ int main(int argc, const char* argv[])
             cudaDeviceSynchronize();
             cells.copy_to_host();
             generate_noise<<<(n_cells + 32 - 1)/32, 32>>>(n_cells, d_state);
-            cells.take_step<morse>(dt_temp);    // Ordered to write during calculation,
+            cells.take_step<morse, friction_on_background>(dt_temp);    // Ordered to write during calculation,
             if ((time_step % every_n) == 0) {
                 output.write_positions(cells);  // use thread for full concurrency.
                 output.write_field(cells, "f", &Cell::f);

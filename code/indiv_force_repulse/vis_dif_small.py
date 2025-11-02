@@ -52,7 +52,7 @@ content = list(map(lambda x: x[0], content))
 ps = []
 cs = []
 o = []
-frac = 0.8
+frac = 0.95
 for i in range(len(coords_r)):
     if ((np.abs(coords_r[i, 0] - (mx + lx/2)) < 0.5*frac*lx) and (np.abs(coords_r[i, 1] - (my + ly/2)) < 0.5*frac*ly)):
         ps.append(coords_r[i])

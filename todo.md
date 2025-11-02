@@ -1,6 +1,4 @@
 # Todo
-- [ ] Test with "inbetween" around the entire thing
-- [ ] Run a yalla program that does a sweeping scan on the 2d file and see how that works out 
 - [ ] Write the simulation using sampling
 - [ ] Calculate Stress-Strain curves for different parameters
 - [ ] Research Elastic Properties of Collagen Fibers
@@ -8,12 +6,14 @@
 - [ ] Figure out how to model a Coarse Grained Model of water using the Morse-Potential and checking parameters like "Diffusion", "Thermal Conductivity" and so on
 
 # Doing
+- [ ] Run a yalla program that does a sweeping scan on the 2d file and see how that works out 
 - [ ] Prepare Presentation for Monday (New Test Images, T tests, maybe a scan test)
 - [ ] Run more test cases for the simulation (F values, f values, T values, F\_2 values)
 - [ ] Write a legend for the scripts and their usage
 - [ ] Update the docs files for recent work
 
 # Done
+- [x] Test with "inbetween" around the entire thing
 - [x] Find samples from the original data and write down their coordinates
 - [x] Check stability of 3D files the correct way
 - [x] Write a modified simulation cuda program that only outputs differences instead of everything
