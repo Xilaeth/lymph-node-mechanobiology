@@ -5,7 +5,7 @@ import sys
 path=sys.argv[1]
 pdata=[]
 p=load(f"{path}")
-p.point_size(5)
+p.point_size(3)
 p.color("green")
 pdata.append(p)
 	

@@ -44,9 +44,9 @@ for i in range(nw):
     if (i == 0):
         cx = 0
     elif (i == (nw-1)):
-        cx = wtot - w
+        cx = int(wtot - w)
     else:
-        cx = int(i*w*(1 - 2*f))
+        cx += int(w*(1 - 2*f))
     for j in range(nh):
         count += 1
         print(f"{count}/{nt}")
@@ -55,7 +55,7 @@ for i in range(nw):
         elif (j == (nh-1)):
             cy = int(htot - h)
         else:
-            cy = int(j*h*(1 - 2*f))
+            cy += int(h*(1 - 2*f))
 
         os.system(f"python3 ffmpeg-crop.py {file} -x={cx} -y={cy} -w={w} -h={h}")
         os.system(f"mv output.tif ./out-tif/wt-{wtot}_ht-{htot}_w-{w}_h-{h}_x-{cx}_y-{cy}_f-{f}.tif")
