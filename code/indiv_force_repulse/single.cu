@@ -65,11 +65,11 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
         if (not(0 == r.f)) {
             if (dist > r_c) return dF;
 
-            double F = 2 * F_1 * a_1 * (exp(-2*a_1*(dist - r_c)) - exp(-a_1*(dist - r_c))); // strength of the Morse potential
+            //double F = 2 * F_1 * a_1 * (exp(-2*a_1*(dist - r_c)) - exp(-a_1*(dist - r_c))); // strength of the Morse potential
 
-            dF.x = F * r.x / dist;
-            dF.y = F * r.y / dist;
-            dF.z = F * r.z / dist;
+//            dF.x = F * r.x / dist;
+ //           dF.y = F * r.y / dist;
+  //          dF.z = F * r.z / dist;
             return dF; // return force that's to be applied
         }
 
@@ -88,19 +88,19 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
         if (dist > r_c) return dF;
 
         if (not(0 == r.f)) {
-            double F = 2 * F_0 * a * (exp(-2*a*(dist - r_c)) - exp(-a*(dist - r_c))); // strength of the Morse potential
+            //double F = 2 * F_0 * a * (exp(-2*a*(dist - r_c)) - exp(-a*(dist - r_c))); // strength of the Morse potential
 
-            dF.x = F * r.x / dist;
-            dF.y = F * r.y / dist;
-            dF.z = F * r.z / dist;
+   //         dF.x = F * r.x / dist;
+    //        dF.y = F * r.y / dist;
+     //       dF.z = F * r.z / dist;
             return dF; // return force that's to be applied
         }
 
-        double F = 2 * F_1 * a_1 * (exp(-2*a_1*(dist - r_c)) - exp(-a_1*(dist - r_c))); // strength of the Morse potential
+//        double F = 2 * F_1 * a_1 * (exp(-2*a_1*(dist - r_c)) - exp(-a_1*(dist - r_c))); // strength of the Morse potential
 
-        dF.x = F * r.x / dist;
-        dF.y = F * r.y / dist;
-        dF.z = F * r.z / dist;
+ //       dF.x = F * r.x / dist;
+  //      dF.y = F * r.y / dist;
+   //     dF.z = F * r.z / dist;
         return dF; // return force that's to be applied
     }
 

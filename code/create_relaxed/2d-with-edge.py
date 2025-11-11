@@ -57,10 +57,10 @@ typ = []
 lx = nx*l
 ly = ny*np.sin(np.pi/3)*l
 for i in data:
-    if ((i[0] < 0.05*lx)): # or (i[0] > 0.95*lx) or (i[1] < 0.05*ly) or (i[1] > 0.95*ly)):
-        typ.append(1)
+    if ((i[0] < 0.05*lx) or (i[0] > 0.95*lx) or (i[1] < 0.05*ly) or (i[1] > 0.95*ly)):
+        typ.append(2)
         continue
-    typ.append(0)
+    typ.append(1)
 
 with open(out + ".vtk", "w", encoding="ascii") as f:
     f.write("# vtk DataFile Version 3.0\n")
@@ -71,7 +71,7 @@ with open(out + ".vtk", "w", encoding="ascii") as f:
     for i in data:
         f.write(str(i[0]) + " " + str(i[1]) + " " + str(i[2]) + "\n")
     f.write("\nPOINT_DATA " + str(leng) + "\n")
-    f.write("SCALARS v float\n")
+    f.write("SCALARS f float\n")
     f.write("LOOKUP_TABLE default\n")
     for i in typ:
         f.write(str(i) + "\n")

@@ -66,4 +66,5 @@ pts.pointdata["deformation"] = cs
 pts.cmap("coolwarm").add_scalarbar("deformation")
 
 plt = Plotter()
-plt.show(pts, pts_o).interactive().close()
+plt.show(pts, pts_o).close()
+
