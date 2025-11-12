@@ -56,8 +56,9 @@ leng = len(data)
 typ = []
 lx = nx*l
 ly = ny*np.sin(np.pi/3)*l
+f1 = 0.0
 for i in data:
-    if ((i[0] < 0.05*lx) or (i[0] > 0.95*lx) or (i[1] < 0.05*ly) or (i[1] > 0.95*ly)):
+    if ((i[0] < f1*lx) or (i[0] > (1-f1)*lx) or (i[1] < f1*ly) or (i[1] > (1-f1)*ly)):
         typ.append(2)
         continue
     typ.append(1)

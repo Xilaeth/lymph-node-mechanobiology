@@ -42,29 +42,29 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
     if (Xi.f == 1) {
         // if i == j add random noise and external force
         if (i == j) {
-            double lx = max_x - min_x;
-            double ly = max_y - min_y;
-//            bool is_inside = (Xi.x < (min_x + (1-frac)*lx)) and (Xi.x > (min_x + frac*lx)) and (Xi.y < (min_y + (1-frac)*ly)) and (Xi.y > (min_y + frac*ly));
- //           if (((int(Xi.v) % id) == 0) and is_inside) {
+            //double lx = max_x - min_x;
+            //double ly = max_y - min_y;
+            //bool is_inside = (Xi.x < (min_x + (1-frac)*lx)) and (Xi.x > (min_x + frac*lx)) and (Xi.y < (min_y + (1-frac)*ly)) and (Xi.y > (min_y + frac*ly));
+            //if (((int(Xi.v) % id) == 0) and is_inside) {
             if (((int(Xi.v) % id) == 0)) {
                 switch (f_dir) {
                     case 1:
-                        dF.x += fo;
+                        dF.x = fo;
                         break;
                     case 2:
-                        dF.y += fo;
+                        dF.y = fo;
                         break;
                     case 3:
-                        dF.z += fo;
+                        dF.z = fo;
                         break;
                     case -1:
-                        dF.x -= fo;
+                        dF.x = -1*fo;
                         break;
                     case -2:
-                        dF.y -= fo;
+                        dF.y = -1*fo;
                         break;
                     case -3:
-                        dF.z -= fo;
+                        dF.z = -1*fo;
                         break;
                 }
             }
@@ -72,7 +72,9 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
             return dF;
         }
 
+
         if (not(0 == r.f)) {
+            /*
             if (dist > r_c) return dF;
 
             double F = 2 * F_1 * a_1 * (exp(-2*a_1*(dist - r_c)) - exp(-a_1*(dist - r_c))); // strength of the Morse potential
@@ -80,12 +82,12 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
             dF.x = F * r.x / dist;
             dF.y = F * r.y / dist;
             dF.z = F * r.z / dist;
+            */
             return dF; // return force that's to be applied
         }
 
-        if (dist > r_max) return dF; // if the distance is greater than the maximum interaction length it's also the 0 vector
-
-        double F = 2 * F_0 * a * (exp(-2*a*(dist - r_c)) - exp(-a*(dist - r_c))); // strength of the Morse potential
+//        double F = 2 * F_0 * a * (exp(-2*a*(dist - r_c)) - exp(-a*(dist - r_c))); // strength of the Morse potential
+        double F = a*(1 - 2*dist);
 
         dF.x = F * r.x / dist;
         dF.y = F * r.y / dist;
@@ -93,6 +95,7 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
         return dF; // return force that's to be applied
     }
 
+    /*
     if (Xi.f == 2) {
         if (i == j) return dF;
         if (dist > r_c) return dF;
@@ -113,6 +116,7 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
         dF.z = F * r.z / dist;
         return dF; // return force that's to be applied
     }
+    */
 
     return dF;
 }
@@ -180,7 +184,7 @@ int main(int argc, const char* argv[])
         
     // Prepare initial state
     Vtk_input input{file};
-    Solution<Cell, Gabriel_solver> cells{n_cells};
+    Solution<Cell, Gabriel_solver> cells{n_cells, 50, float(r_max_temp)};
 
     input.read_positions(cells);
     input.read_field(cells, "v", &Cell::v);

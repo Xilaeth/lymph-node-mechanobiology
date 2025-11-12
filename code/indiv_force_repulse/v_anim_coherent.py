@@ -70,7 +70,7 @@ cs = []
 c = 0
 for i in range(len(typ)):
     if (typ_tot[0][i] == 1):
-        if (((c % fid) == 0) and ((coords_tot[0][i][0] < (min_x + (1-f1)*lx)) and (coords_tot[0][i][0] > (min_x + f1*lx)) and (coords_tot[0][i][1] < (min_y + (1-f1)*ly)) and (coords_tot[0][i][1] > (min_y + f1*ly)))):
+        if (((c % fid) == 0)): # and ((coords_tot[0][i][0] < (min_x + (1-f1)*lx)) and (coords_tot[0][i][0] > (min_x + f1*lx)) and (coords_tot[0][i][1] < (min_y + (1-f1)*ly)) and (coords_tot[0][i][1] > (min_y + f1*ly)))):
             cs.append(c)
             c += 1
             continue
@@ -114,10 +114,12 @@ plt = Plotter(axes=1)
 #plt.show(pts1, pts2, pts3)
 plt.show(pts1, pts3, interactive=False)
 #plt.interactive().close()
+cam = plt.camera
 for i in range(100):
     pts1.points = pts1_tot[i]
 #    pts2.points = pts2_tot[i]
     pts3.points = pts3_tot[i]
+    plt.camera = cam
     plt.screenshot(f"image{(i+1):03d}.png", scale=1)
 
 plt.close()

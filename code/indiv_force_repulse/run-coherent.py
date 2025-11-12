@@ -2,7 +2,7 @@ import os
 import sys
 
 a = 0.4
-rm = 2.0
+rm = 1.0
 D = 0.0
 dt = 0.05
 T = 5000
@@ -24,8 +24,8 @@ for d in dirs:
 #    os.system(f"mkdir ./out/dir-{d}")
 #    os.system(f"touch ./out/dir-{d}/difs.txt")
     os.system(f"python3 run_param_load_coherent.py {file}.vtk -a={a} -rm={rm} -T={T} -D={D} -f={f} -dt={dt} -en={en} -fdir={d} -nr={N} -F={F} -fi={fid} -F1={F1} -a1={a1}")
-   # os.system(f"python3 v_anim_coherent.py output/out-{fid}_ {int(T/en)} {fid}")
-    os.system(f"python3 v_anim.py output/out-{fid}_ {int(T/en)}")
+    os.system(f"python3 v_anim_coherent.py output/out-{fid}_ {int(T/en)} {fid}")
+    #os.system(f"python3 v_anim.py output/out-{fid}_ {int(T/en)}")
     os.system(f"ffmpeg -pattern_type glob -i \"image*.png\" -c:v libx264 -vf fps=30 -pix_fmt yuv420p output.mp4")
     os.system(f"rm ./*.png")
 #    for i in range(N):

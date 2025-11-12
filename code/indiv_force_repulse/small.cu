@@ -221,7 +221,7 @@ int main(int argc, const char* argv[])
             cudaDeviceSynchronize();
             cells.copy_to_host();
             generate_noise<<<(n_cells + 32 - 1)/32, 32>>>(n_cells, d_state);
-            cells.take_step<morse>(dt_temp);    // Ordered to write during calculation,
+            cells.take_step<morse, friction_on_background>(dt_temp);    // Ordered to write during calculation,
         }
         cells_out[i][0] = cells.h_X[ind[i]].x - cells_init[ind[i]][0];
         cells_out[i][1] = cells.h_X[ind[i]].y - cells_init[ind[i]][1];
