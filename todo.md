@@ -6,10 +6,7 @@
 
 # Doing
 - [ ] Write a program that stitches the results back together - scan simulation
-- [ ] Prepare Presentation for Monday (New Test Images, T tests, maybe a scan test)
-- [ ] Run more test cases for the simulation (F values, f values, T values, F\_2 values)
 - [ ] Write a legend for the scripts and their usage
-- [ ] Update the docs files for recent work
 
 # Done
 - [x] Run a yalla program that does a sweeping scan on the 2d file and see how that works out 

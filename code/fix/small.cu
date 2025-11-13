@@ -1,6 +1,5 @@
 #include "../include/dtypes.cuh"
 #include "../include/inits.cuh"
-//#include "../include/solvers-modified.cuh"
 #include "../include/solvers.cuh"
 #include "../include/vtk.cuh"
 #include "../include/utils.cuh"
@@ -70,7 +69,12 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
             return dF; // return force that's to be applied
         }
 
-        double F = a*(1 - 2*dist);
+        double F = 0;
+        if (dist <= 1) {
+            F = a*(1 - 2*dist);
+        } else {
+            F = a*(dist - 2);
+        }
 
         dF.x = F * r.x / dist;
         dF.y = F * r.y / dist;
@@ -158,7 +162,7 @@ int main(int argc, const char* argv[])
         
     // Prepare initial state
     Vtk_input input{file};
-    Solution<Cell, Gabriel_solver> cells{n_cells, 50, 2*r_c};
+    Solution<Cell, Gabriel_solver> cells{n_cells, 50, 4*r_c};
 
     input.read_positions(cells);
     input.read_field(cells, "v", &Cell::v);

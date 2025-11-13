@@ -66,16 +66,23 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
             if (dist > r_c) return dF;
 
             //double F = 2 * F_1 * a_1 * (exp(-2*a_1*(dist - r_c)) - exp(-a_1*(dist - r_c))); // strength of the Morse potential
+            double F = F_1 * (1 - 2*dist);
 
-//            dF.x = F * r.x / dist;
- //           dF.y = F * r.y / dist;
-  //          dF.z = F * r.z / dist;
+            dF.x = F * r.x / dist;
+            dF.y = F * r.y / dist;
+            dF.z = F * r.z / dist;
             return dF; // return force that's to be applied
         }
 
         if (dist > r_max) return dF; // if the distance is greater than the maximum interaction length it's also the 0 vector
 
-        double F = 2 * F_0 * a * (exp(-2*a*(dist - r_c)) - exp(-a*(dist - r_c))); // strength of the Morse potential
+        //double F = 2 * F_0 * a * (exp(-2*a*(dist - r_c)) - exp(-a*(dist - r_c))); // strength of the Morse potential
+        double F = 0;
+        if (dist <= 1) {
+            F = F_0 * (1 - 2*dist);
+        } else {
+            F = F_0 * (dist - 2);
+        }
 
         dF.x = F * r.x / dist;
         dF.y = F * r.y / dist;
@@ -89,18 +96,20 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
 
         if (not(0 == r.f)) {
             //double F = 2 * F_0 * a * (exp(-2*a*(dist - r_c)) - exp(-a*(dist - r_c))); // strength of the Morse potential
+            double F = F_1 * (1 - 2*dist);
 
-   //         dF.x = F * r.x / dist;
-    //        dF.y = F * r.y / dist;
-     //       dF.z = F * r.z / dist;
+            dF.x = F * r.x / dist;
+            dF.y = F * r.y / dist;
+            dF.z = F * r.z / dist;
             return dF; // return force that's to be applied
         }
 
 //        double F = 2 * F_1 * a_1 * (exp(-2*a_1*(dist - r_c)) - exp(-a_1*(dist - r_c))); // strength of the Morse potential
+            double F = F_0 * (1 - 2*dist);
 
- //       dF.x = F * r.x / dist;
-  //      dF.y = F * r.y / dist;
-   //     dF.z = F * r.z / dist;
+        dF.x = F * r.x / dist;
+        dF.y = F * r.y / dist;
+        dF.z = F * r.z / dist;
         return dF; // return force that's to be applied
     }
 
@@ -170,7 +179,7 @@ int main(int argc, const char* argv[])
         
     // Prepare initial state
     Vtk_input input{file};
-    Solution<Cell, Gabriel_solver> cells{n_cells};
+    Solution<Cell, Gabriel_solver> cells{n_cells, 50, float(r_max_temp)};
 
     input.read_positions(cells);
     input.read_field(cells, "v", &Cell::v);

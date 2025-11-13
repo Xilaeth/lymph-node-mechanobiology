@@ -60,6 +60,16 @@ for i in range(len(coords_r)):
     else:
         o.append(coords_r[i])
 
+avg = np.mean(cs)
+var = np.var(cs)
+ma = max(cs)
+
+#print(avg)
+#print(var)
+#print(ma)
+
+#cs = list(map(lambda x: x if x < 0.90*ma else 0, cs))
+
 pts = Points(ps, r=6, c='green', alpha=1.0)
 pts_o = Points(o, r=6, c='black', alpha=0.5)
 pts.pointdata["deformation"] = cs
