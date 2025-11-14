@@ -5,10 +5,11 @@
 - [ ] Figure out how to model a Coarse Grained Model of water using the Morse-Potential and checking parameters like "Diffusion", "Thermal Conductivity" and so on
 
 # Doing
-- [ ] Write a program that stitches the results back together - scan simulation
 - [ ] Write a legend for the scripts and their usage
+- [ ] Write program that stitches the value of the displacement together
 
 # Done
+- [x] Write a program that stitches the results back together - scan simulation
 - [x] Run a yalla program that does a sweeping scan on the 2d file and see how that works out 
 - [x] Test with "inbetween" around the entire thing
 - [x] Find samples from the original data and write down their coordinates
