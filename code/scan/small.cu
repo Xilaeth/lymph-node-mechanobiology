@@ -1,6 +1,5 @@
 #include "../include/dtypes.cuh"
 #include "../include/inits.cuh"
-//#include "../include/solvers-modified.cuh"
 #include "../include/solvers.cuh"
 #include "../include/vtk.cuh"
 #include "../include/utils.cuh"
@@ -15,11 +14,8 @@
 const auto r_c = 0.5f; // equilibrium distance
 __device__ double dt = 0.05f; // time step
 __device__ double a = 1.0f;
-__device__ double r_max = 1.0f;
+__device__ double b = 1.0f;
 __device__ double D = 0.0;
-__device__ double F_0 = 1.0;
-__device__ double F_1 = 0.5;
-__device__ double a_1 = 1.0;
 __device__ double fo = 0.0;
 __device__ int id = 0;
 __device__ int f_dir = 0; // direction of the force
@@ -65,7 +61,7 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
         if (not(0 == r.f)) {
             if (dist > r_c) return dF;
 
-            double F = 2 * F_1 * a_1 * (exp(-2*a_1*(dist - r_c)) - exp(-a_1*(dist - r_c))); // strength of the Morse potential
+            double F = b*(1 - 2*dist);
 
             dF.x = F * r.x / dist;
             dF.y = F * r.y / dist;
@@ -73,9 +69,12 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
             return dF; // return force that's to be applied
         }
 
-        if (dist > r_max) return dF; // if the distance is greater than the maximum interaction length it's also the 0 vector
-
-        double F = 2 * F_0 * a * (exp(-2*a*(dist - r_c)) - exp(-a*(dist - r_c))); // strength of the Morse potential
+        double F = 0;
+        if (dist <= 1) {
+            F = a*(1 - 2*dist);
+        } else {
+            F = a*(dist - 2);
+        }
 
         dF.x = F * r.x / dist;
         dF.y = F * r.y / dist;
@@ -88,7 +87,7 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
         if (dist > r_c) return dF;
 
         if (not(0 == r.f)) {
-            double F = 2 * F_0 * a * (exp(-2*a*(dist - r_c)) - exp(-a*(dist - r_c))); // strength of the Morse potential
+            double F = a*(1 - 2*dist);
 
             dF.x = F * r.x / dist;
             dF.y = F * r.y / dist;
@@ -96,7 +95,7 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
             return dF; // return force that's to be applied
         }
 
-        double F = 2 * F_1 * a_1 * (exp(-2*a_1*(dist - r_c)) - exp(-a_1*(dist - r_c))); // strength of the Morse potential
+        double F = b*(1 - 2*dist);
 
         dF.x = F * r.x / dist;
         dF.y = F * r.y / dist;
@@ -127,26 +126,20 @@ int main(int argc, const char* argv[])
 
     double a_temp = stod(argv[2]); // repulsion strength of the morse potential
     cudaMemcpyToSymbol(a, &a_temp, sizeof(double));
-    double r_max_temp = stod(argv[3]); // repulsion strength of the morse potential
-    cudaMemcpyToSymbol(r_max, &r_max_temp, sizeof(double));
-    double dt_temp = stod(argv[5]);
+    double dt_temp = stod(argv[3]);
     cudaMemcpyToSymbol(dt, &dt_temp, sizeof(double));
     string file = argv[1]; // input file name
     int n_time_steps = stoi(argv[4]);
-    int every_n = stoi(argv[6]);
-    double D_temp = stod(argv[7]);
+    int every_n = stoi(argv[5]);
+    double D_temp = stod(argv[6]);
     cudaMemcpyToSymbol(D, &D_temp, sizeof(double));
-    double F_temp = stod(argv[8]);
-    cudaMemcpyToSymbol(F_0, &F_temp, sizeof(double));
-    double fo_temp = stod(argv[9]);
+    double fo_temp = stod(argv[7]);
     cudaMemcpyToSymbol(fo, &fo_temp, sizeof(double));
-    int f_dir_temp = stoi(argv[10]);
+    int f_dir_temp = stoi(argv[8]);
     cudaMemcpyToSymbol(f_dir, &f_dir_temp, sizeof(int));
-    int n_real = stoi(argv[11]);
-    double F_1_temp = stod(argv[12]);
-    cudaMemcpyToSymbol(F_1, &F_1_temp, sizeof(double));
-    double a_1_temp = stod(argv[13]);
-    cudaMemcpyToSymbol(a_1, &a_1_temp, sizeof(double));
+    int n_real = stoi(argv[9]);
+    double b_temp = stod(argv[10]);
+    cudaMemcpyToSymbol(b, &b_temp, sizeof(double));
 
     ifstream inp(file);
 
@@ -169,7 +162,7 @@ int main(int argc, const char* argv[])
         
     // Prepare initial state
     Vtk_input input{file};
-    Solution<Cell, Gabriel_solver> cells{n_cells};
+    Solution<Cell, Gabriel_solver> cells{n_cells, 50, 4*r_c};
 
     input.read_positions(cells);
     input.read_field(cells, "v", &Cell::v);
@@ -221,7 +214,7 @@ int main(int argc, const char* argv[])
             cudaDeviceSynchronize();
             cells.copy_to_host();
             generate_noise<<<(n_cells + 32 - 1)/32, 32>>>(n_cells, d_state);
-            cells.take_step<morse>(dt_temp);    // Ordered to write during calculation,
+            cells.take_step<morse, friction_on_background>(dt_temp);    // Ordered to write during calculation,
         }
         cells_out[i][0] = cells.h_X[ind[i]].x - cells_init[ind[i]][0];
         cells_out[i][1] = cells.h_X[ind[i]].y - cells_init[ind[i]][1];

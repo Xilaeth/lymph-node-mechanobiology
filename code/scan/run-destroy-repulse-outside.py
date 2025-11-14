@@ -28,8 +28,7 @@ def isInRect(x, lx, ly, v):
         return True
     return False
 
-f1 = 1.0
-f2 = 0.95
+f1 = 0.95
 
 xop = f1 * max(xs)
 yop = f1 * max(ys)
@@ -40,8 +39,8 @@ dy = yop - yom
 xc = xom + dx/2
 yc = yom + dy/2
 x = [xc, yc]
-lx = f2 * dx
-ly = f2 * dy
+lx = dx
+ly = dy
 
 for inp in mask_list:
 

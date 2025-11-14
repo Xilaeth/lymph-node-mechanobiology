@@ -7,7 +7,7 @@ w = 0
 h = 0
 wtot = 0
 htot = 0
-f = 0.5
+f = 0.05
 
 for inp in sys.argv[1:]:
     if (inp[0] == '-'):
@@ -31,8 +31,10 @@ for inp in sys.argv[1:]:
     else:
         file = inp
 
-nw = 2 + floor(wtot / (w*(1 - 2*f)))
-nh = 2 + floor(htot / (h*(1 - 2*f)))
+lh = (1-f)*(1-f)*h
+lw = (1-f)*(1-f)*w
+nw = 1 + (floor(wtot / lw))
+nh = 1 + (floor(htot / lh))
 
 nt = nw*nh
 
@@ -46,7 +48,7 @@ for i in range(nw):
     elif (i == (nw-1)):
         cx = int(wtot - w)
     else:
-        cx += int(w*(1 - 2*f))
+        cx += int(lw)
     for j in range(nh):
         count += 1
         print(f"{count}/{nt}")
@@ -55,7 +57,7 @@ for i in range(nw):
         elif (j == (nh-1)):
             cy = int(htot - h)
         else:
-            cy += int(h*(1 - 2*f))
+            cy += int(lh)
 
         os.system(f"python3 ffmpeg-crop.py {file} -x={cx} -y={cy} -w={w} -h={h}")
         os.system(f"mv output.tif ./out-tif/wt-{wtot}_ht-{htot}_w-{w}_h-{h}_x-{cx}_y-{cy}_f-{f}.tif")

@@ -2,7 +2,7 @@ import os
 import sys
 import numpy as np
 
-f1 = 1.0
+f1 = 0.95
 f2 = 0.95
 
 def get_list(s):
@@ -39,11 +39,14 @@ values = [get_list(i[:-4]) for i in folders]
 
 nx = values[0][2][1]
 ny = values[0][3][1]
+ht = values[0][0][1]
+#print(f"ht: {ht}")
 
-print(f"nx: {nx}")
-print(f"ny: {ny}")
+#print(f"nx: {nx}")
+#print(f"ny: {ny}")
 
-li = f1*f2*ny*0.25*0.5*0.8660
+li = f1*ny*0.25*0.5*0.8660
+lx = int(f1*f2*nx)
 
 x = 0.5*(nx*0.25*0.5 - li)
 y = 0.5*(ny*0.25*0.5*0.8660 - li)
@@ -55,11 +58,7 @@ my = y
 dif_tot = []
 coords_tot = []
 
-f3 = 0.95
-
-lii = f3*li
-
-print(f"li: {li}")
+#print(f"li: {li}")
 
 # loop over all the parts
 for i in range(len(values)):
@@ -67,10 +66,10 @@ for i in range(len(values)):
     cx0 = values[i][4][1]
     cy0 = values[i][5][1]
     # get top left in coords
-    xc = ((cx0+1)/500) * lii
-    yc = ((1999 - (cy0 + ny))/500) * lii
-    print(f"xc: {xc} - nx_c: {cx0}")
-    print(f"yc: {yc} - ny_c: {cy0}")
+    xc = ((cx0)/nx) * li
+    yc = (((ht-1) - (cy0 + ny))/ny) * li
+#    print(f"xc: {xc} - nx_c: {cx0}")
+#    print(f"yc: {yc} - ny_c: {cy0}")
     # getting the vtk data
     file = open(f"./out-vtk/wt-{int(values[i][0][1])}_ht-{int(values[i][1][1])}_w-{int(values[i][2][1])}_h-{int(values[i][3][1])}_x-{int(values[i][4][1])}_y-{int(values[i][5][1])}_f-{values[i][6][1]}.vtk", "rt")
     content = file.read()
@@ -81,6 +80,7 @@ for i in range(len(values)):
     fo = []
 
     sc = 0
+    # extract the coordinates from a given vtk file
     for j in lines:
         if (not(j) or (sc>0 and sc<4)):
             if (sc == 4):
@@ -91,11 +91,15 @@ for i in range(len(values)):
             coords.append([tix, tiy, tiz])
         elif (sc > 0):
             fo.append(j)   
+
+    # make integers out of the type of cell
     fo = list(map(int, fo))
+
+    # go over all the cells and check if they are inside 
     for j in range(len(coords)):
         if (fo[j] == 1):
             tix, tiy, tiz = coords[j]
-            if ((np.abs(tix - (mx + li/2)) < f3*0.5*li) and (np.abs(tiy - (my + li/2)) < f3*0.5*li)):
+            if ((np.abs(tix - (mx + li/2)) < f2*0.5*li) and (np.abs(tiy - (my + li/2)) < f2*0.5*li)):
                 tx, ty, tz = coords[j]
                 tx += xc
                 ty += yc
