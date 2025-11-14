@@ -6,7 +6,7 @@ wt = 2000
 ht = 2000
 w = 500
 h = 500
-f = 0.02
+f = 0.17
 fr = 0.05
 
 for inp in sys.argv[1:]:
@@ -57,9 +57,9 @@ for i in range(l):
     os.system(f"rm ./out_{files[i]}.vtk")
     os.system(f"mv {files[i][:-4]}.vtk ./out-vtk")
     
-#print("Running the simulations:")
-#for i in range(l):
-#    print(f"{i}/{l}")
-#    os.system(f"cp ./out-vtk/{files[i][:-4]}.vtk ./")
-#    os.system(f"python3 run-small.py {files[i][:-4]} {f}")
-#    os.system(f"rm ./{files[i][:-4]}.vtk")
+print("Running the simulations:")
+for i in range(l):
+    print(f"{i}/{l}")
+    os.system(f"cp ./out-vtk/{files[i][:-4]}.vtk ./")
+    os.system(f"python3 run-small.py {files[i][:-4]} {f}")
+    os.system(f"rm ./{files[i][:-4]}.vtk")
