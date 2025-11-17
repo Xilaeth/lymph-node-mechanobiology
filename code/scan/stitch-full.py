@@ -32,33 +32,27 @@ def get_list(s):
     l = len(out_n)
     return [[out_n[i], float(out_v[i])] for i in range(l)]
 
-folders = os.listdir("./out-vtk")
+folders = os.listdir("./out/")
 #folders = os.listdir("./out/")
-# wt - ht - w - h - x - y - fr - T - dt - a - rm - D - N - f
-values = [get_list(i[:-4]) for i in folders]
+# wt - ht - w - h - x - y - fr - T - dt - a - b - rm - D - N - f
+values = [get_list(i[4:]) for i in folders]
 
 nx = values[0][2][1]
 ny = values[0][3][1]
 ht = values[0][0][1]
-#print(f"ht: {ht}")
 
-#print(f"nx: {nx}")
-#print(f"ny: {ny}")
-
-li = f1*ny*0.25*0.5*0.8660
+li = f1*ny*0.25*0.5*0.8659
 lx = int(f1*f2*nx)
 
 x = 0.5*(nx*0.25*0.5 - li)
-y = 0.5*(ny*0.25*0.5*0.8660 - li)
+y = 0.5*(ny*0.25*0.5*0.8659 - li)
 
 mx = x
 my = y
 
-# pairs of points and displacements [points, displace]
 dif_tot = []
 coords_tot = []
-
-#print(f"li: {li}")
+data_tot = []
 
 # loop over all the parts
 for i in range(len(values)):
@@ -71,39 +65,50 @@ for i in range(len(values)):
 #    print(f"xc: {xc} - nx_c: {cx0}")
 #    print(f"yc: {yc} - ny_c: {cy0}")
     # getting the vtk data
-    file = open(f"./out-vtk/wt-{int(values[i][0][1])}_ht-{int(values[i][1][1])}_w-{int(values[i][2][1])}_h-{int(values[i][3][1])}_x-{int(values[i][4][1])}_y-{int(values[i][5][1])}_f-{values[i][6][1]}.vtk", "rt")
+    file = open(f"./out/inp-wt-{int(values[i][0][1])}_ht-{int(values[i][1][1])}_w-{int(values[i][2][1])}_h-{int(values[i][3][1])}_x-{int(values[i][4][1])}_y-{int(values[i][5][1])}_f-{values[i][6][1]}_T-{int(values[i][7][1])}_dt-{values[i][8][1]}_a-{values[i][9][1]}_b-{values[i][10][1]}_D-{values[i][11][1]}_N-{int(values[i][12][1])}_f-{values[i][13][1]}/out_0.vtk", "rt")
+    file2 = open(f"./out/inp-wt-{int(values[i][0][1])}_ht-{int(values[i][1][1])}_w-{int(values[i][2][1])}_h-{int(values[i][3][1])}_x-{int(values[i][4][1])}_y-{int(values[i][5][1])}_f-{values[i][6][1]}_T-{int(values[i][7][1])}_dt-{values[i][8][1]}_a-{values[i][9][1]}_b-{values[i][10][1]}_D-{values[i][11][1]}_N-{int(values[i][12][1])}_f-{values[i][13][1]}/data.csv", "rt")
     content = file.read()
+    content2 = file2.read()
     lines = content.splitlines()
     lines = lines[6:]
+    lines2 = content2.splitlines()
 
     coords = []
     fo = []
 
     sc = 0
+    l = 0
+    shift = 6
     # extract the coordinates from a given vtk file
     for j in lines:
-        if (not(j) or (sc>0 and sc<4)):
-            if (sc == 4):
+        if (not(j) or (sc>0 and sc<(l+shift))):
+            if (sc == (l+shift)):
                 break
             sc += 1
         elif (sc == 0):
             tix, tiy, tiz = list(map(float, j.split(' ')))
             coords.append([tix, tiy, tiz])
+            l += 1
         elif (sc > 0):
-            fo.append(j)   
+            if (j[0] == 'S'):
+                break
+            fo.append(j) 
 
     # make integers out of the type of cell
-    fo = list(map(int, fo))
+    #print(fo)
+    fo = list(map(float, fo))
 
     # go over all the cells and check if they are inside 
     for j in range(len(coords)):
-        if (fo[j] == 1):
+        if (fo[j] < 950):
             tix, tiy, tiz = coords[j]
             if ((np.abs(tix - (mx + li/2)) < f2*0.5*li) and (np.abs(tiy - (my + li/2)) < f2*0.5*li)):
                 tx, ty, tz = coords[j]
                 tx += xc
                 ty += yc
+                dx, dy, dz = list(map(float, lines2[j].split(',')))
                 coords_tot.append([tx, ty, tz])
+                data_tot.append([dx, dy, dz])
         else:
             continue
 
@@ -114,4 +119,8 @@ with open(f"stitch.vtk", "w", encoding="ascii") as f:
     f.write("DATASET POLYDATA\n\n")
     f.write("POINTS " + str(len(coords_tot)) + " float\n")
     for i in coords_tot:
+        f.write(str(i[0]) + " " + str(i[1]) + " " + str(i[2]) + "\n")
+
+with open(f"stitch.csv", "w", encoding="ascii") as f:
+    for i in data_tot:
         f.write(str(i[0]) + " " + str(i[1]) + " " + str(i[2]) + "\n")

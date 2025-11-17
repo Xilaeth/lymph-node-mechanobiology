@@ -4,7 +4,7 @@ import sys
 al = [0.2]
 D = 0.0
 dt = 0.05
-T = 1
+T = 5
 #en = int(T/100)
 en = T
 file = sys.argv[1]

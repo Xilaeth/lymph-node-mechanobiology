@@ -4,8 +4,8 @@ import sys
 tif = "input.tif"
 wt = 2000
 ht = 2000
-w = 500
-h = 500
+w = 501
+h = 501
 f = 0.17
 fr = 0.05
 
