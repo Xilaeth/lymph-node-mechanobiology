@@ -41,11 +41,11 @@ nx = values[0][2][1]
 ny = values[0][3][1]
 ht = values[0][0][1]
 
-li = f1*ny*0.25*0.5*0.8659
+li = f1*ny*0.25*0.5*0.8660
 lx = int(f1*f2*nx)
 
-x = 0.5*(nx*0.25*0.5 - li)
-y = 0.5*(ny*0.25*0.5*0.8659 - li)
+x = 0.5*(nx*0.25*0.5*0.8660 - li)
+y = 0.5*(ny*0.25*0.5*0.8660 - li)
 
 mx = x
 my = y
@@ -61,7 +61,7 @@ for i in range(len(values)):
     cy0 = values[i][5][1]
     # get top left in coords
     xc = ((cx0)/nx) * li
-    yc = (((ht-1) - (cy0 + ny))/ny) * li
+    yc = (((ht) - (cy0 + ny))/ny) * li
 #    print(f"xc: {xc} - nx_c: {cx0}")
 #    print(f"yc: {yc} - ny_c: {cy0}")
     # getting the vtk data
@@ -102,7 +102,7 @@ for i in range(len(values)):
     for j in range(len(coords)):
         if (fo[j] < 950):
             tix, tiy, tiz = coords[j]
-            if ((np.abs(tix - (mx + li/2)) < f2*0.5*li) and (np.abs(tiy - (my + li/2)) < f2*0.5*li)):
+            if ((np.abs(tix - (mx + li/2)) < f2*f1*li/2) and (np.abs(tiy - (my + li/2)) < f2*f1*li/2)):
                 tx, ty, tz = coords[j]
                 tx += xc
                 ty += yc

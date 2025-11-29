@@ -1,6 +1,7 @@
 #include "../include/dtypes.cuh"
 #include "../include/inits.cuh"
-#include "../include/solvers.cuh"
+//#include "../include/solvers.cuh"
+#include "../include/solvers-more.cuh"
 #include "../include/vtk.cuh"
 #include "../include/utils.cuh"
 #include "../include/property.cuh"
@@ -11,6 +12,7 @@
 #include <cmath>
 #include <stdio.h>
 
+__device__ double frac = 1.0f;
 const auto r_c = 0.5f; // equilibrium distance
 __device__ double dt = 0.05f; // time step
 __device__ double a = 1.0f;
@@ -73,7 +75,7 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
         if (dist <= 1) {
             F = a*(1 - 2*dist);
         } else {
-            F = a*(dist - 2);
+            F = a*(dist/frac - 2);
         }
 
         dF.x = F * r.x / dist;
@@ -140,6 +142,8 @@ int main(int argc, const char* argv[])
     int n_real = stoi(argv[9]);
     double b_temp = stod(argv[10]);
     cudaMemcpyToSymbol(b, &b_temp, sizeof(double));
+    double frac_temp = stod(argv[11]);
+    cudaMemcpyToSymbol(frac, &frac_temp, sizeof(double));
 
     ifstream inp(file);
 
@@ -162,7 +166,7 @@ int main(int argc, const char* argv[])
         
     // Prepare initial state
     Vtk_input input{file};
-    Solution<Cell, Gabriel_solver> cells{n_cells, 50, 4*r_c};
+    Solution<Cell, Gabriel_solver> cells{n_cells, 50, float(4*r_c*frac_temp)};
 
     input.read_positions(cells);
     input.read_field(cells, "v", &Cell::v);

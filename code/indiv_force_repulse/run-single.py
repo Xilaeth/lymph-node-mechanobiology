@@ -4,18 +4,18 @@ import sys
 a = 0.4
 rm = 2.0
 D = 0.0
-dt = 0.05
-T = 1000
+dt = 0.1
+T = 100
 en = int(T/100)
 #en = 1
 file = sys.argv[1]
 f = float(sys.argv[2])
 fid = int(sys.argv[3])
-F = 0.2
-F1 = 0.01
+F = float(sys.argv[4])
+F1 = float(sys.argv[5])
 a1 = 0.1
 #dirs = [1, -2, -1, 2] # x, -y, -x, y
-dirs = [1]
+dirs = [2]
 
 N = int(os.popen(f"python3 count.py {file}.vtk").read())
 print(N)

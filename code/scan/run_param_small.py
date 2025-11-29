@@ -14,6 +14,7 @@ F1 = 1.0
 a1 = 1.0
 fdir = 0
 nr = 0
+frac = 1.0
 
 for inp in sys.argv[1:]:
     if (inp[0] == '-'):
@@ -43,6 +44,9 @@ for inp in sys.argv[1:]:
             case "nr=":
                 nr = int(inp[4:])
                 continue
+            case "fr=":
+                frac = int(inp[4:])
+                continue
         match inp[1:6]:
             case "fdir=":
                 fdir = int(inp[6:])
@@ -50,4 +54,4 @@ for inp in sys.argv[1:]:
     else:
         load = inp
 
-os.system(f"./small {load} {a} {dt} {T} {every_n} {D} {f} {fdir} {nr} {b}")
+os.system(f"./small {load} {a} {dt} {T} {every_n} {D} {f} {fdir} {nr} {b} {frac}")

@@ -252,7 +252,7 @@ protected:
                 &fix_dX, &d_dX[fix_point], sizeof(Pt), cudaMemcpyDeviceToHost);
         }
 
-        euler_step<<<(n + 32 - 1) / 32, 32>>>(n, dt, d_X, fix_dX, d_dX, d_X1);
+        euler_step<<<(n + 32 - 1) / 32, 32>>>(n, dt, d_X, fix_dX*0, d_dX, d_X1);
 
         // 2nd step
         thrust::fill(thrust::device, d_dX1, d_dX1 + n, Pt{0});
@@ -271,7 +271,7 @@ protected:
                 cudaMemcpyDeviceToHost);
         }
         heun_step<<<(n + 32 - 1) / 32, 32>>>(
-            n, dt, d_dX, fix_dX1, d_dX1, d_X, d_old_v);
+            n, dt, d_dX, fix_dX1*0, d_dX1, d_X, d_old_v);
     }
 };
 
@@ -522,8 +522,8 @@ __global__ void compute_cube_gabriel(const int n, const Pt* __restrict__ d_X,
     float3 sum_v{0};
     float sum_friction = 0;
 
-    int neighbour_id[100];
-    float neighbour_dist[100];
+    int neighbour_id[200];
+    float neighbour_dist[200];
     int n_neighs = 0;
 
     // First loop. Register all possible pairwise interactions based on
@@ -627,7 +627,6 @@ public:
     }
 
 protected:
-    // this is the function that ends up computing the neighbors
     Grid grid;
     template<Pairwise_interaction<Pt> pw_int, Pairwise_friction<Pt> pw_friction>
     void pwints(int n, const Pt* __restrict__ d_X,
@@ -641,6 +640,5 @@ protected:
     }
 };
 
-// the Gabriel_solver is made of the Heun_solver with the Pt type and the Gabriel computer
 template<typename Pt>
 using Gabriel_solver = Heun_solver<Pt, Gabriel_computer>;

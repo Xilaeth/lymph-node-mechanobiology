@@ -1,7 +1,8 @@
 #include "../include/dtypes.cuh"
 #include "../include/inits.cuh"
 //#include "../include/solvers-modified.cuh"
-#include "../include/solvers.cuh"
+#include "../include/solvers-more.cuh"
+//#include "../include/solvers.cuh"
 #include "../include/vtk.cuh"
 #include "../include/utils.cuh"
 #include "../include/property.cuh"
@@ -12,6 +13,7 @@
 #include <cmath>
 #include <stdio.h>
 
+const auto frac = 4.f / 2.f;
 const auto r_c = 0.5f; // equilibrium distance
 __device__ double dt = 0.05f; // time step
 __device__ double a = 1.0f;
@@ -81,7 +83,7 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
         if (dist <= 1) {
             F = F_0 * (1 - 2*dist);
         } else {
-            F = F_0 * (dist - 2);
+            F = F_0 * (dist/frac - 2);
         }
 
         dF.x = F * r.x / dist;
@@ -179,7 +181,7 @@ int main(int argc, const char* argv[])
         
     // Prepare initial state
     Vtk_input input{file};
-    Solution<Cell, Gabriel_solver> cells{n_cells, 50, float(r_max_temp)};
+    Solution<Cell, Gabriel_solver> cells{n_cells, 50, frac*float(r_max_temp)};
 
     input.read_positions(cells);
     input.read_field(cells, "v", &Cell::v);
