@@ -27,7 +27,7 @@ for l in range(n + 1):
             force.append(i)
 
     pos = list(map(lambda x: list(map(lambda y: float(y), x.split(' ')))[:2], pos))
-    force = list(map(lambda x: float(x), force))
+    force = list(map(lambda x: np.abs(float(x)), force))
     for i in range(len(force)):
         if (np.abs(force[i]) > 1):
             force[i] = 0

@@ -45,7 +45,7 @@ for inp in sys.argv[1:]:
                 nr = int(inp[4:])
                 continue
             case "fr=":
-                frac = int(inp[4:])
+                frac = float(inp[4:])
                 continue
         match inp[1:6]:
             case "fdir=":
@@ -54,4 +54,4 @@ for inp in sys.argv[1:]:
     else:
         load = inp
 
-os.system(f"./track {load} {a} {dt} {T} {every_n} {D} {b} {frac}")
+os.system(f"./track {load} {a} {dt} {T} {every_n} {D} {frac}")

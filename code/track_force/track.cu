@@ -15,9 +15,8 @@ __device__ double frac = 1.0f;
 const auto r_c = 0.5f; // equilibrium distance
 __device__ double dt = 0.05f; // time step
 __device__ double a = 1.0f;
-__device__ double b = 1.0f;
 __device__ double D = 0.0;
-__device__ int id = 0;
+__device__ double *fs;
 
 // new data type that stores force as well
 MAKE_PT(Cell, f);
@@ -45,6 +44,7 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
     dF.x = F * r.x / dist;
     dF.y = F * r.y / dist;
     dF.z = F * r.z / dist;
+    fs[i] += F;
     return dF; // return force that's to be applied
 }
 
@@ -76,9 +76,7 @@ int main(int argc, const char* argv[])
     int every_n = stoi(argv[5]);
     double D_temp = stod(argv[6]);
     cudaMemcpyToSymbol(D, &D_temp, sizeof(double));
-    double b_temp = stod(argv[7]);
-    cudaMemcpyToSymbol(b, &b_temp, sizeof(double));
-    double frac_temp = stod(argv[8]);
+    double frac_temp = stod(argv[7]);
     cudaMemcpyToSymbol(frac, &frac_temp, sizeof(double));
 
     ifstream inp(file);
@@ -106,6 +104,12 @@ int main(int argc, const char* argv[])
 
     input.read_positions(cells);
 
+    //double *fs_temp;
+    //for (int i = 0; i <= n_cells; i++) {
+    //    fs_temp[i] = 0;
+    //}
+    //cudaMemcpyToSymbol(fs, &fs_temp, n_cells*sizeof(double));
+
     // Prepare random state
 //    curandState* d_state;
 //    cudaMalloc(&d_state, n_cells*sizeof(curandState));
@@ -120,12 +124,32 @@ int main(int argc, const char* argv[])
     // Integrate positions
     Vtk_output output{"out"};  // Writes to output/relax_#.vtk
     for (auto time_step = 0; time_step <= n_time_steps; time_step++) {
+
+        double fs_temp[n_cells];
+        for (int i = 0; i <= n_cells; i++) {
+            fs_temp[i] = 0;
+        }
+        double *d_tmp;
+        cudaMalloc(&d_tmp, n_cells * sizeof(double));
+        cudaMemcpy(d_tmp, fs_temp, n_cells * sizeof(double), cudaMemcpyHostToDevice);
+        cudaMemcpyToSymbol(fs, &d_tmp, sizeof(double *));
+
         cudaDeviceSynchronize();
         cells.copy_to_host();
 //        generate_noise<<<(n_cells + 32 - 1)/32, 32>>>(n_cells, d_state);
         cells.take_step<morse, friction_on_background>(dt_temp);    // Ordered to write during calculation,
-        output.write_positions(cells);  // use thread for full concurrency.
-        output.write_field(cells, "f", &Cell::f);
+
+        double *d_fs;
+        cudaMemcpyFromSymbol(&d_fs, fs, sizeof(double*));
+        cudaMemcpy(fs_temp, d_fs, n_cells * sizeof(double), cudaMemcpyDeviceToHost);
+        for (int i = 0; i <= n_cells; i++) {
+            cells.h_X[i].f = fs_temp[i];
+        }
+
+        if (time_step % every_n == 0) {
+            output.write_positions(cells);  // use thread for full concurrency.
+            output.write_field(cells, "f", &Cell::f);
+        }
     }
 
     return 0;

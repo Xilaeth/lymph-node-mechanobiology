@@ -5,14 +5,14 @@ import sys
 path = sys.argv[1]
 n = int(sys.argv[2])
 
-avg = []
+tot = []
 
 for i in range(n):
     data_temp = np.loadtxt(f"{path}{i}.csv", delimiter=',')
-    avg.append(np.mean(data_temp))
+    tot.append(sum(data_temp))
 
 x = np.linspace(0, 100, 101)
 
-plt.scatter(x, avg, s=0.5, c='black')
-plt.plot(x, avg, 'r--')
+plt.scatter(x, tot, s=0.5, c='black')
+plt.plot(x, tot, 'r--')
 plt.show()
