@@ -4,10 +4,10 @@ import sys
 al = [0.2]
 D = 0.0
 dt = 0.01
-T = 5000
+T = 20000
 en = int(T/100)
 file = sys.argv[1]
-frac = 1.0
+frac = 1.5
 n = len(al)
 c = 0
 

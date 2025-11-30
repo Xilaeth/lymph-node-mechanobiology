@@ -17,10 +17,13 @@ for l in range(n + 1):
     force = []
 
     sc = 0
+
     for i in lines:
         if (not(i) or ((sc < 6 + len(pos)) and (sc > 0))):
             sc += 1
             continue
+        if ((sc >= 6 + len(pos)) and i[0] == 'S'):
+            break
         if (sc == 0):
             pos.append(i)
         if (sc > 0):
