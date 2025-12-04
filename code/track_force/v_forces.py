@@ -11,7 +11,7 @@ for i in range(n):
     data_temp = np.loadtxt(f"{path}{i}.csv", delimiter=',')
     tot.append(sum(data_temp))
 
-x = np.linspace(0, 100, 101)
+x = np.linspace(0, n-1, n)
 
 plt.scatter(x, tot, s=0.5, c='black')
 plt.plot(x, tot, 'r--')
