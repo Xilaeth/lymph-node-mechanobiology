@@ -54,4 +54,4 @@ for inp in sys.argv[1:]:
     else:
         load = inp
 
-os.system(f"./track-beads {load} {a} {dt} {T} {every_n} {D} {frac} {b} {nr}")
+os.system(f"./track-beads {load} {a} {dt} {T} {every_n} {D} {frac} {b}")

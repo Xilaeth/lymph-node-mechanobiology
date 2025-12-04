@@ -18,8 +18,6 @@ __device__ double a = 0.2f;
 __device__ double b = 0.01f;
 __device__ double D = 0.0;
 __device__ double *fs;
-__device__ int ci = -1;
-__device__ int ic = -1;
 
 MAKE_PT(Cell, f, ct);
 
@@ -27,10 +25,6 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
     Cell dF{0}; 
 
     if (Xi.ct == 1) {
-        if (not(ic == i)) {
-            ic = i;
-            ci += 1;
-        }
         if (i == j) {
             return dF;
         }
@@ -51,7 +45,7 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
         dF.x = F * r.x / dist;
         dF.y = F * r.y / dist;
         dF.z = F * r.z / dist;
-        fs[ci] += F;
+        fs[i] += F;
     } else if (Xi.ct == 2) {
         if (i == j) {
             return dF;
@@ -92,7 +86,7 @@ int main(int argc, const char* argv[])
     cudaMemcpyToSymbol(frac, &frac_temp, sizeof(double));
     double b_temp = stod(argv[8]); 
     cudaMemcpyToSymbol(b, &b_temp, sizeof(double));
-    int N = stoi(argv[9]); 
+//    int N = stoi(argv[9]); 
 
     ifstream inp(file);
 
@@ -119,30 +113,19 @@ int main(int argc, const char* argv[])
     input.read_positions(cells);
     input.read_field(cells, "ct", &Cell::ct);
 
-    // NOT DONE
-    int indeces[N];
-    for (int i = 0; i < n_cells; i++) {
-        if (cells.h_X[i].ct == 1) {
-
-        }
-    }
-
     cells.copy_to_device();
 
     Vtk_output output{"out"};  
     for (auto time_step = 0; time_step <= n_time_steps; time_step++) {
         cudaDeviceSynchronize();
 
-        int init_ci = -1;
-        cudaMemcpyToSymbol(ci, &init_ci, sizeof(int));
-
-        double fs_temp[N];
-        for (int i = 0; i < N; i++) {
+        double fs_temp[n_cells];
+        for (int i = 0; i < n_cells; i++) {
             fs_temp[i] = 0;
         }
         double *d_tmp;
-        cudaMalloc(&d_tmp, N * sizeof(double));
-        cudaMemcpy(d_tmp, fs_temp, N * sizeof(double), cudaMemcpyHostToDevice);
+        cudaMalloc(&d_tmp, n_cells * sizeof(double));
+        cudaMemcpy(d_tmp, fs_temp, n_cells * sizeof(double), cudaMemcpyHostToDevice);
         cudaMemcpyToSymbol(fs, &d_tmp, sizeof(double *));
 
         cells.copy_to_host();
@@ -150,8 +133,8 @@ int main(int argc, const char* argv[])
 
         double *d_fs;
         cudaMemcpyFromSymbol(&d_fs, fs, sizeof(double*));
-        cudaMemcpy(fs_temp, d_fs, N * sizeof(double), cudaMemcpyDeviceToHost);
-        for (int i = 0; i < N; i++) {
+        cudaMemcpy(fs_temp, d_fs, n_cells * sizeof(double), cudaMemcpyDeviceToHost);
+        for (int i = 0; i < n_cells; i++) {
             cells.h_X[i].f = fs_temp[i];
         }
 

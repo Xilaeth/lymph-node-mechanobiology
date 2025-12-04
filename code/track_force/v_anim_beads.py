@@ -53,7 +53,7 @@ for i in range(len(coords_tot)):
     cn.append(cn_temp)
 
 pts1 = Points(cr[0], r=6, c="green", alpha=1.0)
-pts2 = Points(cn[0], r=6, c="blue", alpha=0.3)
+pts2 = Points(cn[0], r=6, c=get_color(rgb=(190, 250, 215)), alpha=0.3)
 txt = Text2D(txt="T=0", pos="top left").font("Calibri")
 
 def slider(widget, event):
