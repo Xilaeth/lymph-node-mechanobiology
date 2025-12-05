@@ -501,6 +501,7 @@ protected:
 template<typename Pt>
 using Grid_solver = Heun_solver<Pt, Grid_computer>;
 
+const int numNeighs = 300;
 
 // Compute pairwise interactions and frictions based on the grid solver,
 // plus further refinement of the cell neighbourhood using the Gabriel
@@ -522,8 +523,8 @@ __global__ void compute_cube_gabriel(const int n, const Pt* __restrict__ d_X,
     float3 sum_v{0};
     float sum_friction = 0;
 
-    int neighbour_id[200];
-    float neighbour_dist[200];
+    int neighbour_id[numNeighs];
+    float neighbour_dist[numNeighs];
     int n_neighs = 0;
 
     // First loop. Register all possible pairwise interactions based on
