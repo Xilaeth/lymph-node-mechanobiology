@@ -17,15 +17,19 @@ __device__ double dt = 0.05f;
 __device__ double a = 0.2f;
 __device__ double b = 0.01f;
 __device__ double D = 0.0;
+__device__ double force = 0.1;
 __device__ double *fs;
 
-MAKE_PT(Cell, f, ct);
+MAKE_PT(Cell, f, ct, fo);
 
 __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
     Cell dF{0}; 
 
     if (Xi.ct == 1) {
         if (i == j) {
+            if (Xi.fo == 1) {
+                dF.x = force;
+            }
             return dF;
         }
 
@@ -42,10 +46,12 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
             }
         }
 
+
         dF.x = F * r.x / dist;
         dF.y = F * r.y / dist;
         dF.z = F * r.z / dist;
         fs[i] += F;
+
     } else if (Xi.ct == 2) {
         if (i == j) {
             return dF;
@@ -86,7 +92,8 @@ int main(int argc, const char* argv[])
     cudaMemcpyToSymbol(frac, &frac_temp, sizeof(double));
     double b_temp = stod(argv[8]); 
     cudaMemcpyToSymbol(b, &b_temp, sizeof(double));
-//    int N = stoi(argv[9]); 
+    double force_temp = stod(argv[9]);
+    cudaMemcpyToSymbol(force, &force_temp, sizeof(double));
 
     ifstream inp(file);
 
@@ -112,6 +119,7 @@ int main(int argc, const char* argv[])
 
     input.read_positions(cells);
     input.read_field(cells, "ct", &Cell::ct);
+    input.read_field(cells, "fo", &Cell::fo);
 
     cells.copy_to_device();
 
@@ -142,6 +150,7 @@ int main(int argc, const char* argv[])
             output.write_positions(cells);  
             output.write_field(cells, "f", &Cell::f);
             output.write_field(cells, "ct", &Cell::ct);
+            output.write_field(cells, "fo", &Cell::fo);
         }
     }
 

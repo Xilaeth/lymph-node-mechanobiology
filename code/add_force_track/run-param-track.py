@@ -15,6 +15,7 @@ a1 = 1.0
 fdir = 0
 nr = 0
 frac = 1.0
+force = 0.1
 
 for inp in sys.argv[1:]:
     if (inp[0] == '-'):
@@ -47,6 +48,9 @@ for inp in sys.argv[1:]:
             case "fr=":
                 frac = float(inp[4:])
                 continue
+            case "fo=":
+                force = float(inp[4:])
+                continue
         match inp[1:6]:
             case "fdir=":
                 fdir = int(inp[6:])
@@ -54,4 +58,4 @@ for inp in sys.argv[1:]:
     else:
         load = inp
 
-os.system(f"./track {load} {a} {dt} {T} {every_n} {D} {frac}")
+os.system(f"./track {load} {a} {dt} {T} {every_n} {D} {frac} {force}")
