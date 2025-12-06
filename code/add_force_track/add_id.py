@@ -24,8 +24,12 @@ for i in lines:
 coords = list(map(lambda x: list(map(lambda y: float(y), x.split(' '))), coords))
 fo = list(map(lambda x: int(x), fo))
 
-lx = max(np.array(coords)[:, 0]) - min(np.array(coords)[:, 0])
-ly = max(np.array(coords)[:, 1]) - min(np.array(coords)[:, 1])
+xmin = min(np.array(coords)[:, 0])
+xmax = max(np.array(coords)[:, 0])
+ymin = min(np.array(coords)[:, 1])
+ymax = max(np.array(coords)[:, 1])
+lx = xmax - xmin
+ly = ymax - ymin
 
 out = sys.argv[2]
 leng = len(coords)
@@ -33,8 +37,8 @@ fxs = float(sys.argv[3])
 fxe = float(sys.argv[4])
 fys = float(sys.argv[5])
 fye = float(sys.argv[6])
-x = 0.5*lx*(fxs + fxe)
-y = 0.5*ly*(fys + fye)
+x = 0.5*( (xmin + fxs*lx) + (xmin + fxe*lx) )
+y = 0.5*( (ymin + fys*ly) + (ymin + fye*ly) )
 dx = lx*(fxe - fxs)
 dy = ly*(fye - fys)
 

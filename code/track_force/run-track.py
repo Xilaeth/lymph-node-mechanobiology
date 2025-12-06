@@ -7,9 +7,9 @@ dt = 0.05
 T = 1000
 en = int(T/100)
 #file = sys.argv[1]
-files = ["68-68-no-edge", "125-125-no-edge"]
+files = ["out_lines_68-68-no-edge", "out_lines_125-125-no-edge"]
 fracs = [1.0, 1.5, 2.0]
-n = len(al)*len(fracs)
+n = len(al)*len(fracs)*len(files)
 c = 0
 
 for a in al:
