@@ -1,5 +1,3 @@
-# automatically creates the mask and density plots for all masks given a starting vtk
-
 import os
 import sys
 import numpy as np
@@ -17,8 +15,6 @@ for inp in sys.argv[1:]:
         mask_list.append(inp[4:])
     else:
         file_name = inp
-
-# first we determine the approximate size of the tissue sample
 
 file = open(sys.argv[1], "rt")
 content = file.read()
@@ -51,7 +47,6 @@ lx = f * dx
 ly = f * dy
 
 
-# generate the masked vtks for the masks and generate the corrosponding csv files
 for inp in mask_list:
 
     x = [xc, yc]

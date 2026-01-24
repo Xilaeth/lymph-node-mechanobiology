@@ -45,7 +45,7 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
     dF.x = F * r.x / dist;
     dF.y = F * r.y / dist;
     dF.z = F * r.z / dist;
-    fs[i] += F;
+    fs[i] += F * r.x / dist;
     return dF; // return force that's to be applied
 }
 

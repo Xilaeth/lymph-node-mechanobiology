@@ -3,8 +3,12 @@ import sys
 
 folder = sys.argv[1]
 folders = os.listdir(folder)
+n = len(folders)
+i = 0
 
 for f in folders:
+    i += 1
+    print(f"{i}/{n}")
     os.system(f"python3 read-all.py {folder}/{f}/out_ 100 split")
     os.system(f"mv {folder}/{f} ./data")
     os.system(f"mv ./split ./data/{f}")
