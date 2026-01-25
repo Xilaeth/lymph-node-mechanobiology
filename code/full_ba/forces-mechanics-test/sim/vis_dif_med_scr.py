@@ -6,6 +6,7 @@ from numpy import linalg as LA
 
 vtk = sys.argv[1]
 n = int(sys.argv[3])
+d = int(sys.argv[4]) - 1
 
 m = pv.read(vtk)
 points = m.points
@@ -13,7 +14,7 @@ points = m.points
 file = sys.argv[2]
 
 difs = np.loadtxt(file, delimiter=',')
-content = list(map(lambda x: x[0], difs))
+content = list(map(lambda x: x[d], difs))
 
 xs = np.array(points)[:, 0].ravel()
 ys = np.array(points)[:, 1].ravel()

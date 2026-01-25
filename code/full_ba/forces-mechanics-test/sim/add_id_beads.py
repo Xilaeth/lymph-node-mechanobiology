@@ -25,7 +25,6 @@ with open(f"{out}.vtk", "w", encoding="ascii") as f:
     f.write("LOOKUP_TABLE default\n")
     for i in range(leng):
         f.write(f"{typ[i]}\n")
-    f.write("\nPOINT_DATA " + str(leng) + "\n")
     f.write("SCALARS v float\n")
     f.write("LOOKUP_TABLE default\n")
     for i in range(leng):

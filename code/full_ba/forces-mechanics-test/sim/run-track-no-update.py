@@ -32,6 +32,6 @@ for file in files:
                             os.system(f"mv ./output/* ./out/{name}")
                             os.system(f"python3 make_dif.py {file}.vtk ./out/{name} {name}")
                             os.system(f"mv {name}.csv ./out/{name}")
-                            os.system(f"python3 vis_dif_med_scr.py {file}.vtk ./out/{name}/{name}.csv {N}")
+                            os.system(f"python3 vis_dif_med_scr.py {file}.vtk ./out/{name}/{name}.csv {N} {fd}")
                             os.system(f"mv difs.png ./out/{name}")
 os.system("mv ./out/* ./data")

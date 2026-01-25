@@ -7,9 +7,9 @@ req = 1.0
 ds = [2.0]#, 3.0]
 Ds = [0.0] #[0.0, 0.01, 0.02]
 dt = 0.05
-Ts = [10]
+Ts = [25]
 fs = [0.01, 0.02, 0.04, 0.08, 0.16]
-fd = 2
+fd = 1
 #file = sys.argv[1]
 files = [sys.argv[1]]
 n = len(al)*len(bl)*len(Ds)*len(files)*len(fs)*len(Ts)*len(ds)
@@ -32,6 +32,6 @@ for file in files:
                             os.system(f"mv ./output/* ./out/{name}")
                             os.system(f"python3 make_dif.py {file}.vtk ./out/{name} {name}")
                             os.system(f"mv {name}.csv ./out/{name}")
-                            os.system(f"python3 vis_dif_med_scr.py {file}.vtk ./out/{name}/{name}.csv {N}")
+                            os.system(f"python3 vis_dif_med_scr.py {file}.vtk ./out/{name}/{name}.csv {N} {fd}")
                             os.system(f"mv difs.png ./out/{name}")
 os.system("mv ./out/* ./data")
