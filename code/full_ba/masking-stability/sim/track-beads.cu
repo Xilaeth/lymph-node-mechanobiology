@@ -200,6 +200,7 @@ int main(int argc, const char* argv[])
             output.write_positions(cells);  // use thread for full concurrency.
             output.write_field(cells, "fx", &Cell::fx);
             output.write_field(cells, "fy", &Cell::fy);
+            output.write_field(cells, "t", &Cell::t);
         }
         cudaFree(d_fsx);
         cudaFree(d_fsy);

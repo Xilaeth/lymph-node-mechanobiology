@@ -71,7 +71,7 @@ for inp in mask_list:
         coordsOut.append(v)
         if (pixel_values[h - py][px][0] != 0):
             typ.append(1)
-        elif (pixel_values[h - py][px][0] != 0):
+        else:
             typ.append(0)
 
     xs = list(map(lambda x: x[0], coordsOut))
