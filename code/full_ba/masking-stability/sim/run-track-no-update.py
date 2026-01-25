@@ -10,10 +10,10 @@ al = [0.2]
 bl = [1.5]
 req = 1.0
 d = 2.0
-Ds = [0.0] 
+Ds = [0.0, 0.01] 
 dt = 0.05
-T = 1000
-en = T+2#int(T/100)
+T = 20000
+en = int(T/100)
 n = len(al)*len(bl)*len(Ds)*len(files)
 c = 0
 

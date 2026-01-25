@@ -17,6 +17,9 @@ for i in range(n):
     coords_tot.append(coords)
     t_tot.append(t)
 
+xs = np.array(coords_tot)[:, :, 0].ravel()
+ys = np.array(coords_tot)[:, :, 1].ravel()
+
 maxx = max(xs)
 minx = min(xs)
 maxy = max(ys)
@@ -51,7 +54,8 @@ axis = Axes(
 )
 plt.show(pts1, pts2, txt, axis)
 plt.screenshot("s0.png")
-pts1.points = coords_tot[100]
+pts1.points = p1[100]
+pts2.points = p2[100]
 txt.text(f"T=100")
 plt.render()
 plt.screenshot("s100.png")
