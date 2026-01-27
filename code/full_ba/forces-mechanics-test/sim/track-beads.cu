@@ -32,7 +32,6 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
     Cell dF{0}; 
     double F = 0;
 
-    // these forces aren't counted in the force yet
     if (Xi.t == 1) {
         if (i == j) {
             if (int(Xi.v) == id) {
@@ -64,7 +63,7 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
                 F = 0;
             }
         } else {
-            if (dist <= b*req) {
+            if (dist <= req) {
                 F = a2*(1 - (dist/req));
             } else {
                 F = 0;
@@ -89,7 +88,7 @@ __device__ Cell morse(Cell Xi, Cell r, float dist, int i, int j) {
                 F = 0;
             }
         } else {
-            if (dist <= b*req) {
+            if (dist <= req) {
                 F = a2*(1 - (dist/req));
             } else {
                 F = 0;
@@ -176,13 +175,14 @@ int main(int argc, const char* argv[])
     Property<Cell> W{n_cells, "wiener_process"};
     cudaMemcpyToSymbol(dW, &W.d_prop, sizeof(dW));
 
-    double cells_init[n_cells][4];
+    double cells_init[n_cells][5];
 
     for (int i = 0; i < n_cells; i++) {
         cells_init[i][0] = cells.h_X[i].x;
         cells_init[i][1] = cells.h_X[i].y;
         cells_init[i][2] = cells.h_X[i].z;
         cells_init[i][3] = cells.h_X[i].v;
+        cells_init[i][4] = cells.h_X[i].t;
     }
 
     for (int i = 0; i < n_cells; i++) {
@@ -193,6 +193,7 @@ int main(int argc, const char* argv[])
             cells.h_X[j].y = cells_init[j][1];
             cells.h_X[j].z = cells_init[j][2];
             cells.h_X[j].v = cells_init[j][3];
+            cells.h_X[j].t = cells_init[j][4];
         }
 
         cells.copy_to_device();

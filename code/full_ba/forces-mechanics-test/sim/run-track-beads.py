@@ -2,20 +2,20 @@ import os
 import sys
 
 al = [0.2] #[0.1, 0.2, 0.4]
-a2l = [0.1] #[0.1, 0.2, 0.4]
+a2l = [0.0] #[0.1, 0.2, 0.4]
 bl = [1.5] # 2.0] #[1.0, 1.5, 2.0]
 req = 1.0
 ds = [2.0]#, 3.0]
 Ds = [0.0] #[0.0, 0.01, 0.02]
 dt = 0.05
 Ts = [10]
-fs = [0.01, 0.02, 0.04, 0.08, 0.16]
+fs = [0.08] #, 0.02, 0.04, 0.08, 0.16]
 fd = 1
 #file = sys.argv[1]
 files = [sys.argv[1]]
 n = len(al)*len(a2l)*len(bl)*len(Ds)*len(files)*len(fs)*len(Ts)*len(ds)
 c = 0
-N = 15
+N = 30
 
 for file in files:
     for a in al:

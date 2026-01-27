@@ -30,10 +30,23 @@ p1 = []
 p2 = []
 c1 = []
 
+p = 0.95
+
+#for i in range(len(typ)):
+#    if (typ[i] == 1):
+#        p1.append(points[i])
+#        c1.append(content[i])
+#    else:
+#        p2.append(points[i])
+
 for i in range(len(typ)):
-    if (i == 1):
-        p1.append(points[i])
-        c1.append(content[i])
+    v = points[i]
+    if (((v[0] > (minx + (1-p)*dx)) and (v[0] < (minx + p*dx))) and ((v[1] > (miny + (1-p)*dy)) and (v[1] < (miny + p*dy)))):
+        if (typ[i] == 1):
+            p1.append(points[i])
+            c1.append(content[i])
+        else:
+            p2.append(points[i])
     else:
         p2.append(points[i])
 
