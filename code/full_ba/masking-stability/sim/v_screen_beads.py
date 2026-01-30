@@ -54,9 +54,9 @@ axis = Axes(
 )
 plt.show(pts1, pts2, txt, axis)
 plt.screenshot("s0.png")
-pts1.points = p1[100]
-pts2.points = p2[100]
-txt.text(f"T=100")
+pts1.points = p1[n-1]
+pts2.points = p2[n-1]
+txt.text(f"T={n-1}")
 plt.render()
 plt.screenshot("s100.png")
 plt.close()

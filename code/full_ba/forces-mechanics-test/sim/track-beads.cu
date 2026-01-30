@@ -188,6 +188,15 @@ int main(int argc, const char* argv[])
     for (int i = 0; i < n_cells; i++) {
         cudaMemcpyToSymbol(id, &i, sizeof(int));
 
+        string o = "out-";
+        string ou = o + to_string(i);
+        Vtk_output output{ou};  
+
+        if (cells.h_X[i].t != 1) {
+            output.write_positions(cells);  
+            continue;
+        }
+
         for (int j = 0; j < n_cells; j++) {
             cells.h_X[j].x = cells_init[j][0];
             cells.h_X[j].y = cells_init[j][1];
@@ -198,10 +207,6 @@ int main(int argc, const char* argv[])
 
         cells.copy_to_device();
 
-        string o = "out-";
-        string ou = o + to_string(i);
-
-        Vtk_output output{ou};  
         for (auto time_step = 0; time_step <= n_time_steps; time_step++) {
 
             cudaDeviceSynchronize();

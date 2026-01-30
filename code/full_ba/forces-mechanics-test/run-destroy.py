@@ -10,7 +10,6 @@ import sys
 file_name = "open.vtk"
 mask_list = []
 
-
 for inp in sys.argv[1:]:
     if (inp[0:4] == '-im='):
         mask_list.append(inp[4:])

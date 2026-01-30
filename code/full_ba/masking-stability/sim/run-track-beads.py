@@ -7,7 +7,7 @@ for inp in sys.argv[1:]:
     files.append(inp)
 
 al = [0.2] 
-a2l = [0.1]
+a2l = [0.05]
 bl = [1.5]
 req = 1.0
 d = 2.0
@@ -29,3 +29,6 @@ for file in files:
                     os.system(f"mkdir ./out/{name}")
                     os.system(f"python3 run-param-track-beads.py {file}.vtk -a={a} -b={b} -d={d} -req={req} -T={T} -D={D} -dt={dt} -en={en} -a2={a2}")
                     os.system(f"mv ./output/* ./out/{name}")
+                    os.system(f"python3 v_screen_beads.py ./out/{name}/out_ 101")
+                    os.system(f"mv ./*.png ./out/{name}")
+os.system("mv ./out/* ./data")

@@ -10,11 +10,18 @@ m = pv.read(vtk)
 points = m.points
 typ = m.point_data["t"]
 d = int(sys.argv[3]) - 1
+n = int(sys.argv[4])
 
 file = sys.argv[2]
 
 difs = np.loadtxt(file, delimiter=',')
 content = list(map(lambda x: x[d], difs))
+
+c2 = []
+
+for i in range(len(content)):
+    if (typ[i] == 1):
+        c2.append(content[i])
 
 xs = np.array(points)[:, 0].ravel()
 ys = np.array(points)[:, 1].ravel()
@@ -32,19 +39,19 @@ c1 = []
 
 p = 0.95
 
-#for i in range(len(typ)):
-#    if (typ[i] == 1):
-#        p1.append(points[i])
-#        c1.append(content[i])
-#    else:
-#        p2.append(points[i])
+ind = np.argsort(c2)[-n:]
 
+i2 = 0
 for i in range(len(typ)):
     v = points[i]
     if (((v[0] > (minx + (1-p)*dx)) and (v[0] < (minx + p*dx))) and ((v[1] > (miny + (1-p)*dy)) and (v[1] < (miny + p*dy)))):
         if (typ[i] == 1):
-            p1.append(points[i])
-            c1.append(content[i])
+            if (i2 in ind):
+                p2.append(points[i])
+            else:
+                p1.append(points[i])
+                c1.append(content[i])
+            i2 += 1
         else:
             p2.append(points[i])
     else:
@@ -53,7 +60,7 @@ for i in range(len(typ)):
 pts1 = Points(p1, r=6, c='green', alpha=1.0)
 pts1.pointdata["deformation"] = c1
 pts1.cmap("coolwarm").add_scalarbar("deformation")
-pts2 = Points(p2, r=6, c='grey', alpha=0.5)
+pts2 = Points(p2, r=6, c='grey', alpha=0.2)
 
 axis = Axes(
     xtitle="x",
