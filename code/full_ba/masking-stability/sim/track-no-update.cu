@@ -107,7 +107,7 @@ int main(int argc, const char* argv[])
         
     // Prepare initial state
     Vtk_input input{file};
-    Solution<Cell, Gabriel_solver> cells{n_cells, 50, float(d_temp)};
+    Solution<Cell, Gabriel_solver> cells{n_cells, 100, float(d_temp)};
 
     input.read_positions(cells);
 

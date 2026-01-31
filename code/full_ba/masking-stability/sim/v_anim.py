@@ -1,5 +1,6 @@
 import sys
 import numpy as np
+import pyvista as pv
 from vedo import *
 
 path = sys.argv[1]
@@ -9,35 +10,10 @@ coords_tot = []
 typ_tot = []
 
 for i in range(n):
-    file = open(f"{path}{i}.vtk")
-    content = file.read()
-    lines = content.splitlines()
-    lines = lines[6:]
+    m = pv.read(f"{path}{i}.vtk")
+    pos = m.points
 
-    coords = []
-    typ = []
-
-    sc = 0
-    sc2 = 0
-    for i in lines:
-        if (not(i) or ((sc < 6 + len(coords)) and (sc > 0))):
-            sc += 1
-            continue
-        if (sc == 0):
-            coords.append(i)
-        if ((i[0] == "S") or ((sc2 < 2) and (sc2>0))):
-            sc2 += 1
-            continue
-        if (sc2 > 0):
-            typ.append(i)
-        if (sc > 0):
-            continue
-
-
-    coords = list(map(lambda x: list(map(lambda y: float(y), x.split(' '))), coords))
-    typ = list(map(lambda x: int(x), typ))
-    coords_tot.append(coords)
-    typ_tot.append(typ)
+    coords_tot.append(pos)
 
 pts1 = Points(coords_tot[0], r=10, c="green", alpha=1.0)
 txt = Text2D(txt="T=0", pos="top left").font("Calibri")
