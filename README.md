@@ -22,7 +22,7 @@ Martin-Leo Hansmann group at the University Clinic Frankfurt and the FIAS.
     - **Numpy** 
     - **matplotlib** 
     - **vedo**
-    - **tifffile*
+    - **tifffile**
 
 ## Getting Started
 
