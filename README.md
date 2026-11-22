@@ -28,5 +28,4 @@ Martin-Leo Hansmann group at the University Clinic Frankfurt and the FIAS.
 
 You can inspect the code in the `code/` folder and run the individual modules.
 
-For an overview of the projects, the theoretical background and the results you can check out the thesis in `thesis.pdf` or the
-accompanying presentation in `slides.pdf`.
+For an overview of the projects, the theoretical background and the results you can check out the accompanying presentation in `slides.pdf`.
