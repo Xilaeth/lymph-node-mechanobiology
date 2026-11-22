@@ -1,8 +1,0 @@
-Introduction:
-    \item\label{MoreIsDifferent} P. W. Anderson: More Is Different: Broken Symmetry and the Nature of the Hierarchical Structure of Science, Science, vol. 177, no. 4047, Aug. 1972, pp. 393-96
-    \item\label{ComplexSystems} Siegenfeld, Alexander F., and Yaneer Bar-Yam. ‘An Introduction to Complex Systems Science and Its Applications’. Complexity, vol. 2020, Jul. 2020, pp. 1–16.
-    \item\label{Renormalization} Bauerschmidt, Roland, et al. ‘Introduction to a Renormalisation Group Method’. arXiv:1907.05474, arXiv, 11 Nov. 2019. arXiv.org
-    \item\label{Onsager} Onsager, Lars. ‘Crystal Statistics. I. A Two-Dimensional Model with an Order-Disorder Transition’. Physical Review, vol. 65, nos. 3–4, Feb. 1944, pp. 117–49
-    \item\label{Scientometrics} Niazi, Muaz, and Amir Hussain. "Agent-based computing from multi-agent systems to agent-based models: a visual survey." Scientometrics 89.2 (2011): 479.
-    \item\label{Dieterich-Skript} Wolfgang Dieterich: Stochastische Prozesse in der Physik kondensierter Materie, Skript SoSe 2000, Universität Konstanz
-

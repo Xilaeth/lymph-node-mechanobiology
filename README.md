@@ -1,73 +1,32 @@
-# Structure and Folder Content
+# Computational Simulation of the Ising Model
 
-## Code
-This folder contains most of the code that I wrote and use for simulating things
+This project implements a pipeline that turns three-dimensional confocal microscopy data of the actin structures in
+human lymph nodes into agent-based cell structures to infer mechanobiological properties such as their elasticity.
 
-### Actively Included Folders
+This project served as my BSc thesis for the Physics Bachelor at the Goethe University Frankfurt. The thesis was written
+in collaboration with the Matthaeus Group at the Frankfurt Institute for Advanced Studies (FIAS) and used data from the
+Martin-Leo Hansmann group at the University Clinic Frankfurt and the FIAS. 
 
-#### vtks
-This folder includes some .vtk files that I have either used in the past or am currently using.
+> **Status:** Archived academic project - cleaned up for reference
 
-#### vis-dif
-This folder includes code for visualizing strain, i.e. the difference between two images
+## Features
+- Includes the Python code necessary to turn the TIFF stacks into the `.vtk` format which is then used to initialize the simulation.
+- Includes the CUDA code to run the simulation and mechanical inference.
+- Includes the Python code for the statistical analysis of the results.
 
-#### vedo
-This folder includes some rough code that I used to primarily learn vedo, not necessarily code that I am using all that much
+## Prerequisites
 
-#### tests
-This folder includes the test files that come with the ya||a library
+- **Python:** 3.8+ 
+- **FFMPEG**
+- **Libraries:**
+    - **Numpy** 
+    - **matplotlib** 
+    - **vedo**
+    - **tifffile*
 
-#### sample
-This folder includes code that is used to either sample from a larger tif file, i.e. downsampling, or resizing a tif file
+## Getting Started
 
-#### repulsive
-This folder contains most of the code for working with the two-bead model where the inter-cell medium is explicitly modelled
+You can inspect the code in the `code/` folder and run the individual modules.
 
-#### random-cuda
-This folder contains the code that I used when first implementing the brownian motion into the simulation
-
-#### pngs
-This folder includes the masks that I use for testing
-
-#### parameter-scan
-This folder includes the code for running parameter scans on the three different types of simulations
-
-#### include
-This folder includes the include files from ya||a
-
-#### examples
-This folder includes the examples from the ya||a library
-
-#### data
-This folder includes some files that work with the tif files, i.e. create vtk files from them and so on
-
-#### cuda
-This folder includes the first files that I wrote when I started using ya||a. 
-
-#### create-relaxed
-This folder includes scripts that creates relaxed vtk files.
-
-#### average
-UNFINISHED
-
-### Deprecated Folders
-
-#### density
-This folder includes files to calculate a density map of the cells
-
-UNFINISHED
-
-#### stable
-This folder
-
-## Legends
-This folder contains certain legends, i.e. explanations, that I have either written for myself or that I copied from somewhere else
-
-## Tex
-This mainly contains the writing portion of my thesis, i.e. the tex file, images, references, etc.
-
-# Important Links
-- https://github.com/marcomusy/vedo/blob/master/docs/documentation.md
-- https://github.com/germannp/yalla
-- https://vedo.embl.es/
-- https://pypi.org/project/tifffile/
+For an overview of the projects, the theoretical background and the results you can check out the thesis in `thesis.pdf` or the
+accompanying presentation in `slides.pdf`.
