@@ -24,5 +24,5 @@ For theoretical background, methodology, and main results, see `slides.pdf`.
 
 1. Clone the repository:
    ```bash
-   git clone [https://github.com/Xilaeth/lymph-node-mechanobiology.git](https://github.com/Xilaeth/lymph-node-mechanobiology.git)
-   cd lymph-node-mechanobiology```
+   git clone https://github.com/Xilaeth/lymph-node-mechanobiology.git
+   cd lymph-node-mechanobiology
