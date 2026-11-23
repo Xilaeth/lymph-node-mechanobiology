@@ -6,6 +6,14 @@ This work was developed as a BSc Physics thesis at Goethe University Frankfurt i
 
 > **Status:** Archived academic project — cleaned up for reference.
 
+<p align="center">
+  <img src="assets/preview-2.jpg" alt="Max-projection of confocal microscopy stacks of human lymph node actin network" width="45%" />
+    
+  <img src="assets/preview-1.png" alt="2D cross-section of agent-based simulation" width="45%" />
+  <br />
+  <em><strong>Left:</strong> Confocal microscopy data of human lymph node actin structures. <strong>Right:</strong> Discretized agent-based representation undergoing mechanical probing.</em>
+</p>
+
 ## Overview & Pipeline
 
 1. **Image Preprocessing & Mesh/Agent Initialization (`code/`):** Converts 3D confocal microscopy TIFF stacks into `.vtk` structures to initialize the agent-based model.
